@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Electrician & Roofing Services - Licensed, Insured, Trusted. Free estimates. Serving [City] and surrounding areas.">
+    <title>Pro Electric & Roofing - Licensed & Insured Professionals</title>
+    <link rel="stylesheet" href="../shared/styles.css">
+    <style>
+        :root {
+            /* Electrician Bold Color Scheme */
+            --primary-color: #0f172a;
+            --primary-color-dark: #020617;
+            --primary-color-rgb: 15, 23, 42;
+            --accent-color: #fbbf24;
+            --accent-color-light: #fcd34d;
+            --electric-blue: #3b82f6;
+            --bold-navy: #0f172a;
+            --font-heading: 'Poppins', sans-serif;
+            --font-primary: 'Inter', sans-serif;
+        }
+        
+        .emergency-banner {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .emergency-banner a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 10px;
+            font-weight: 700;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .emergency-banner a:hover {
+            opacity: 0.9;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.9)),
+                        linear-gradient(45deg, rgba(59, 130, 246, 0.15), rgba(251, 191, 36, 0.1)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%230f172a" width="1200" height="600"/></svg>');
+        }
+        
+        .hero::before {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.85));
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #f59e0b);
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            font-weight: 700;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--white);
+            border-color: var(--white);
+        }
+        
+        .service-card {
+            border-top: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            border-top-color: var(--electric-blue);
+            transform: translateY(-8px);
+        }
+        
+        .gallery-section {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--bg-light), #f8fafc);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .gallery-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            border: 1px solid var(--border-color);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-color);
+        }
+        
+        .gallery-item > div:first-child {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary-color), var(--electric-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-item > div:first-child::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(251, 191, 36, 0.2) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .gallery-item-content {
+            padding: 25px;
+        }
+        
+        .gallery-item-content h4 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .gallery-item-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        /* Wire wrapper: spans from services down to experience (trust-signals) section */
+        .wire-wrapper {
+            position: relative;
+        }
+        
+        .wire-decoration {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 1;
+            width: 80px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: auto;
+        }
+        
+        .wire-decoration-left {
+            left: 20px;
+        }
+        
+        .wire-decoration-right {
+            left: auto;
+            right: 20px;
+        }
+        
+        @media (max-width: 1200px) {
+            .wire-decoration {
+                display: none;
+            }
+        }
+        
+        .wire-decoration svg {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            display: block;
+        }
+        
+        .reviews-section {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--white), #f8fafc);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .review-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--radius-lg);
+            border-left: 5px solid var(--accent-color);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            position: relative;
+        }
+        
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 4rem;
+            color: rgba(251, 191, 36, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-left-color: var(--electric-blue);
+        }
+        
+        .review-stars {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .review-text {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-detail {
+            margin-bottom: 50px;
+            padding: 35px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .service-detail h3 {
+            color: var(--primary-color);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .service-detail ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .service-detail li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: var(--text-light);
+            transition: color var(--transition-fast);
+        }
+        
+        .service-detail li:hover {
+            color: var(--text-dark);
+        }
+        
+        .service-detail li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 50%;
+        }
+        
+        .certifications {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            padding: 100px 0;
+            color: var(--white);
+        }
+        
+        .certifications .section-title {
+            color: var(--white);
+        }
+        
+        .certifications .section-title::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--electric-blue));
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .cert-item {
+            text-align: center;
+            padding: 35px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-base);
+        }
+        
+        .cert-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .cert-item strong {
+            display: block;
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .cert-item p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+        
+        .trust-signals {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+        }
+        
+        .section-title::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--electric-blue));
+        }
+        
+        .sticky-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: var(--white);
+            border-bottom: none;
+            position: relative;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .sticky-cta::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-color);
+            pointer-events: none;
+        }
+        
+        .sticky-cta.scrolled {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .sticky-cta .cta-text {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        
+        .sticky-cta .btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color);
+            text-shadow: none;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sticky-cta .btn:hover {
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header {
+            background: var(--white);
+            backdrop-filter: none;
+            top: calc(var(--spacing-sm) * 2 + 48px + 2px);
+            margin: 0;
+            transition: top 0.3s ease;
+        }
+        
+        .header.scrolled {
+            top: 0;
+        }
+        
+        .contact-form {
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+        }
+        
+        /* Storm cloud float animation - above house in Storm Damage gallery */
+        .storm-cloud-float {
+            animation: cloudFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-6px) translateX(3px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <strong>24/7 Emergency Service Available</strong>
+        <a href="tel:+1234567890">Call Now: (123) 456-7890</a>
+    </div>
+
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta">
+        <div class="container">
+            <span class="cta-text">Need electrical or roofing work? Get a free estimate!</span>
+            <a href="tel:+1234567890" class="btn btn-primary">Call (123) 456-7890</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">Pro Electric & Roofing</a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Licensed Electricians & Roofing Experts</h1>
+                <p class="hero-subtitle">Quality Workmanship, Fair Prices, Guaranteed Satisfaction</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary btn-large">Request Free Estimate</a>
+                    <a href="tel:+1234567890" class="btn btn-secondary btn-large">Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wire wrapper: spans from services down to experience section -->
+    <div class="wire-wrapper">
+        <!-- Decorative Wire Graphics - extend to experience section -->
+        <div class="wire-decoration wire-decoration-left">
+            <svg viewBox="0 0 80 2000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- White Wire -->
+                <path d="M 20 0 Q 25 200 20 400 Q 15 600 20 800 Q 25 1000 20 1200 Q 15 1400 20 1600 Q 25 1800 20 2000" 
+                      stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="18" y1="2000" x2="22" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="20" y1="2000" x2="20" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="22" y1="2000" x2="18" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="16" y1="1998" x2="24" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="24" y1="1998" x2="16" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Yellow Wire -->
+                <path d="M 30 0 Q 35 250 30 500 Q 25 750 30 1000 Q 35 1250 30 1500 Q 25 1750 30 2000" 
+                      stroke="#fbbf24" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="28" y1="2000" x2="32" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="30" y1="2000" x2="30" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="32" y1="2000" x2="28" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="26" y1="1998" x2="34" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="34" y1="1998" x2="26" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Blue Wire -->
+                <path d="M 40 0 Q 45 300 40 600 Q 35 900 40 1200 Q 45 1500 40 1800 Q 35 1900 40 2000" 
+                      stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="38" y1="2000" x2="42" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="40" y1="2000" x2="40" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="42" y1="2000" x2="38" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="36" y1="1998" x2="44" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="44" y1="1998" x2="36" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Green Wire -->
+                <path d="M 50 0 Q 55 350 50 700 Q 45 1050 50 1400 Q 55 1750 50 2000" 
+                      stroke="#10b981" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="48" y1="2000" x2="52" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="50" y1="2000" x2="50" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="52" y1="2000" x2="48" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="46" y1="1998" x2="54" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="54" y1="1998" x2="46" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Red Wire -->
+                <path d="M 60 0 Q 65 400 60 800 Q 55 1200 60 1600 Q 65 1900 60 2000" 
+                      stroke="#ef4444" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="58" y1="2000" x2="62" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="60" y1="2000" x2="60" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="62" y1="2000" x2="58" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="56" y1="1998" x2="64" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="64" y1="1998" x2="56" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <div class="wire-decoration wire-decoration-right">
+            <svg viewBox="0 0 80 2000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Black Wire -->
+                <path d="M 20 0 Q 15 200 20 400 Q 25 600 20 800 Q 15 1000 20 1200 Q 25 1400 20 1600 Q 15 1800 20 2000" 
+                      stroke="#1e293b" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="18" y1="2000" x2="22" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="20" y1="2000" x2="20" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="22" y1="2000" x2="18" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="16" y1="1998" x2="24" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="24" y1="1998" x2="16" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Yellow Wire -->
+                <path d="M 30 0 Q 25 250 30 500 Q 35 750 30 1000 Q 25 1250 30 1500 Q 35 1750 30 2000" 
+                      stroke="#fbbf24" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="28" y1="2000" x2="32" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="30" y1="2000" x2="30" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="32" y1="2000" x2="28" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="26" y1="1998" x2="34" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="34" y1="1998" x2="26" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Blue Wire -->
+                <path d="M 40 0 Q 35 300 40 600 Q 45 900 40 1200 Q 35 1500 40 1800 Q 45 1900 40 2000" 
+                      stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="38" y1="2000" x2="42" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="40" y1="2000" x2="40" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="42" y1="2000" x2="38" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="36" y1="1998" x2="44" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="44" y1="1998" x2="36" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Green Wire -->
+                <path d="M 50 0 Q 45 350 50 700 Q 55 1050 50 1400 Q 45 1750 50 2000" 
+                      stroke="#10b981" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="48" y1="2000" x2="52" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="50" y1="2000" x2="50" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="52" y1="2000" x2="48" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="46" y1="1998" x2="54" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="54" y1="1998" x2="46" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Red Wire -->
+                <path d="M 60 0 Q 55 400 60 800 Q 65 1200 60 1600 Q 55 1900 60 2000" 
+                      stroke="#ef4444" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Stripped end at bottom - copper -->
+                <line x1="58" y1="2000" x2="62" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="60" y1="2000" x2="60" y2="1990" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="62" y1="2000" x2="58" y2="1992" stroke="#b87333" stroke-width="3" stroke-linecap="round"/>
+                <line x1="56" y1="1998" x2="64" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+                <line x1="64" y1="1998" x2="56" y2="1988" stroke="#b87333" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    
+    <!-- Services Section -->
+    <section class="services services-section-with-wires" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Electrical Services</h3>
+                    <p>Panel upgrades, wiring, lighting installation, outlet repair, surge protection, and full electrical solutions.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 15px;">Get Quote</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Roofing Services</h3>
+                    <p>Roof installation, repair, replacement, gutter services, storm damage restoration, and maintenance.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 15px;">Get Quote</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Warranty & Guarantee</h3>
+                    <p>All work backed by comprehensive warranties. We stand behind our craftsmanship with satisfaction guarantees.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 15px;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Services -->
+    <section class="services" style="background: var(--white);">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="service-detail">
+                    <h3>Electrical Services</h3>
+                    <ul>
+                        <li>Electrical panel upgrades and replacement</li>
+                        <li>Whole house rewiring</li>
+                        <li>Lighting installation (indoor & outdoor)</li>
+                        <li>Outlet and switch installation/repair</li>
+                        <li>GFCI and AFCI installation</li>
+                        <li>Surge protection systems</li>
+                        <li>Generator installation and hookup</li>
+                        <li>Electrical troubleshooting and repairs</li>
+                        <li>Code compliance inspections</li>
+                        <li>Emergency electrical service</li>
+                    </ul>
+                </div>
+
+                <div class="service-detail">
+                    <h3>Roofing Services</h3>
+                    <ul>
+                        <li>Complete roof replacement</li>
+                        <li>Roof repair and patching</li>
+                        <li>Gutter installation and repair</li>
+                        <li>Storm damage assessment and repair</li>
+                        <li>Roof inspections</li>
+                        <li>Leak detection and repair</li>
+                        <li>Skylight installation</li>
+                        <li>Chimney and flashing repair</li>
+                        <li>Roof maintenance programs</li>
+                        <li>Insurance claim assistance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications">
+        <div class="container">
+            <h2 class="section-title">Licensed, Insured & Certified</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <strong>Licensed</strong>
+                    <p>Fully licensed electricians and roofing contractors</p>
+                </div>
+                <div class="cert-item">
+                    <strong>Insured</strong>
+                    <p>Comprehensive liability and workers' compensation insurance</p>
+                </div>
+                <div class="cert-item">
+                    <strong>Bonded</strong>
+                    <p>Bonded for your protection and peace of mind</p>
+                </div>
+                <div class="cert-item">
+                    <strong>Warranty</strong>
+                    <p>All work backed by comprehensive warranties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--electric-blue)); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <rect x="60" y="40" width="80" height="120" fill="none" stroke="#fbbf24" stroke-width="4" rx="4"/>
+                            <rect x="70" y="50" width="20" height="15" fill="#fbbf24" opacity="0.6"/>
+                            <rect x="95" y="50" width="20" height="15" fill="#fbbf24" opacity="0.6"/>
+                            <rect x="120" y="50" width="20" height="15" fill="#fbbf24" opacity="0.6"/>
+                            <line x1="80" y1="80" x2="120" y2="80" stroke="#fbbf24" stroke-width="3"/>
+                            <line x1="80" y1="100" x2="120" y2="100" stroke="#fbbf24" stroke-width="3"/>
+                            <line x1="80" y1="120" x2="120" y2="120" stroke="#fbbf24" stroke-width="3"/>
+                            <circle cx="100" cy="145" r="8" fill="#fbbf24"/>
+                            <path d="M 100 145 L 100 160" stroke="#fbbf24" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Modern Electrical Panel</h4>
+                        <p>Upgraded 200-amp service panel installation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, #1e293b, #334155); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <polygon points="100,30 170,80 170,150 30,150 30,80" fill="none" stroke="#fbbf24" stroke-width="4"/>
+                            <rect x="40" y="100" width="120" height="8" fill="#fbbf24" opacity="0.7"/>
+                            <rect x="40" y="115" width="120" height="8" fill="#fbbf24" opacity="0.7"/>
+                            <rect x="40" y="130" width="120" height="8" fill="#fbbf24" opacity="0.7"/>
+                            <circle cx="100" cy="70" r="15" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                            <line x1="85" y1="70" x2="115" y2="70" stroke="#fbbf24" stroke-width="2"/>
+                            <line x1="100" y1="55" x2="100" y2="85" stroke="#fbbf24" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Complete Roof Replacement</h4>
+                        <p>New asphalt shingle roof installation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--electric-blue)); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <rect x="50" y="100" width="100" height="60" fill="none" stroke="#fbbf24" stroke-width="3" rx="2"/>
+                            <circle cx="80" cy="130" r="8" fill="#fbbf24" opacity="0.8"/>
+                            <circle cx="100" cy="130" r="8" fill="#fbbf24" opacity="0.8"/>
+                            <circle cx="120" cy="130" r="8" fill="#fbbf24" opacity="0.8"/>
+                            <line x1="70" y1="80" x2="70" y2="100" stroke="#fbbf24" stroke-width="3"/>
+                            <line x1="100" y1="60" x2="100" y2="100" stroke="#fbbf24" stroke-width="3"/>
+                            <line x1="130" y1="80" x2="130" y2="100" stroke="#fbbf24" stroke-width="3"/>
+                            <circle cx="70" cy="70" r="6" fill="#fbbf24"/>
+                            <circle cx="100" cy="50" r="6" fill="#fbbf24"/>
+                            <circle cx="130" cy="70" r="6" fill="#fbbf24"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Landscape Lighting</h4>
+                        <p>Professional outdoor lighting installation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, #1e293b, #334155); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <line x1="30" y1="120" x2="170" y2="120" stroke="#fbbf24" stroke-width="6" stroke-linecap="round"/>
+                            <line x1="50" y1="100" x2="50" y2="120" stroke="#fbbf24" stroke-width="4"/>
+                            <line x1="80" y1="100" x2="80" y2="120" stroke="#fbbf24" stroke-width="4"/>
+                            <line x1="110" y1="100" x2="110" y2="120" stroke="#fbbf24" stroke-width="4"/>
+                            <line x1="140" y1="100" x2="140" y2="120" stroke="#fbbf24" stroke-width="4"/>
+                            <polygon points="40,100 50,90 60,100" fill="#fbbf24" opacity="0.7"/>
+                            <polygon points="70,100 80,90 90,100" fill="#fbbf24" opacity="0.7"/>
+                            <polygon points="100,100 110,90 120,100" fill="#fbbf24" opacity="0.7"/>
+                            <polygon points="130,100 140,90 150,100" fill="#fbbf24" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Seamless Gutter Installation</h4>
+                        <p>New gutter system with leaf protection</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--electric-blue)); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <rect x="40" y="60" width="120" height="100" fill="none" stroke="#fbbf24" stroke-width="3" rx="4"/>
+                            <circle cx="60" cy="80" r="4" fill="#fbbf24"/>
+                            <circle cx="80" cy="80" r="4" fill="#fbbf24"/>
+                            <circle cx="100" cy="80" r="4" fill="#fbbf24"/>
+                            <circle cx="120" cy="80" r="4" fill="#fbbf24"/>
+                            <circle cx="140" cy="80" r="4" fill="#fbbf24"/>
+                            <line x1="50" y1="110" x2="150" y2="110" stroke="#fbbf24" stroke-width="2"/>
+                            <line x1="50" y1="130" x2="150" y2="130" stroke="#fbbf24" stroke-width="2"/>
+                            <line x1="50" y1="150" x2="150" y2="150" stroke="#fbbf24" stroke-width="2"/>
+                            <rect x="70" y="40" width="60" height="20" fill="none" stroke="#fbbf24" stroke-width="2" rx="2"/>
+                            <circle cx="85" cy="50" r="3" fill="#fbbf24"/>
+                            <circle cx="100" cy="50" r="3" fill="#fbbf24"/>
+                            <circle cx="115" cy="50" r="3" fill="#fbbf24"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Kitchen Remodel Wiring</h4>
+                        <p>Complete electrical upgrade for kitchen renovation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="background: linear-gradient(135deg, #1e293b, #334155); height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <svg width="200" height="200" viewBox="0 -25 200 225" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+                            <polygon points="100,40 160,90 160,140 40,140 40,90" fill="none" stroke="#fbbf24" stroke-width="4"/>
+                            <rect x="50" y="100" width="100" height="8" fill="#fbbf24" opacity="0.7"/>
+                            <rect x="50" y="115" width="100" height="8" fill="#fbbf24" opacity="0.7"/>
+                            <polygon points="60,80 80,70 100,80 80,90" fill="#fbbf24" opacity="0.6"/>
+                            <polygon points="100,80 120,70 140,80 120,90" fill="#fbbf24" opacity="0.6"/>
+                            <line x1="70" y1="60" x2="70" y2="80" stroke="#fbbf24" stroke-width="2"/>
+                            <line x1="130" y1="60" x2="130" y2="80" stroke="#fbbf24" stroke-width="2"/>
+                            <!-- Thunder Cloud (Higher, centered, floating - no overlap with house) -->
+                            <g class="storm-cloud-float">
+                                <ellipse cx="100" cy="12" rx="26" ry="13" fill="#4a5568" opacity="0.9"/>
+                                <ellipse cx="116" cy="14" rx="21" ry="11" fill="#4a5568" opacity="0.9"/>
+                                <ellipse cx="85" cy="14" rx="18" ry="9" fill="#4a5568" opacity="0.9"/>
+                                <path d="M 104 18 L 109 30 L 100 30 L 104 40 L 116 28 L 108 28 Z" fill="#fbbf24" opacity="1"/>
+                            </g>
+                            <!-- Rain (falling down from cloud toward house) -->
+                            <line x1="85" y1="24" x2="85" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="90" y1="24" x2="90" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="95" y1="24" x2="95" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="100" y1="24" x2="100" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="105" y1="24" x2="105" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="110" y1="24" x2="110" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="115" y1="24" x2="115" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="120" y1="24" x2="120" y2="42" stroke="#60a5fa" stroke-width="1.5" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h4>Storm Damage Repair</h4>
+                        <p>Quick response to storm damage restoration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Excellent service from start to finish. The team was professional, on time, and did quality work. Highly recommend!"</p>
+                    <p class="review-author">- Sarah M., Downtown</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"They replaced our entire roof and the process was smooth. Great communication and fair pricing. Very satisfied!"</p>
+                    <p class="review-author">- John D., Midtown</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Emergency electrical service on a Sunday! They came out quickly and fixed the issue. Professional and reliable."</p>
+                    <p class="review-author">- Mike T., Uptown</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Upgraded our electrical panel and added new outlets. Clean work, great price, and they cleaned up perfectly."</p>
+                    <p class="review-author">- Lisa K., Westside</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Best roofing company we've worked with. They helped with insurance claim and did beautiful work."</p>
+                    <p class="review-author">- Robert P., Eastside</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Professional, knowledgeable, and honest. They explained everything clearly and the work was top-notch."</p>
+                    <p class="review-author">- Jennifer L., Northside</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 20px;">
+                    <strong>4.9/5 Average Rating</strong> from 200+ Google Reviews
+                </p>
+                <a href="https://www.google.com/maps" class="btn btn-primary" target="_blank">Read More Reviews</a>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    <!-- End wire-wrapper - wires run from services down to experience section -->
+
+    <!-- Trust Signals (Experience) -->
+    <section class="trust-signals">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-number">20+</div>
+                    <div class="trust-label">Years Experience</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">3000+</div>
+                    <div class="trust-label">Projects Completed</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">4.9</div>
+                    <div class="trust-label">Average Rating</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">100%</div>
+                    <div class="trust-label">Satisfaction Guarantee</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Request Your Free Estimate</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:info@proelectric.com">info@proelectric.com</a></p>
+                    <p><strong>Address:</strong> 789 Contractor Lane, City, State 12345</p>
+                    <p><strong>Service Areas:</strong> Downtown, Midtown, Uptown, Westside, Eastside, Northside, Southside, Suburbs</p>
+                    <div style="margin-top: 20px;">
+                        <p><strong>Business Hours:</strong></p>
+                        <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
+                        <p>Saturday: 8:00 AM - 4:00 PM</p>
+                        <p>Sunday: Emergency Service Only</p>
+                        <p style="margin-top: 15px; color: #dc2626; font-weight: 600;">24/7 Emergency Service Available</p>
+                    </div>
+                    <div style="margin-top: 20px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184133389887!2d-73.98811768459384!3d40.75889597932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2s789%20Contractor%20Ln%2C%20New%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0; display: block;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Get Your Free Estimate</h3>
+                    <form id="contactForm" action="https://formspree.io/f/maqdokll" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Needed *</label>
+                            <select id="service" name="service" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 16px;">
+                                <option value="">Select a service...</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="roofing">Roofing</option>
+                                <option value="both">Both</option>
+                                <option value="emergency">Emergency Service</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Project Address</label>
+                            <input type="text" id="address" name="address" placeholder="Street address, City, State">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Describe your electrical or roofing needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Request Free Estimate</button>
+                        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: var(--text-light);">
+                            For emergencies, please call <a href="tel:+1234567890" style="color: var(--primary-color);">(123) 456-7890</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Pro Electric & Roofing</h4>
+                    <p>Licensed, insured, and trusted professionals for all your electrical and roofing needs</p>
+                    <p style="margin-top: 15px; color: rgba(255,255,255,0.8);">
+                        Licensed • Insured • Bonded
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>(123) 456-7890</p>
+                    <p>info@proelectric.com</p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">24/7 Emergency Service</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pro Electric & Roofing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/script.js"></script>
+</body>
+</html>

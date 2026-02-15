@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Forest City Digital - Websites You Don't Have to Worry About. Professional WordPress websites for restaurants and trades businesses. Fast, mobile-friendly sites that generate leads. Starting at $1,500.">
     <title>Forest City Digital - Websites You Don't Have to Worry About</title>
+    <meta property="og:title" content="Forest City Digital - Websites You Don't Have to Worry About">
+    <meta property="og:description" content="Professional WordPress websites for restaurants and trades. Fast, mobile-friendly, with maintenance. Starting at $1,500. London, ON.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://forestcitydigital.com/assets/og-image.png">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"LocalBusiness","name":"Forest City Digital","description":"Websites You Don't Have to Worry About. Professional WordPress sites for restaurants and trades.","url":"https://forestcitydigital.com","telephone":"+15197197762","email":"ForestCityDigital@gmail.com","areaServed":{"@type":"City","name":"London","addressRegion":"ON"}}
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -13,7 +20,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <a href="/">Forest City Digital</a>
+                    <a href="index.html">Forest City Digital</a>
                 </div>
                 <nav class="nav">
                     <ul>
@@ -34,6 +41,13 @@
         </div>
     </header>
 
+    <!-- Sticky mobile CTA bar (visible after scroll on small screens) -->
+    <div class="mobile-cta-bar" id="mobileCtaBar" aria-hidden="true">
+        <a href="tel:+15197197762" class="mobile-cta-btn">Call</a>
+        <a href="mailto:ForestCityDigital@gmail.com" class="mobile-cta-btn">Email</a>
+        <a href="#contact" class="mobile-cta-btn mobile-cta-primary">Get Quote</a>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero pine-bg" id="home">
         <div class="container">
@@ -45,6 +59,12 @@
                     <a href="portfolio.html" class="btn btn-secondary btn-large">View Our Work</a>
                 </div>
                 <p class="hero-note">Starting at $1,500 • Packages from $99/month</p>
+                <div class="trust-strip">
+                    <span>Fast turnaround</span>
+                    <span>Mobile-first</span>
+                    <span>Maintenance included</span>
+                    <span>Local to London, ON</span>
+                </div>
             </div>
         </div>
     </section>
@@ -92,7 +112,7 @@
                             <li>✓ Google Maps integration</li>
                             <li>✓ Mobile-first design</li>
                         </ul>
-                        <a href="../demos/restaurant/index.html" target="_blank" class="btn btn-primary">View Demo</a>
+                        <a href="demos/restaurant/index.html" target="_blank" class="btn btn-primary">View Demo</a>
                     </div>
                 </div>
 
@@ -113,7 +133,7 @@
                             <li>✓ Quote request forms</li>
                             <li>✓ Trust signals & certifications</li>
                         </ul>
-                        <a href="../demos/plumber/index.html" target="_blank" class="btn btn-primary">View Demo</a>
+                        <a href="demos/plumber/index.html" target="_blank" class="btn btn-primary">View Demo</a>
                     </div>
                 </div>
 
@@ -134,7 +154,7 @@
                             <li>✓ Free estimate forms</li>
                             <li>✓ License & insurance badges</li>
                         </ul>
-                        <a href="../demos/electrician/index.html" target="_blank" class="btn btn-primary">View Demo</a>
+                        <a href="demos/electrician/index.html" target="_blank" class="btn btn-primary">View Demo</a>
                     </div>
                 </div>
             </div>
@@ -293,6 +313,32 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonials-grid">
+                <blockquote class="testimonial-card">
+                    <p>"Professional, fast, and our new site gets way more inquiries. Exactly what we needed."</p>
+                    <footer>— Restaurant owner, London</footer>
+                </blockquote>
+                <blockquote class="testimonial-card">
+                    <p>"No more worrying about updates or security. They handle it so we can focus on our business."</p>
+                    <footer>— Trades business owner</footer>
+                </blockquote>
+                <blockquote class="testimonial-card">
+                    <p>"Clear pricing, great communication, and the site looks great on every device."</p>
+                    <footer>— Local service business</footer>
+                </blockquote>
+            </div>
+            <div class="recent-projects-cta">
+                <h3 class="section-title" style="font-size: 24px; margin-bottom: 16px;">See Our Work</h3>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Real websites we've built for restaurants and trades businesses.</p>
+                <a href="portfolio.html" class="btn btn-primary">View Portfolio</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact pine-bg" id="contact">
         <div class="container">
@@ -314,7 +360,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/maqdokll" method="POST">
                         <div class="form-group">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -335,11 +381,27 @@
                             <label for="service">Service Type</label>
                             <select id="service" name="service" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 16px;">
                                 <option value="">Select...</option>
-                                <option value="restaurant">Restaurant</option>
-                                <option value="plumbing">Plumbing/HVAC</option>
-                                <option value="electrician">Electrician/Roofing</option>
+                                <option value="restaurant">Restaurant / Café / Food</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="hvac">HVAC</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="roofing">Roofing</option>
+                                <option value="landscaping">Landscaping / Lawn Care</option>
+                                <option value="cleaning">Cleaning / Janitorial</option>
+                                <option value="handyman">Handyman / General Contractor</option>
+                                <option value="painting">Painting</option>
+                                <option value="moving">Moving / Storage</option>
+                                <option value="automotive">Automotive / Auto Repair</option>
+                                <option value="beauty">Beauty / Salon / Barber</option>
+                                <option value="fitness">Fitness / Gym</option>
+                                <option value="retail">Retail / Shop</option>
+                                <option value="professional">Professional Services (legal, accounting, etc.)</option>
                                 <option value="other">Other</option>
                             </select>
+                        </div>
+                        <div class="form-group service-other-wrap" id="serviceOtherWrap" style="display: none;">
+                            <label for="service_other">Please specify your service type</label>
+                            <input type="text" id="service_other" name="service_other" placeholder="e.g. Pet grooming, Event planning...">
                         </div>
                         <div class="form-group">
                             <label for="message">Tell us about your project *</label>
@@ -382,6 +444,9 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <div class="toast" id="thankYouToast" aria-live="polite" role="status">Thank you for your submission!</div>
+
+    <script src="script.js?v=2"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

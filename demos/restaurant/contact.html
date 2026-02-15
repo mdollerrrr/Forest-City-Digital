@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Bella Vista Restaurant - Reserve your table, get directions, or inquire about private events.">
+    <title>Contact Us - Bella Vista Restaurant</title>
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6B4C5A;
+            --primary-color-dark: #5A3D4A;
+            --primary-color-rgb: 107, 76, 90;
+            --accent-color: #D4A574;
+            --accent-color-light: #E8C9A0;
+            --warm-orange: #C97D60;
+            --warm-gold: #D4A574;
+            --font-heading: 'Playfair Display', serif;
+            --font-primary: 'Poppins', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+        
+        .page-hero {
+            background: linear-gradient(135deg, rgba(90, 61, 74, 0.9), rgba(107, 76, 90, 0.85));
+            padding: 120px 0 80px;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .page-hero h1 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #C49A63);
+            color: #2d1f0e;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
+            font-weight: 700;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #E8C9A0, var(--accent-color));
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.6);
+            color: #1a1308;
+        }
+        
+        .hours-section {
+            background: linear-gradient(135deg, #fefbf8, #f8f4f0);
+            padding: 100px 0;
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .hours-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            border-top: 4px solid var(--warm-gold);
+        }
+        
+        .hours-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .hours-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+        }
+        
+        .hours-card p {
+            margin-bottom: 12px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        .hours-card strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            background: linear-gradient(90deg, var(--primary-color), var(--warm-gold));
+        }
+        
+        .sticky-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: var(--white);
+            border-bottom: none;
+            position: relative;
+        }
+        
+        .sticky-cta::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 7px;
+            background: linear-gradient(90deg, #009246 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #CE2B37 66.66%);
+            pointer-events: none;
+        }
+        
+        .sticky-cta .cta-text {
+            color: var(--white);
+        }
+        
+        .sticky-cta {
+            border-bottom: none;
+            padding-bottom: calc(var(--spacing-sm) + 7px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: relative;
+        }
+        
+        .sticky-cta::before {
+            content: '';
+            position: absolute;
+            bottom: 7px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            pointer-events: none;
+        }
+        
+        .sticky-cta.scrolled {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .header {
+            background: var(--white);
+            backdrop-filter: none;
+            top: calc(var(--spacing-sm) * 2 + 48px + 7px);
+            margin: 0;
+            transition: top 0.3s ease;
+        }
+        
+        .header.scrolled {
+            top: 0;
+        }
+        
+        .contact-form {
+            border-top: 4px solid var(--warm-gold);
+        }
+        
+        .contact {
+            background: 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><g opacity="0.04"><path d="M50 100 Q60 80 70 100 T90 100" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(15 70 100)"/><path d="M120 150 Q130 130 140 150 T160 150" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(-20 140 150)"/><path d="M200 80 Q210 60 220 80 T240 80" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(30 220 80)"/><path d="M80 200 Q90 180 100 200 T120 200" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(-15 100 200)"/><path d="M250 180 Q260 160 270 180 T290 180" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(25 270 180)"/><path d="M150 250 Q160 230 170 250 T190 250" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(-10 170 250)"/><path d="M300 120 Q310 100 320 120 T340 120" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(35 320 120)"/><path d="M180 300 Q190 280 200 300 T220 300" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(-25 200 300)"/><path d="M320 250 Q330 230 340 250 T360 250" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(20 340 250)"/><path d="M100 350 Q110 330 120 350 T140 350" stroke="%23D4A574" fill="none" stroke-width="8" stroke-linecap="round" transform="rotate(15 120 350)"/></g></svg>'),
+                        linear-gradient(to bottom, var(--white), #fefbf8);
+            background-size: 400px 400px, 100% 100%;
+            background-position: center, center;
+            background-repeat: repeat, no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta">
+        <div class="container">
+            <span class="cta-text">Hungry? Reserve your table now!</span>
+            <a href="tel:+1234567890" class="btn btn-primary">Call (123) 456-7890</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Bella Vista</a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Reserve your table or get in touch with us</p>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section class="hours-section">
+        <div class="container">
+            <h2 class="section-title">Hours & Location</h2>
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h3>Dining Hours</h3>
+                    <p><strong>Monday - Thursday:</strong> 5:00 PM - 10:00 PM</p>
+                    <p><strong>Friday - Saturday:</strong> 5:00 PM - 11:00 PM</p>
+                    <p><strong>Sunday:</strong> 4:00 PM - 9:00 PM</p>
+                </div>
+                <div class="hours-card">
+                    <h3>Happy Hour</h3>
+                    <p><strong>Monday - Friday:</strong> 4:00 PM - 6:00 PM</p>
+                    <p>50% off appetizers & drinks</p>
+                </div>
+                <div class="hours-card">
+                    <h3>Location</h3>
+                    <p>123 Main Street</p>
+                    <p>Downtown District</p>
+                    <p>City, State 12345</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Reserve Your Table</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:reservations@bellavista.com">reservations@bellavista.com</a></p>
+                    <p><strong>Address:</strong> 123 Main Street, Downtown, City, State 12345</p>
+                    <p><strong>Service Areas:</strong> Downtown, Midtown, Uptown, Surrounding Areas</p>
+                    <div style="margin-top: 20px;">
+                        <a href="https://www.opentable.com" class="btn btn-primary" target="_blank">Reserve on OpenTable</a>
+                    </div>
+                    <div style="margin-top: 20px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184133389887!2d-73.98811768459384!3d40.75889597932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2s123%20Main%20St%2C%20New%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0; display: block;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Request a Reservation</h3>
+                    <form id="contactForm" action="https://formspree.io/f/maqdokll" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <input type="number" id="guests" name="guests" min="1" max="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Special Requests</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Request Reservation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Bella Vista Restaurant</h4>
+                    <p>Authentic Italian cuisine in the heart of downtown</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>(123) 456-7890</p>
+                    <p>reservations@bellavista.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bella Vista Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/script.js"></script>
+</body>
+</html>
