@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forest City Digital - Websites we've built for restaurants and trades businesses in London and beyond.">
+    <title>Portfolio - Forest City Digital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Forest City Digital</a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#work">Our Work</a></li>
+                        <li><a href="index.html#packages">Packages</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </nav>
+                <a href="index.html#contact" class="btn btn-primary mobile-hidden">Get Started</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section class="work-section portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Websites We've Built</h2>
+            <p class="section-subtitle">Hover over a preview to play the video. Click the link to visit the live site.</p>
+
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- To add your video: save your screen recording as assets/portfolio-demo.mp4 (MP4 recommended). Hover to play. -->
+                <article class="portfolio-card">
+                    <div class="portfolio-preview" aria-hidden="true">
+                        <video class="portfolio-video" muted loop preload="metadata" playsinline>
+                            <source src="assets/assetsportfolio-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-footer">
+                        <h3 class="portfolio-title">Bella Vista Restaurant Demo</h3>
+                        <a href="https://example.com" target="_blank" rel="noopener" class="portfolio-link">Visit site →</a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <div class="portfolio-preview" aria-hidden="true">
+                        <video class="portfolio-video" muted loop preload="metadata" playsinline>
+                            <source src="assets/another-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-footer">
+                        <h3 class="portfolio-title">Another Project</h3>
+                        <a href="https://example.com" target="_blank" rel="noopener" class="portfolio-link">Visit site →</a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <div class="portfolio-preview" aria-hidden="true">
+                        <video class="portfolio-video" muted loop preload="metadata" playsinline>
+                            <source src="assets/trades-site-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-footer">
+                        <h3 class="portfolio-title">Trades / Service Site</h3>
+                        <a href="https://example.com" target="_blank" rel="noopener" class="portfolio-link">Visit site →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Forest City Digital</h4>
+                    <p>Websites You Don't Have to Worry About</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#work">Our Work</a></li>
+                        <li><a href="index.html#packages">Packages</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>ForestCityDigital@gmail.com</p>
+                    <p>(519) 719-7762</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Forest City Digital. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Play video on hover, pause when mouse leaves
+        document.querySelectorAll('.portfolio-preview').forEach(function (wrap) {
+            var video = wrap.querySelector('.portfolio-video');
+            if (!video) return;
+            wrap.addEventListener('mouseenter', function () {
+                video.play().catch(function () {});
+            });
+            wrap.addEventListener('mouseleave', function () {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+    </script>
+</body>
+</html>
