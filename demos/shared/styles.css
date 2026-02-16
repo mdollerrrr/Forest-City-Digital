@@ -456,6 +456,19 @@ a {
     transform: scale(1.1) rotate(5deg);
 }
 
+.service-icon-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: var(--spacing-md);
+    border-radius: 12px;
+    transition: transform var(--transition-base);
+}
+
+.service-card:hover .service-icon-img {
+    transform: scale(1.1);
+}
+
 .service-card h3 {
     margin-bottom: var(--spacing-sm);
     color: var(--text-dark);

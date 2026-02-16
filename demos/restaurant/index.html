@@ -25,10 +25,33 @@
         
         body {
             font-family: var(--font-primary);
+            line-height: 1.65;
+            letter-spacing: 0.01em;
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-heading);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .hero-cta-glass {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 28px 36px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-cta-glass .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
         }
         
         .restaurant-hero {
@@ -43,6 +66,17 @@
             background-repeat: repeat, no-repeat, no-repeat;
         }
         
+        .restaurant-hero {
+            min-height: 70vh;
+            padding: 100px 0 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .restaurant-hero .container {
+            max-width: 1100px;
+        }
+
         .restaurant-hero::before {
             background: linear-gradient(135deg, rgba(90, 61, 74, 0.7), rgba(107, 76, 90, 0.6));
         }
@@ -56,8 +90,15 @@
         
         .btn-primary:hover {
             background: linear-gradient(135deg, #E8C9A0, var(--accent-color));
-            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.6);
+            box-shadow: 0 8px 24px rgba(212, 165, 116, 0.6);
             color: #1a1308;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:focus-visible,
+        .btn-secondary:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
         
         .btn-secondary {
@@ -69,16 +110,27 @@
         .btn-secondary:hover {
             background: var(--white);
             border-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
         }
         
         .service-card {
             border-top: 4px solid var(--warm-gold);
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
         
         .service-card:hover {
             border-top-color: var(--primary-color);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.18);
         }
+
+        .services-grid .service-card:nth-child(1) { transition-delay: 0s; }
+        .services-grid .service-card:nth-child(2) { transition-delay: 0.08s; }
+        .services-grid .service-card:nth-child(3) { transition-delay: 0.16s; }
         
         .menu-section {
             padding: 100px 0;
@@ -179,16 +231,17 @@
         .hours-card {
             background: var(--white);
             padding: 40px;
-            border-radius: var(--radius-lg);
+            border-radius: 16px;
             text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-base);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.12);
+            transition: all 0.35s ease;
             border-top: 4px solid var(--warm-gold);
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
         
         .hours-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.18);
         }
         
         .hours-card h3 {
@@ -218,10 +271,13 @@
         }
         
         .sticky-cta {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            background: rgba(107, 76, 90, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: var(--white);
             border-bottom: none;
             position: relative;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
         }
         
         .sticky-cta::after {
@@ -248,6 +304,8 @@
         
         .sticky-cta .cta-text {
             color: var(--white);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
         }
         
         .sticky-cta {
@@ -260,6 +318,45 @@
             transform: translateY(-100%);
             opacity: 0;
             pointer-events: none;
+        }
+
+        .stats-strip {
+            background: var(--white);
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-strip-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 48px 64px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .stat-suffix {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--warm-gold);
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 4px;
         }
         
         .header {
@@ -331,9 +428,31 @@
             <div class="hero-content">
                 <h1 class="hero-title">Authentic Italian Cuisine</h1>
                 <p class="hero-subtitle">Family recipes passed down through generations, served with passion in the heart of downtown</p>
-                <div class="hero-cta">
-                    <a href="contact.html" class="btn btn-primary btn-large">Reserve a Table</a>
-                    <a href="menu.html" class="btn btn-secondary btn-large">View Menu</a>
+                <div class="hero-cta-glass">
+                    <div class="hero-cta">
+                        <a href="contact.html" class="btn btn-primary btn-large">Reserve a Table</a>
+                        <a href="menu.html" class="btn btn-secondary btn-large">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip" aria-label="Restaurant highlights">
+        <div class="container">
+            <div class="stats-strip-inner">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Years Serving</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">5-Star Reviews</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Menu Items</span>
                 </div>
             </div>
         </div>
@@ -345,17 +464,17 @@
             <h2 class="section-title">Why Choose Bella Vista</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🍝</div>
+                    <img class="service-icon-img" src="../../assets/Restauraunt/spaghetti.png" alt="Authentic recipes" loading="lazy">
                     <h3>Authentic Recipes</h3>
                     <p>Traditional Italian dishes made with fresh, locally-sourced ingredients and time-honored family recipes.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🍷</div>
+                    <img class="service-icon-img" src="../../assets/Restauraunt/wine.png" alt="Wine selection" loading="lazy">
                     <h3>Wine Selection</h3>
                     <p>Curated selection of Italian wines and craft cocktails to complement your dining experience.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🎉</div>
+                    <img class="service-icon-img" src="../../assets/Restauraunt/firework2.png" alt="Private events" loading="lazy">
                     <h3>Private Events</h3>
                     <p>Host your special occasions in our elegant private dining room. Perfect for parties, corporate events, and celebrations.</p>
                 </div>
@@ -413,6 +532,37 @@
         </div>
     </footer>
 
+    <script>
+    (function() {
+        var statsSection = document.querySelector('.stats-strip');
+        if (!statsSection) return;
+        var numbers = statsSection.querySelectorAll('.stat-number[data-count]');
+        var done = false;
+        function countUp(el) {
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var duration = 1500;
+            var start = 0;
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var easeOut = 1 - Math.pow(1 - progress, 2);
+                var current = Math.round(start + (target - start) * easeOut);
+                el.textContent = current;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+        var observer = new IntersectionObserver(function(entries) {
+            if (done) return;
+            if (entries[0].isIntersecting) {
+                done = true;
+                numbers.forEach(countUp);
+            }
+        }, { threshold: 0.3 });
+        observer.observe(statsSection);
+    })();
+    </script>
     <script src="../shared/script.js"></script>
 </body>
 </html>
