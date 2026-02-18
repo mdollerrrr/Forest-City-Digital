@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Follow Slürps Dirty Soda on Instagram and TikTok for the latest flavours, pop-up locations, and behind-the-scenes fizz in London, Ontario.">
+    <title>Socials - Slürps Dirty Soda</title>
+    <link rel="stylesheet" href="./shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5AAFCC;
+            --primary-color-dark: #4899B5;
+            --primary-color-rgb: 90, 175, 204;
+            --accent-color: #F2A1B3;
+            --accent-color-light: #F7C6D1;
+            --pastel-lavender: #C4B3D9;
+            --pastel-cream: #FFF5D6;
+            --pastel-blue-light: #D4EDF5;
+            --font-heading: 'Fredoka One', cursive;
+            --font-primary: 'Nunito', sans-serif;
+        }
+
+        body {
+            line-height: 1.65;
+            letter-spacing: 0.01em;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .hero {
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196, 179, 217, 0.5), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(242, 161, 179, 0.45), transparent 50%),
+                radial-gradient(ellipse 70% 50% at 20% 80%, rgba(90, 175, 204, 0.35), transparent 50%),
+                linear-gradient(135deg, #D4EDF5 0%, #F7C6D1 35%, #C4B3D9 65%, #FFF5D6 100%);
+            min-height: 40vh;
+            padding: 80px 0 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            max-width: 1100px;
+        }
+
+        .hero::before {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-title {
+            color: #2d3748;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-subtitle {
+            color: #4a5568;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-cta-glass {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 22px 26px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-cta-glass .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #e8879c);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(242, 161, 179, 0.4);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px rgba(242, 161, 179, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:focus-visible,
+        .btn-secondary:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color-dark);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            border-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-cta {
+            background: rgba(90, 175, 204, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--white);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-cta::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-color);
+            pointer-events: none;
+        }
+
+        .sticky-cta.scrolled {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sticky-cta .cta-text {
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .sticky-cta .btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color-dark);
+            text-shadow: none;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticky-cta .btn:hover {
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            background: var(--white);
+            backdrop-filter: none;
+            top: calc(var(--spacing-sm) * 2 + 48px + 2px);
+            margin: 0;
+            transition: top 0.3s ease;
+        }
+
+        .header.scrolled {
+            top: 0;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        a:not(.btn):focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .section-title::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+
+        .socials-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        .socials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-card {
+            background: var(--white);
+            padding: 48px 36px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .social-card:nth-child(1) {
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .social-card:nth-child(2) {
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .social-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-card:nth-child(1) { transition-delay: 0s; }
+        .social-card:nth-child(2) { transition-delay: 0.1s; }
+
+        .social-icon-wrap {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .social-icon-wrap.instagram {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon-wrap.tiktok {
+            background: #000;
+        }
+
+        .social-icon-wrap svg {
+            width: 40px;
+            height: 40px;
+            fill: #fff;
+        }
+
+        .social-card h3 {
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+
+        .social-handle {
+            font-size: 1.1rem;
+            color: var(--primary-color-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .social-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .social-card .btn {
+            margin-top: auto;
+        }
+
+        .contact-info a:hover,
+        .contact a:not(.btn):hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .contact-form {
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(242, 161, 179, 0.15);
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 60px;
+            width: auto;
+            display: block;
+        }
+
+        .brand-wordmark {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+        .schedule-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #FFF5D6 0%, #F7C6D1 40%, #D4EDF5 100%);
+        }
+
+        .schedule-section .section-title {
+            color: #2d3748;
+        }
+
+        .schedule-note {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: all 0.35s ease;
+        }
+
+        .schedule-card:hover {
+            background: rgba(255, 255, 255, 0.75);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.12);
+        }
+
+        .schedule-card:nth-child(1) { transition-delay: 0s; }
+        .schedule-card:nth-child(2) { transition-delay: 0.08s; }
+        .schedule-card:nth-child(3) { transition-delay: 0.16s; }
+        .schedule-card:nth-child(4) { transition-delay: 0.24s; }
+
+        .schedule-day {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--primary-color-dark);
+            margin-bottom: 8px;
+        }
+
+        .schedule-time {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .schedule-location {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .schedule-tbd {
+            display: inline-block;
+            background: rgba(242, 161, 179, 0.18);
+            color: var(--accent-color);
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .socials-grid {
+                grid-template-columns: 1fr;
+            }
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            .brand-logo {
+                height: 44px;
+            }
+            .brand-wordmark {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta">
+        <div class="container">
+            <span class="cta-text">Pop-ups & events only — book Slürps for your next event in London, ON.</span>
+            <a href="index.html#contact" class="btn">Book for an Event</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" aria-label="Slürps Dirty Soda - Home">
+                        <img class="brand-logo" src="./assets/Slurps/slurps logo.png" alt="Slürps Dirty Soda logo">
+                        <span class="brand-wordmark">Sl&uuml;rps Dirty Soda</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#menu">Menu</a></li>
+                        <li><a href="index.html#build-your-own">Build Your Own</a></li>
+                        <li><a href="index.html#reviews">Reviews</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="socials.html">Socials</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Follow the Fizz</h1>
+                <p class="hero-subtitle">Stay up to date with new flavours, pop-up locations, and behind-the-scenes fun</p>
+                <div class="hero-cta-glass" style="margin-top: 18px;">
+                    <div class="hero-cta">
+                        <a href="index.html#contact" class="btn btn-primary btn-large">Book for an Event</a>
+                        <a href="index.html#menu" class="btn btn-secondary btn-large">Browse the Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Socials Section -->
+    <section class="socials-section">
+        <div class="container">
+            <h2 class="section-title">Find Us Online</h2>
+            <div class="socials-grid">
+                <!-- Instagram Card -->
+                <div class="social-card">
+                    <div class="social-icon-wrap instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </div>
+                    <h3>Instagram</h3>
+                    <div class="social-handle">@slurps_dirtysoda</div>
+                    <p>Colourful drink pics, pop-up announcements, event recaps, and the occasional behind-the-scenes chaos. This is where the fizz lives.</p>
+                    <a href="https://www.instagram.com/slurps_dirtysoda/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">Follow on Instagram</a>
+                </div>
+                <!-- TikTok Card -->
+                <div class="social-card">
+                    <div class="social-icon-wrap tiktok">
+                        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16v-3.45a4.85 4.85 0 01-3.77-1.25V6.69h3.77z"/></svg>
+                    </div>
+                    <h3>TikTok</h3>
+                    <div class="social-handle">@slurps.soda</div>
+                    <p>Watch us craft your favourite dirty sodas, see what's trending, and catch all the fizzy content you didn't know you needed. Hit follow!</p>
+                    <a href="https://www.tiktok.com/@slurps.soda" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">Follow on TikTok</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pop-Up Schedule -->
+    <section class="schedule-section" id="schedule">
+        <div class="container">
+            <h2 class="section-title">Pop-Up Schedule</h2>
+            <p class="schedule-note">Schedule updates weekly &mdash; check our <a href="https://www.instagram.com/slurps_dirtysoda/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color-dark); font-weight: 700;">Instagram</a> for the latest locations and times!</p>
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <div class="schedule-day">Friday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                    <span class="schedule-tbd">Coming Soon</span>
+                </div>
+                <div class="schedule-card">
+                    <div class="schedule-day">Saturday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                    <span class="schedule-tbd">Coming Soon</span>
+                </div>
+                <div class="schedule-card">
+                    <div class="schedule-day">Sunday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                    <span class="schedule-tbd">Coming Soon</span>
+                </div>
+                <div class="schedule-card">
+                    <div class="schedule-day">Your next event!!</div>
+                    <div class="schedule-time">By Request</div>
+                    <div class="schedule-location">London &amp; Area</div>
+                    <a class="btn btn-primary" href="index.html#contact" style="margin-top: 12px; display: inline-block;">Book for an Event</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sl&uuml;rps Dirty Soda</h4>
+                    <p>London Ontario's favourite dirty soda pop-up. Handcrafted fizzy creations for events, parties, and everyday cravings.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#menu">Menu</a></li>
+                        <li><a href="index.html#build-your-own">Build Your Own</a></li>
+                        <li><a href="index.html#reviews">Reviews</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="socials.html">Socials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>226-559-7449</p>
+                    <p>London, Ontario</p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">Pop-Up &amp; Catering Available</p>
+                    <div style="margin-top: 16px; display: flex; gap: 16px;">
+                        <a href="https://www.instagram.com/slurps_dirtysoda/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: rgba(255,255,255,0.8); transition: color 0.2s;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@slurps.soda" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style="color: rgba(255,255,255,0.8); transition: color 0.2s;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16v-3.45a4.85 4.85 0 01-3.77-1.25V6.69h3.77z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sl&uuml;rps Dirty Soda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./shared/script.js"></script>
+</body>
+</html>

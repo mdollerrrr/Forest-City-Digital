@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Slürps Dirty Soda — London, Ontario's favourite dirty soda pop-up shop. Handcrafted fizzy creations, custom builds, and event catering. All drinks $5. Book us for your next event!">
+    <title>Slürps Dirty Soda — London Ontario Pop-Up &amp; Event Catering | Dirty Soda</title>
+    <link rel="canonical" href="https://example.com/">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Slürps Dirty Soda — London Ontario's Favourite Dirty Soda Pop-Up">
+    <meta property="og:description" content="Handcrafted dirty sodas, custom builds & event catering in London, ON. 8+ signature drinks, all $5. Book Slürps for your next event!">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="https://example.com/assets/Slurps/slurps%20logo.png">
+    <meta property="og:locale" content="en_CA">
+    <meta property="og:site_name" content="Slürps Dirty Soda">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Slürps Dirty Soda — London Ontario's Favourite Dirty Soda Pop-Up">
+    <meta name="twitter:description" content="Handcrafted dirty sodas, custom builds & event catering in London, ON. 8+ signature drinks, all $5.">
+    <meta name="twitter:image" content="https://example.com/assets/Slurps/slurps%20logo.png">
+    <link rel="stylesheet" href="./shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5AAFCC;
+            --primary-color-dark: #4899B5;
+            --primary-color-rgb: 90, 175, 204;
+            --accent-color: #F2A1B3;
+            --accent-color-light: #F7C6D1;
+            --pastel-lavender: #C4B3D9;
+            --pastel-cream: #FFF5D6;
+            --pastel-blue-light: #D4EDF5;
+            --font-heading: 'Fredoka One', cursive;
+            --font-primary: 'Nunito', sans-serif;
+        }
+
+        body {
+            line-height: 1.65;
+            letter-spacing: 0.01em;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .hero {
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196, 179, 217, 0.5), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(242, 161, 179, 0.45), transparent 50%),
+                radial-gradient(ellipse 70% 50% at 20% 80%, rgba(90, 175, 204, 0.35), transparent 50%),
+                linear-gradient(135deg, #D4EDF5 0%, #F7C6D1 35%, #C4B3D9 65%, #FFF5D6 100%);
+            min-height: 70vh;
+            padding: 100px 0 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            max-width: 1100px;
+        }
+
+        .hero::before {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-title {
+            color: #2d3748;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-subtitle {
+            color: #4a5568;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-cta-glass {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 28px 36px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-cta-glass .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #e8879c);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(242, 161, 179, 0.4);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px rgba(242, 161, 179, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:focus-visible,
+        .btn-secondary:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color-dark);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            border-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card {
+            border-top: 4px solid var(--accent-color);
+            transition: all 0.35s ease;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card:hover {
+            border-top-color: var(--primary-color);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card:nth-child(2) { border-top-color: var(--primary-color); }
+        .service-card:nth-child(3) { border-top-color: var(--pastel-lavender); }
+        .service-card:nth-child(4) { border-top-color: #F5D680; }
+        .service-card:nth-child(5) { border-top-color: var(--accent-color); }
+        .service-card:nth-child(6) { border-top-color: var(--primary-color); }
+        .service-card:nth-child(7) { border-top-color: var(--pastel-lavender); }
+        .service-card:nth-child(8) { border-top-color: #F5D680; }
+
+        .services-section-drinks {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 90px 0;
+        }
+
+        .best-sellers-strip {
+            margin-bottom: 60px;
+        }
+
+        .best-sellers-strip .strip-title {
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 28px;
+        }
+
+        .best-sellers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .drink-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            font-family: var(--font-heading);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .drink-badge.popular {
+            background: linear-gradient(135deg, #F5D680, #f0c850);
+            color: #5a4a1e;
+            box-shadow: 0 2px 8px rgba(245, 214, 128, 0.4);
+        }
+
+        .drink-badge.seasonal {
+            background: linear-gradient(135deg, var(--pastel-lavender), #b8a3d0);
+            color: #3d2d5c;
+            box-shadow: 0 2px 8px rgba(196, 179, 217, 0.4);
+        }
+
+        .drink-badge.new-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(90, 175, 204, 0.4);
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .service-icon-duo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .service-icon-duo .service-icon-img {
+            width: 52px;
+            height: 52px;
+            margin-bottom: 0;
+        }
+
+        .drink-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .services-grid .service-card:nth-child(1) { transition-delay: 0s; }
+        .services-grid .service-card:nth-child(2) { transition-delay: 0.06s; }
+        .services-grid .service-card:nth-child(3) { transition-delay: 0.12s; }
+        .services-grid .service-card:nth-child(4) { transition-delay: 0.18s; }
+        .services-grid .service-card:nth-child(5) { transition-delay: 0.24s; }
+        .services-grid .service-card:nth-child(6) { transition-delay: 0.3s; }
+        .services-grid .service-card:nth-child(7) { transition-delay: 0.36s; }
+        .services-grid .service-card:nth-child(8) { transition-delay: 0.42s; }
+
+        .byo-pricing-callout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .byo-pricing-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #4A3560;
+        }
+
+        .byo-pricing-pill .pill-price {
+            font-family: var(--font-heading);
+            color: var(--accent-color);
+        }
+
+        .build-your-own {
+            background: linear-gradient(135deg, #C4B3D9 0%, #D8CCE8 50%, #E8DFF2 100%);
+            padding: 100px 0;
+            color: #2d3748;
+        }
+
+        .build-your-own .section-title {
+            color: #2d3748;
+        }
+
+        .build-your-own .section-title::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+
+        .byo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .byo-card {
+            text-align: center;
+            padding: 40px 28px 36px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 32px -8px rgba(74, 53, 96, 0.1);
+        }
+
+        .byo-card:hover {
+            background: rgba(255, 255, 255, 0.68);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 16px 48px -12px rgba(74, 53, 96, 0.18);
+        }
+
+        .byo-step-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .byo-step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .byo-card:nth-child(1) .byo-step-num { background: var(--accent-color); }
+        .byo-card:nth-child(2) .byo-step-num { background: var(--primary-color); }
+        .byo-card:nth-child(3) .byo-step-num { background: var(--pastel-lavender); }
+        .byo-card:nth-child(4) .byo-step-num { background: #F5D680; color: #6b5a3d; }
+
+        .byo-step-label {
+            font-family: var(--font-heading);
+            color: #4A3560;
+            font-size: 1.2rem;
+        }
+
+        .byo-card .byo-note {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #6b5a80;
+            font-style: normal;
+            font-weight: 600;
+            margin-bottom: 18px;
+            background: rgba(196, 179, 217, 0.25);
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(196, 179, 217, 0.35);
+        }
+
+        .byo-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .byo-chip {
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid rgba(196, 179, 217, 0.4);
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #4a5568;
+            transition: all 0.25s ease;
+            cursor: default;
+        }
+
+        .byo-chip:hover {
+            background: rgba(242, 161, 179, 0.15);
+            border-color: var(--accent-color);
+            color: #4A3560;
+            transform: translateY(-1px);
+        }
+
+        .byo-card:nth-child(1) .byo-chip:hover { border-color: var(--accent-color); }
+        .byo-card:nth-child(2) .byo-chip:hover { border-color: var(--primary-color); }
+        .byo-card:nth-child(3) .byo-chip:hover { border-color: var(--pastel-lavender); background: rgba(196, 179, 217, 0.15); }
+        .byo-card:nth-child(4) .byo-chip:hover { border-color: #F5D680; background: rgba(245, 214, 128, 0.15); }
+
+        .byo-grid .byo-card:nth-child(1) { transition-delay: 0s; }
+        .byo-grid .byo-card:nth-child(2) { transition-delay: 0.08s; }
+        .byo-grid .byo-card:nth-child(3) { transition-delay: 0.16s; }
+        .byo-grid .byo-card:nth-child(4) { transition-delay: 0.24s; }
+
+        .reviews-section {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 16px;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+            transition: all 0.35s ease;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .review-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 4rem;
+            color: rgba(242, 161, 179, 0.15);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .review-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--primary-color);
+        }
+
+        .review-card:nth-child(odd) {
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .review-card:nth-child(even) {
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .reviews-grid .review-card:nth-child(1) { transition-delay: 0s; }
+        .reviews-grid .review-card:nth-child(2) { transition-delay: 0.08s; }
+        .reviews-grid .review-card:nth-child(3) { transition-delay: 0.16s; }
+        .reviews-grid .review-card:nth-child(4) { transition-delay: 0.24s; }
+        .reviews-grid .review-card:nth-child(5) { transition-delay: 0.32s; }
+        .reviews-grid .review-card:nth-child(6) { transition-delay: 0.4s; }
+
+        .review-stars {
+            color: #F5D680;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 90px 0;
+        }
+
+        .trust-signals {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+        }
+
+        .section-title::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+
+        .sticky-cta {
+            background: rgba(90, 175, 204, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--white);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-cta::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-color);
+            pointer-events: none;
+        }
+
+        .sticky-cta.scrolled {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sticky-cta .cta-text {
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .sticky-cta .btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color-dark);
+            text-shadow: none;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticky-cta .btn:hover {
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            background: var(--white);
+            backdrop-filter: none;
+            top: calc(var(--spacing-sm) * 2 + 48px + 2px);
+            margin: 0;
+            transition: top 0.3s ease;
+        }
+
+        .header.scrolled {
+            top: 0;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-info a:hover,
+        .contact a:not(.btn):hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        a:not(.btn):focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .contact-form {
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(242, 161, 179, 0.15);
+        }
+
+        .stats-strip {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-strip-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 48px 64px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .stat-suffix {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 60px;
+            width: auto;
+            display: block;
+        }
+
+        .brand-wordmark {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+
+        .service-card {
+            position: relative;
+        }
+
+        .drink-price {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg, var(--accent-color), #e8879c);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(242, 161, 179, 0.3);
+        }
+
+        .bubble-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble-layer .pop-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.7), rgba(242,161,179,0.55) 50%, rgba(220,100,130,0.45));
+            border: 2px solid rgba(242,161,179,0.5);
+            box-shadow: 0 2px 12px rgba(242,161,179,0.25), inset 0 -2px 6px rgba(255,255,255,0.3);
+            animation: bubblePop 3.5s ease-out forwards;
+        }
+
+        @keyframes bubblePop {
+            0% {
+                transform: scale(0.2) translateY(0);
+                opacity: 0;
+            }
+            15% {
+                transform: scale(1.1) translateY(-10px);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1) translateY(-30px);
+                opacity: 0.85;
+            }
+            80% {
+                transform: scale(1.05) translateY(-50px);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.3) translateY(-70px);
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bubble-layer .pop-bubble {
+                animation: none;
+                opacity: 0.45;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-cta-glass {
+                padding: 20px;
+            }
+            .byo-grid {
+                grid-template-columns: 1fr;
+            }
+            .brand-logo {
+                height: 44px;
+            }
+            .brand-wordmark {
+                display: none;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Slürps Dirty Soda",
+        "description": "London, Ontario's favourite dirty soda pop-up shop. Handcrafted fizzy creations, custom builds, and event catering.",
+        "url": "https://example.com/",
+        "telephone": "+1-226-559-7449",
+        "priceRange": "$",
+        "areaServed": {
+            "@type": "City",
+            "name": "London",
+            "containedInPlace": {
+                "@type": "AdministrativeArea",
+                "name": "Ontario"
+            }
+        },
+        "sameAs": [
+            "https://www.instagram.com/slurps_dirtysoda/",
+            "https://www.tiktok.com/@slurps.soda"
+        ],
+        "knowsAbout": ["dirty soda", "pop-up shop", "event catering", "custom drinks"],
+        "currenciesAccepted": "CAD",
+        "paymentAccepted": "Cash, Credit Card"
+    }
+    </script>
+</head>
+<body>
+    <!-- Background bubble pop layer -->
+    <div class="bubble-layer" id="bubbleLayer" aria-hidden="true"></div>
+
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta">
+        <div class="container">
+            <span class="cta-text">Pop-ups & events only — book Slürps for your next event in London, ON.</span>
+            <a href="#contact" class="btn">Book for an Event</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/" aria-label="Slürps Dirty Soda - Home">
+                        <img class="brand-logo" src="./assets/Slurps/slurps logo.png" alt="Slürps Dirty Soda logo">
+                        <span class="brand-wordmark">Sl&uuml;rps Dirty Soda</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#build-your-own">Build Your Own</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="socials.html">Socials</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">London's Favourite Dirty Soda Pop-Up</h1>
+                <p class="hero-subtitle">Local. Handcrafted. Delicious.</p>
+                <p style="max-width: 560px; margin: 12px auto 0; color: #4a5568; font-size: clamp(1.1rem, 2vw, 1.25rem); line-height: 1.6; text-shadow: 0 1px 3px rgba(255,255,255,0.4);">Dirty soda is your favourite pop mixed with flavour syrups, creamy add-ins, and fresh garnishes &mdash; customized to perfection.</p>
+                <div class="hero-cta-glass">
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary btn-large">Book for an Event</a>
+                        <a href="socials.html" class="btn btn-secondary btn-large">See Pop-Up Updates</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip" aria-label="Quick stats">
+        <div class="container">
+            <div class="stats-strip-inner">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="8">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Signature Drinks</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="1000">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Happy Sips Served</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Customizable</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slürps Classics Menu -->
+    <section class="services services-section-drinks" id="menu">
+        <div class="container">
+            <h2 class="section-title">Sl&uuml;rps Classics</h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/beer.png" alt="Root beer icon" loading="lazy">
+                    <h3>Rootin' For Vanilla</h3>
+                    <p>Classic root beer, but make it iconic. Swirled with smooth vanilla syrup, creamy vanilla creamer, and topped with delicious maraschino cherries.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-badge popular">Fan Favourite</span>
+                    <span class="drink-price">$5</span>
+                    <div class="service-icon-duo">
+                        <img class="service-icon-img" src="./assets/Slurps/peach.png" alt="Peach icon" loading="lazy">
+                        <img class="service-icon-img" src="./assets/Slurps/strawberry.png" alt="Strawberry icon" loading="lazy">
+                    </div>
+                    <h3>Peach Berry Burst</h3>
+                    <p>Refreshing lemonade and peach &amp; strawberry syrup team up for a lively drink that's vibrant, and totally refreshing. Available in still and sparkling options.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/cola.png" alt="Cola bottle icon" loading="lazy">
+                    <h3>Dr. Pepper Fanatic</h3>
+                    <p>For the ride-or-die Dr. Pepper lovers. Creamy vanilla creamer brings the smooth, coconut syrup for yummy-ness, &amp; lime garnish bring the zing.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/cherries.png" alt="Cherries icon" loading="lazy">
+                    <h3>Diet Coke Icon</h3>
+                    <p>A timeless Diet Coke swirled with cherry syrup sweetness and finished with a silky layer of cold foam with a cherry garnish. Effortlessly iconic.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/fruit.png" alt="Orange icon" loading="lazy">
+                    <h3>The Orange Dream Team</h3>
+                    <p>Bright, bubbly, and vanilla-drenched. Creamy cold foam meets crisp orange fizz and vanilla syrup in a match that just makes sense.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/watermelon.png" alt="Watermelon icon" loading="lazy">
+                    <h3>Pink Citrus Punch</h3>
+                    <p>Sparkling water and lemonade power the punch, while watermelon syrup and a fresh lime garnish add the shock factor.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-badge popular">Fan Favourite</span>
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/bubbles.png" alt="Bubbles icon" loading="lazy">
+                    <h3>Bubble Trouble</h3>
+                    <p>This one's all about the fizz with Sprite, blue raspberry, and lime syrup, finished with a lime garnish. It's bold, sweet, and ready to get you into some bubbly trouble.</p>
+                </div>
+                <div class="service-card">
+                    <span class="drink-badge popular">Fan Favourite</span>
+                    <span class="drink-price">$5</span>
+                    <img class="service-icon-img" src="./assets/Slurps/sunset.png" alt="Sunset icon" loading="lazy">
+                    <h3>Golden Hour</h3>
+                    <p>Bubbly, fruity, and topped with a splash of coconut cream, this one's a golden blend of peach, mango, and sparkling water for a tropical blast.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Your Own Section -->
+    <section class="build-your-own" id="build-your-own">
+        <div class="container">
+            <h2 class="section-title">Build Your Own</h2>
+            <div class="byo-pricing-callout">
+                <span class="byo-pricing-pill">Base drink <span class="pill-price">$5</span></span>
+                <span class="byo-pricing-pill">Extra syrup <span class="pill-price">+$0.50</span></span>
+                <span class="byo-pricing-pill">Extra inclusion <span class="pill-price">+$0.50</span></span>
+            </div>
+            <div class="byo-grid">
+                <div class="byo-card">
+                    <div class="byo-step-badge">
+                        <span class="byo-step-num">1</span>
+                        <span class="byo-step-label">Choose Ice Level</span>
+                    </div>
+                    <div class="byo-chips">
+                        <span class="byo-chip">No Ice</span>
+                        <span class="byo-chip">Light Ice</span>
+                        <span class="byo-chip">Regular</span>
+                        <span class="byo-chip">Extra</span>
+                    </div>
+                </div>
+                <div class="byo-card">
+                    <div class="byo-step-badge">
+                        <span class="byo-step-num">2</span>
+                        <span class="byo-step-label">Choose a Base</span>
+                    </div>
+                    <div class="byo-chips">
+                        <span class="byo-chip">Sparkling Water</span>
+                        <span class="byo-chip">Diet Coke</span>
+                        <span class="byo-chip">Sprite</span>
+                        <span class="byo-chip">Orange Soda</span>
+                        <span class="byo-chip">Root Beer</span>
+                        <span class="byo-chip">Dr. Pepper</span>
+                        <span class="byo-chip">Lemonade</span>
+                    </div>
+                </div>
+                <div class="byo-card">
+                    <div class="byo-step-badge">
+                        <span class="byo-step-num">3</span>
+                        <span class="byo-step-label">Choose Flavors</span>
+                    </div>
+                    <p class="byo-note">Up to 1 syrup, or add more for $0.50 extra!</p>
+                    <div class="byo-chips">
+                        <span class="byo-chip">Vanilla</span>
+                        <span class="byo-chip">Sugar-Free Vanilla</span>
+                        <span class="byo-chip">Blue Raspberry</span>
+                        <span class="byo-chip">Peach</span>
+                        <span class="byo-chip">Strawberry</span>
+                        <span class="byo-chip">Watermelon</span>
+                        <span class="byo-chip">Coconut</span>
+                        <span class="byo-chip">Cherry</span>
+                        <span class="byo-chip">Lime</span>
+                    </div>
+                </div>
+                <div class="byo-card">
+                    <div class="byo-step-badge">
+                        <span class="byo-step-num">4</span>
+                        <span class="byo-step-label">Inclusions</span>
+                    </div>
+                    <p class="byo-note">Up to 1 inclusion, or add more for $0.50 extra!</p>
+                    <div class="byo-chips">
+                        <span class="byo-chip">Maraschino Cherry</span>
+                        <span class="byo-chip">Cold Foam</span>
+                        <span class="byo-chip">Vanilla Creamer</span>
+                        <span class="byo-chip">Lime Garnish</span>
+                        <span class="byo-chip">Coconut Cream</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">What People Are Saying</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"The Diet Coke Icon is absolutely incredible. I've never had a dirty soda this good. It's my new obsession!"</p>
+                    <p class="review-author">- Emma R., London</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"We hired Sl&uuml;rps for our daughter's birthday party and it was a HIT. Every kid (and adult!) loved building their own drinks."</p>
+                    <p class="review-author">- Jenna &amp; Mark T., Byron</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Golden Hour is a taste of summer in a cup. So refreshing! I can't stop telling everyone about Sl&uuml;rps."</p>
+                    <p class="review-author">- Taylor P., Masonville</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"The Build Your Own option is genius. I made a custom sparkling water with peach and coconut cream - amazing combo!"</p>
+                    <p class="review-author">- Priya S., Wortley Village</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Bubble Trouble is the real deal. Blue raspberry and lime is such a perfect flavour combo. I'm hooked."</p>
+                    <p class="review-author">- Josh K., Old East Village</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Had Sl&uuml;rps cater our office event and everyone was raving about it for days. Professional, fun, and delicious!"</p>
+                    <p class="review-author">- Lisa M., Downtown London</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 20px;">
+                    <strong>5/5 Average Rating</strong> from our happy customers
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals -->
+    <section class="trust-signals">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-number">Pop-Up</div>
+                    <div class="trust-label">Events &amp; Markets</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">Custom</div>
+                    <div class="trust-label">Build Your Own Drinks</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">Private</div>
+                    <div class="trust-label">Party Packages</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">Catering</div>
+                    <div class="trust-label">For Any Occasion</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> <a href="tel:+12265597449">226-559-7449</a></p>
+                    <p><strong>Location:</strong> London, Ontario</p>
+                    <p><strong>Type:</strong> Pop-Up Shop &amp; Mobile Catering</p>
+                    <div style="margin-top: 20px;">
+                        <p><strong>Services:</strong></p>
+                        <p>Pop-Up Events &amp; Local Markets</p>
+                        <p>Birthday Parties &amp; Private Events</p>
+                        <p>School Events</p>
+                        <p>Corporate Catering</p>
+                        <p>Weddings &amp; Baby showers</p>
+                    </div>
+                    <div style="margin-top: 20px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93068.93498554184!2d-81.31822855!3d42.98456085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef20ea88d9b0b%3A0x28c7d7699a056b95!2sLondon%2C%20ON!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca"
+                            width="100%"
+                            height="300"
+                            style="border:0; display: block;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Book Sl&uuml;rps for Your Event</h3>
+                    <form id="contactForm" action="https://formspree.io/f/maqdokll" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-type">Event Type *</label>
+                            <select id="event-type" name="event-type" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 16px;">
+                                <option value="">Select event type...</option>
+                                <option value="pop-up">Pop-Up Event</option>
+                                <option value="birthday">Birthday Party</option>
+                                <option value="private-event">Private Event</option>
+                                <option value="corporate">Corporate Catering</option>
+                                <option value="wedding">Wedding / Shower</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tell Us About Your Event *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Date, number of guests, any special requests..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large" data-original-text="Send Inquiry">Send Inquiry</button>
+                        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: var(--text-light);">
+                            Or call us directly at <a href="tel:+12265597449" style="color: var(--primary-color-dark);">226-559-7449</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sl&uuml;rps Dirty Soda</h4>
+                    <p>London Ontario's favourite dirty soda pop-up. Handcrafted fizzy creations for events, parties, school events, and everyday cravings.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#build-your-own">Build Your Own</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="socials.html">Socials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>226-559-7449</p>
+                    <p>London, Ontario</p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">Pop-Up &amp; Catering Available</p>
+                    <div style="margin-top: 16px; display: flex; gap: 16px;">
+                        <a href="https://www.instagram.com/slurps_dirtysoda/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: rgba(255,255,255,0.8); transition: color 0.2s;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@slurps.soda" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style="color: rgba(255,255,255,0.8); transition: color 0.2s;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16v-3.45a4.85 4.85 0 01-3.77-1.25V6.69h3.77z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sl&uuml;rps Dirty Soda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        var statsSection = document.querySelector('.stats-strip');
+        if (!statsSection) return;
+        var numbers = statsSection.querySelectorAll('.stat-number[data-count]');
+        var done = false;
+        function countUp(el) {
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var duration = 1500;
+            var start = 0;
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var easeOut = 1 - Math.pow(1 - progress, 2);
+                var current = Math.round(start + (target - start) * easeOut);
+                el.textContent = current;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+        var observer = new IntersectionObserver(function(entries) {
+            if (done) return;
+            if (entries[0].isIntersecting) {
+                done = true;
+                numbers.forEach(countUp);
+            }
+        }, { threshold: 0.3 });
+        observer.observe(statsSection);
+    })();
+    </script>
+    <script>
+    (function() {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var layer = document.getElementById('bubbleLayer');
+        if (!layer) return;
+
+        function spawnBubble() {
+            var max = reduced ? 10 : 35;
+            if (layer.childElementCount >= max) return;
+            var size = 24 + Math.random() * 44;
+            var b = document.createElement('div');
+            b.className = 'pop-bubble';
+            b.style.width = size + 'px';
+            b.style.height = size + 'px';
+            b.style.left = (Math.random() * 92 + 4) + '%';
+            b.style.top = (15 + Math.random() * 70) + '%';
+            if (reduced) {
+                b.style.animation = 'none';
+                b.style.opacity = '0.4';
+                setTimeout(function() { b.remove(); }, 8000 + Math.random() * 6000);
+            } else {
+                b.addEventListener('animationend', function() { b.remove(); });
+            }
+            layer.appendChild(b);
+        }
+
+        // Spawn initial batch so bubbles are visible immediately
+        var initCount = reduced ? 8 : 6;
+        for (var i = 0; i < initCount; i++) {
+            setTimeout(function() { spawnBubble(); }, i * 400);
+        }
+
+        // Gentle continuous trickle
+        var trickleInterval = reduced ? 4000 : 1500;
+        var trickleMax = reduced ? 8 : 12;
+        setInterval(function() {
+            if (layer.childElementCount < trickleMax) spawnBubble();
+        }, trickleInterval);
+
+        // Extra burst on scroll (normal mode only)
+        if (!reduced) {
+            var ticking = false;
+            var lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function() {
+                    var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                    if (Math.abs(currentScroll - lastScroll) > 10) {
+                        var count = 2 + Math.floor(Math.random() * 3);
+                        for (var j = 0; j < count; j++) spawnBubble();
+                        lastScroll = currentScroll;
+                    }
+                    ticking = false;
+                });
+            }, { passive: true });
+        }
+    })();
+    </script>
+    <script src="./shared/script.js"></script>
+</body>
+</html>
