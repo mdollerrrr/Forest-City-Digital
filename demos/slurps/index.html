@@ -394,7 +394,7 @@
 
         .reviews-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
@@ -695,6 +695,9 @@
             .byo-grid {
                 grid-template-columns: 1fr;
             }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
             .brand-logo {
                 height: 44px;
             }
@@ -755,8 +758,8 @@
                 <nav class="nav">
                     <ul>
                         <li><a href="#home">Home</a></li>
+                        <li><a href="schedule.html">Schedule</a></li>
                         <li><a href="#menu">Menu</a></li>
-                        <li><a href="#build-your-own">Build Your Own</a></li>
                         <li><a href="#reviews">Reviews</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="socials.html">Socials</a></li>
@@ -781,7 +784,7 @@
                 <div class="hero-cta-glass">
                     <div class="hero-cta">
                         <a href="#contact" class="btn btn-primary btn-large">Book for an Event</a>
-                        <a href="socials.html" class="btn btn-secondary btn-large">See Pop-Up Updates</a>
+                        <a href="schedule.html" class="btn btn-secondary btn-large">See Pop-Up Updates</a>
                     </div>
                 </div>
             </div>
@@ -876,11 +879,6 @@
     <section class="build-your-own" id="build-your-own">
         <div class="container">
             <h2 class="section-title">Build Your Own</h2>
-            <div class="byo-pricing-callout">
-                <span class="byo-pricing-pill">Base drink <span class="pill-price">$5</span></span>
-                <span class="byo-pricing-pill">Extra syrup <span class="pill-price">+$0.50</span></span>
-                <span class="byo-pricing-pill">Extra inclusion <span class="pill-price">+$0.50</span></span>
-            </div>
             <div class="byo-grid">
                 <div class="byo-card">
                     <div class="byo-step-badge">
@@ -914,7 +912,7 @@
                         <span class="byo-step-num">3</span>
                         <span class="byo-step-label">Choose Flavors</span>
                     </div>
-                    <p class="byo-note">Up to 1 syrup, or add more for $0.50 extra!</p>
+                    <p class="byo-note">Up to 1 syrup, or add more for an extra charge!</p>
                     <div class="byo-chips">
                         <span class="byo-chip">Vanilla</span>
                         <span class="byo-chip">Sugar-Free Vanilla</span>
@@ -932,7 +930,7 @@
                         <span class="byo-step-num">4</span>
                         <span class="byo-step-label">Inclusions</span>
                     </div>
-                    <p class="byo-note">Up to 1 inclusion, or add more for $0.50 extra!</p>
+                    <p class="byo-note">Up to 1 inclusion, or add more for an extra charge!</p>
                     <div class="byo-chips">
                         <span class="byo-chip">Maraschino Cherry</span>
                         <span class="byo-chip">Cold Foam</span>
@@ -965,21 +963,6 @@
                     <p class="review-text">"Golden Hour is a taste of summer in a cup. So refreshing! I can't stop telling everyone about Sl&uuml;rps."</p>
                     <p class="review-author">- Taylor P., Masonville</p>
                 </div>
-                <div class="review-card">
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"The Build Your Own option is genius. I made a custom sparkling water with peach and coconut cream - amazing combo!"</p>
-                    <p class="review-author">- Priya S., Wortley Village</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"Bubble Trouble is the real deal. Blue raspberry and lime is such a perfect flavour combo. I'm hooked."</p>
-                    <p class="review-author">- Josh K., Old East Village</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"Had Sl&uuml;rps cater our office event and everyone was raving about it for days. Professional, fun, and delicious!"</p>
-                    <p class="review-author">- Lisa M., Downtown London</p>
-                </div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
                 <p style="font-size: 18px; color: var(--text-light); margin-bottom: 20px;">
@@ -996,10 +979,6 @@
                 <div class="trust-item">
                     <div class="trust-number">Pop-Up</div>
                     <div class="trust-label">Events &amp; Markets</div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-number">Custom</div>
-                    <div class="trust-label">Build Your Own Drinks</div>
                 </div>
                 <div class="trust-item">
                     <div class="trust-number">Private</div>
@@ -1021,6 +1000,7 @@
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     <p><strong>Phone:</strong> <a href="tel:+12265597449">226-559-7449</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:slurpsdirtysoda@gmail.com">slurpsdirtysoda@gmail.com</a></p>
                     <p><strong>Location:</strong> London, Ontario</p>
                     <p><strong>Type:</strong> Pop-Up Shop &amp; Mobile Catering</p>
                     <div style="margin-top: 20px;">
@@ -1028,6 +1008,7 @@
                         <p>Pop-Up Events &amp; Local Markets</p>
                         <p>Birthday Parties &amp; Private Events</p>
                         <p>School Events</p>
+                        <p>Fundraising</p>
                         <p>Corporate Catering</p>
                         <p>Weddings &amp; Baby showers</p>
                     </div>
@@ -1096,8 +1077,8 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
+                        <li><a href="schedule.html">Schedule</a></li>
                         <li><a href="#menu">Menu</a></li>
-                        <li><a href="#build-your-own">Build Your Own</a></li>
                         <li><a href="#reviews">Reviews</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="socials.html">Socials</a></li>

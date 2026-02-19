@@ -176,6 +176,12 @@ Update the color scheme in demos/[target]/index.html:
 - Update any hardcoded gradient colors in hero, trust-signals, etc.
 ```
 
+### Editable schedule (Google Sheet) — Slürps demo
+
+The Slürps schedule is customer-editable via Google Sheets.
+
+- **Sheet**: publish the schedule tab as CSV (headers: `Day`, `Time`, `Location`)\n+- **Website**: `demos/slurps/schedule.html` fetches the schedule from a same-origin endpoint: `/api/slurps-schedule`\n+- **Serverless function**: `api/slurps-schedule.js` fetches/parses the published CSV and returns JSON (avoids CORS issues)\n+\n+Local testing note:\n+\n+- A basic static file server won’t run `api/` functions.\n+- To test locally, use Vercel’s dev server:\n+  - Install CLI: `npm i -g vercel`\n+  - From the project root: `vercel dev`\n+  - Then open: `http://localhost:3000/demos/slurps/schedule.html`
+
 ---
 
 ## Modernization Checklist
