@@ -1,0 +1,37 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "^/$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/index.html"
+    },
+    {
+      "src": "^/index\\.html$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/index.html"
+    },
+    {
+      "src": "^/socials\\.html$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/socials.html"
+    },
+    {
+      "src": "^/schedule\\.html$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/schedule.html"
+    },
+    {
+      "src": "^/assets/(.*)$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/assets/$1"
+    },
+    {
+      "src": "^/shared/(.*)$",
+      "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
+      "dest": "/demos/slurps/shared/$1"
+    },
+    { "handle": "filesystem" }
+  ]
+}
+
