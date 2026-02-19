@@ -34,12 +34,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form submission: send to Forest City Digital Formspree, show toast
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        // Event type "Other": show/hide custom text field and submit custom value
+        var eventTypeSelect = document.getElementById('event-type');
+        var eventTypeOtherWrap = document.getElementById('eventTypeOtherWrap');
+        var eventTypeOtherInput = document.getElementById('event-type-other');
+
+        if (eventTypeSelect && eventTypeOtherWrap && eventTypeOtherInput) {
+            function toggleEventTypeOther() {
+                var isOther = eventTypeSelect.value === 'other';
+                eventTypeOtherWrap.style.display = isOther ? 'block' : 'none';
+                eventTypeOtherInput.required = isOther;
+                if (!isOther) eventTypeOtherInput.value = '';
+            }
+            eventTypeSelect.addEventListener('change', toggleEventTypeOther);
+            toggleEventTypeOther();
+        }
+
         var formAction = contactForm.getAttribute('action') || 'https://formspree.io/f/maqdokll';
         if (!contactForm.getAttribute('action')) {
             contactForm.setAttribute('action', formAction);
         }
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            if (eventTypeSelect && eventTypeOtherInput && eventTypeSelect.value === 'other') {
+                var custom = (eventTypeOtherInput.value || '').trim();
+                if (!custom) {
+                    eventTypeOtherInput.focus();
+                    return;
+                }
+                // Replace select value for submission
+                eventTypeSelect.value = custom;
+            }
             var form = this;
             var submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn) {
@@ -53,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(function() {
                 form.reset();
+                // Re-run toggle after reset so Other field hides
+                if (eventTypeSelect && eventTypeOtherWrap && eventTypeOtherInput) {
+                    eventTypeOtherWrap.style.display = 'none';
+                    eventTypeOtherInput.required = false;
+                    eventTypeOtherInput.value = '';
+                }
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = submitBtn.dataset.originalText || 'Get Free Quote';

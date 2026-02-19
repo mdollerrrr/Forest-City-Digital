@@ -180,7 +180,41 @@ Update the color scheme in demos/[target]/index.html:
 
 The Slürps schedule is customer-editable via Google Sheets.
 
-- **Sheet**: publish the schedule tab as CSV (headers: `Day`, `Time`, `Location`)\n+- **Website**: `demos/slurps/schedule.html` fetches the schedule from a same-origin endpoint: `/api/slurps-schedule`\n+- **Serverless function**: `api/slurps-schedule.js` fetches/parses the published CSV and returns JSON (avoids CORS issues)\n+\n+Local testing note:\n+\n+- A basic static file server won’t run `api/` functions.\n+- To test locally, use Vercel’s dev server:\n+  - Install CLI: `npm i -g vercel`\n+  - From the project root: `vercel dev`\n+  - Then open: `http://localhost:3000/demos/slurps/schedule.html`
+- **Sheet**: publish the schedule tab as CSV (headers: `Day`, `Time`, `Location`)
+- **Website**: `demos/slurps/schedule.html` can fetch the schedule from a same-origin endpoint: `/api/slurps-schedule`
+- **Serverless function**: `api/slurps-schedule.js` fetches/parses the published CSV and returns JSON (avoids CORS issues)
+
+Local testing note:
+
+- A basic static file server won’t run `api/` functions.
+- To test locally, use Vercel’s dev server:
+  - Install CLI: `npm i -g vercel`
+  - From the project root: `vercel dev`
+  - Then open: `http://localhost:3000/demos/slurps/schedule.html`
+
+### Form submissions → client inbox (recommended)
+
+For real customer sites, the contact form should send leads to the **client’s email inbox**.
+
+Because these sites are static HTML, you need a form handler:
+
+- **Recommended**: Formspree (one form per client)
+- Alternatives: Netlify Forms, Basin, or your own email API (SendGrid/Mailgun)
+
+How it works in this repo:
+
+- Each site has a `<form id="contactForm" ... action="https://formspree.io/f/XXXX">`
+- The shared demo JS posts to whatever `action` is set (`demos/shared/script.js`)
+
+Client setup:
+
+1) Create a Formspree form for the client
+2) Add the client’s email as the recipient in Formspree
+3) Replace the `action` URL in that client’s site with their new Formspree endpoint
+
+Tip: You can set a custom email subject with:
+
+`<input type="hidden" name="_subject" value="New Website Lead">`
 
 ---
 

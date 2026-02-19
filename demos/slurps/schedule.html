@@ -207,7 +207,7 @@
 
         .schedule-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 24px;
             max-width: 960px;
             margin: 0 auto;
@@ -331,8 +331,22 @@
         <div class="container">
             <h2 class="section-title">This Week’s Pop-Ups</h2>
             <p class="schedule-note">Schedule updates weekly.</p>
-            <div class="schedule-grid" id="scheduleGrid" aria-live="polite">
-                <div class="schedule-empty" id="scheduleLoading">Loading schedule…</div>
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <div class="schedule-day">Friday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                </div>
+                <div class="schedule-card">
+                    <div class="schedule-day">Saturday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                </div>
+                <div class="schedule-card">
+                    <div class="schedule-day">Sunday</div>
+                    <div class="schedule-time">TBD</div>
+                    <div class="schedule-location">Location TBD</div>
+                </div>
             </div>
         </div>
     </section>
@@ -377,83 +391,6 @@
         </div>
     </footer>
 
-    <script>
-    (function() {
-        var API_URL = '/api/slurps-schedule';
-        var grid = document.getElementById('scheduleGrid');
-        var loading = document.getElementById('scheduleLoading');
-        if (!grid) return;
-
-        function clearGrid() {
-            while (grid.firstChild) grid.removeChild(grid.firstChild);
-        }
-
-        function addFallback(cls, text) {
-            var d = document.createElement('div');
-            d.className = cls;
-
-            var p = document.createElement('p');
-            p.style.margin = '0';
-            p.textContent = text;
-            d.appendChild(p);
-
-            var a = document.createElement('a');
-            a.href = 'index.html#contact';
-            a.className = 'btn btn-primary';
-            a.textContent = 'Book an event';
-            a.style.marginTop = '14px';
-            a.style.display = 'inline-block';
-            d.appendChild(a);
-
-            grid.appendChild(d);
-        }
-
-        function render(rows) {
-            clearGrid();
-            if (!rows.length) {
-                addFallback('schedule-empty', 'Schedule is being updated — book Slürps for your event.');
-                return;
-            }
-
-            rows.forEach(function(r) {
-                var card = document.createElement('div');
-                card.className = 'schedule-card';
-
-                var day = document.createElement('div');
-                day.className = 'schedule-day';
-                day.textContent = r.day || 'TBD';
-
-                var time = document.createElement('div');
-                time.className = 'schedule-time';
-                time.textContent = r.time || 'TBD';
-
-                var location = document.createElement('div');
-                location.className = 'schedule-location';
-                location.textContent = r.location || 'Location TBD';
-
-                card.appendChild(day);
-                card.appendChild(time);
-                card.appendChild(location);
-                grid.appendChild(card);
-            });
-        }
-
-        fetch(API_URL, { cache: 'no-store' })
-            .then(function(res) {
-                if (!res.ok) throw new Error('Bad response');
-                return res.json();
-            })
-            .then(function(items) {
-                if (loading && loading.parentNode) loading.parentNode.removeChild(loading);
-                render(Array.isArray(items) ? items : []);
-            })
-            .catch(function() {
-                if (loading && loading.parentNode) loading.parentNode.removeChild(loading);
-                clearGrid();
-                addFallback('schedule-error', 'Schedule is being updated — book Slürps for your event.');
-            });
-    })();
-    </script>
     <script src="./shared/script.js"></script>
 </body>
 </html>
