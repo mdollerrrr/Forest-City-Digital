@@ -116,6 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.header');
     const stickyCta = document.querySelector('.sticky-cta');
     const stickyCtaHeight = stickyCta ? stickyCta.offsetHeight : 0;
+
+    // Keep header offset in sync with CTA height (important on mobile when CTA wraps)
+    if (stickyCta) {
+        const root = document.documentElement;
+        const setStickyCtaHeightVar = () => {
+            const h = stickyCta.offsetHeight || 0;
+            root.style.setProperty('--sticky-cta-height', h + 'px');
+        };
+        setStickyCtaHeightVar();
+        window.addEventListener('resize', setStickyCtaHeightVar);
+    }
     
     if (header && stickyCta) {
         window.addEventListener('scroll', function() {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Slürps Dirty Soda schedule — upcoming pop-up locations and times in London, Ontario. Updated live from our schedule sheet.">
+    <meta name="description" content="See where Slürps Dirty Soda will be popping up next in London, Ontario. Updated weekly.">
     <title>Schedule - Slürps Dirty Soda</title>
     <link rel="stylesheet" href="./shared/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,7 +119,8 @@
             -webkit-backdrop-filter: blur(12px);
             color: var(--white);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
+            position: sticky;
+            top: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
@@ -139,6 +140,11 @@
             transform: translateY(-100%);
             opacity: 0;
             pointer-events: none;
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+            overflow: hidden;
         }
 
         .sticky-cta .cta-text {
@@ -164,7 +170,7 @@
         .header {
             background: var(--white);
             backdrop-filter: none;
-            top: calc(var(--spacing-sm) * 2 + 48px + 2px);
+            top: var(--sticky-cta-height, 50px);
             margin: 0;
             transition: top 0.3s ease;
         }
@@ -185,6 +191,25 @@
 
         .section-title::after {
             background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 60px;
+            width: auto;
+            display: block;
+        }
+
+        .brand-wordmark {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            white-space: nowrap;
         }
 
         .schedule-section {
@@ -250,16 +275,11 @@
             font-size: 0.95rem;
         }
 
-        .schedule-empty,
-        .schedule-error {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: #4a5568;
-            font-weight: 600;
-            padding: 18px 16px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+        .schedule-venue {
+            display: block;
+            margin-top: 6px;
+            font-weight: 700;
+            color: #2d3748;
         }
 
         @media (max-width: 768px) {
@@ -268,6 +288,18 @@
             }
             .schedule-grid {
                 grid-template-columns: 1fr;
+            }
+            .brand-logo {
+                height: 44px;
+            }
+            .brand-wordmark {
+                display: inline;
+                font-size: 1rem;
+                line-height: 1.05;
+                max-width: 42vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
     </style>
@@ -315,7 +347,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Pop-Up Schedule</h1>
-                <p class="hero-subtitle">Updated live — check back anytime for the latest locations and times.</p>
+                <p class="hero-subtitle">Updated weekly — check back anytime for the latest locations and times.</p>
                 <div class="hero-cta-glass" style="margin-top: 18px;">
                     <div class="hero-cta">
                         <a href="index.html#contact" class="btn btn-primary btn-large">Book for an Event</a>
@@ -333,19 +365,19 @@
             <p class="schedule-note">Schedule updates weekly.</p>
             <div class="schedule-grid">
                 <div class="schedule-card">
-                    <div class="schedule-day">Friday</div>
-                    <div class="schedule-time">TBD</div>
-                    <div class="schedule-location">Location TBD</div>
+                    <div class="schedule-day">March 1st</div>
+                    <div class="schedule-time">6–8pm</div>
+                    <div class="schedule-location">IRC Grand Iftar &amp; Auction<br><span class="schedule-venue">FIMS &amp; Nursing (Room TBD)</span></div>
                 </div>
                 <div class="schedule-card">
-                    <div class="schedule-day">Saturday</div>
-                    <div class="schedule-time">TBD</div>
-                    <div class="schedule-location">Location TBD</div>
+                    <div class="schedule-day">March 6–7</div>
+                    <div class="schedule-time">7pm–1am</div>
+                    <div class="schedule-location">Relay for Life<br><span class="schedule-venue">Rec Center</span></div>
                 </div>
                 <div class="schedule-card">
-                    <div class="schedule-day">Sunday</div>
-                    <div class="schedule-time">TBD</div>
-                    <div class="schedule-location">Location TBD</div>
+                    <div class="schedule-day">March 9</div>
+                    <div class="schedule-time">4–7pm</div>
+                    <div class="schedule-location">UWO Aesthetics Fitness Social<br><span class="schedule-venue">UCC Mustang Lounge</span></div>
                 </div>
             </div>
         </div>
