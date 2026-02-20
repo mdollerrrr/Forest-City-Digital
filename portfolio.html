@@ -44,12 +44,16 @@
     <section class="work-section portfolio-section">
         <div class="container">
             <h2 class="section-title">Websites We've Built</h2>
-            <p class="section-subtitle">Hover over a preview to play the video. Click the link to visit the live site.</p>
+            <p class="section-subtitle">Tap (mobile) or hover (desktop) over a preview to play the video. Click the link to visit the live site.</p>
 
             <div class="portfolio-grid" id="portfolio-grid">
                 <!-- To add your video: save your screen recording as assets/portfolio-demo.mp4 (MP4 recommended). Hover to play. -->
                 <article class="portfolio-card">
                     <div class="portfolio-preview" aria-hidden="true">
+                        <div class="portfolio-play-overlay" aria-hidden="true">
+                            <span class="portfolio-play-icon" aria-hidden="true"></span>
+                            <span class="portfolio-play-text">Tap to play preview</span>
+                        </div>
                         <video class="portfolio-video" muted loop preload="metadata" playsinline>
                             <source src="assets/Main Website/slurps recording.mp4" type="video/mp4">
                         </video>
@@ -68,6 +72,10 @@
 
                 <article class="portfolio-card">
                     <div class="portfolio-preview" aria-hidden="true">
+                        <div class="portfolio-play-overlay" aria-hidden="true">
+                            <span class="portfolio-play-icon" aria-hidden="true"></span>
+                            <span class="portfolio-play-text">Tap to play preview</span>
+                        </div>
                         <video class="portfolio-video" muted loop preload="metadata" playsinline>
                             <source src="assets/Main Website/assetsportfolio-demo.mp4" type="video/mp4">
                         </video>
@@ -86,6 +94,10 @@
 
                 <article class="portfolio-card">
                     <div class="portfolio-preview" aria-hidden="true">
+                        <div class="portfolio-play-overlay" aria-hidden="true">
+                            <span class="portfolio-play-icon" aria-hidden="true"></span>
+                            <span class="portfolio-play-text">Tap to play preview</span>
+                        </div>
                         <video class="portfolio-video" muted loop preload="metadata" playsinline>
                             <source src="assets/another-demo.mp4" type="video/mp4">
                         </video>
@@ -144,18 +156,58 @@
 
     <script src="script.js"></script>
     <script>
-        // Play video on hover, pause when mouse leaves
-        document.querySelectorAll('.portfolio-preview').forEach(function (wrap) {
-            var video = wrap.querySelector('.portfolio-video');
-            if (!video) return;
-            wrap.addEventListener('mouseenter', function () {
-                video.play().catch(function () {});
+        (function () {
+            var isHoverDevice = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            function stopAllExcept(exceptVideo) {
+                document.querySelectorAll('.portfolio-preview').forEach(function (w) {
+                    var v = w.querySelector('.portfolio-video');
+                    if (!v || v === exceptVideo) return;
+                    try {
+                        v.pause();
+                        v.currentTime = 0;
+                    } catch (e) {}
+                    w.classList.remove('is-playing');
+                });
+            }
+
+            document.querySelectorAll('.portfolio-preview').forEach(function (wrap) {
+                var video = wrap.querySelector('.portfolio-video');
+                if (!video) return;
+
+                if (isHoverDevice) {
+                    // Desktop: hover to preview
+                    wrap.addEventListener('mouseenter', function () {
+                        stopAllExcept(video);
+                        wrap.classList.add('is-playing');
+                        video.play().catch(function () {});
+                    });
+                    wrap.addEventListener('mouseleave', function () {
+                        wrap.classList.remove('is-playing');
+                        video.pause();
+                        video.currentTime = 0;
+                    });
+                    return;
+                }
+
+                // Mobile/touch: tap to play/pause
+                wrap.addEventListener('click', function () {
+                    if (video.paused) {
+                        stopAllExcept(video);
+                        video.preload = 'auto';
+                        try { video.load(); } catch (e) {}
+                        wrap.classList.add('is-playing');
+                        video.play().catch(function () {});
+                    } else {
+                        wrap.classList.remove('is-playing');
+                        try {
+                            video.pause();
+                            video.currentTime = 0;
+                        } catch (e) {}
+                    }
+                });
             });
-            wrap.addEventListener('mouseleave', function () {
-                video.pause();
-                video.currentTime = 0;
-            });
-        });
+        })();
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
