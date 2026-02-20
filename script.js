@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Get Free Quote';
                 }
-                alert('Something went wrong. Please email us at ForestCityDigital@gmail.com or call (519) 719-7762.');
+                alert('Something went wrong. Please email us at ForestCityDigital@gmail.com or call (226-559-7450).');
             });
         });
     }

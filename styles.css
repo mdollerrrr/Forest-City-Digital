@@ -352,6 +352,295 @@ h1, h2, h3, h4, h5, h6 {
     gap: 48px 64px;
 }
 
+/* Who this is for */
+.whofor-section {
+    padding: 80px 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.whofor-section::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background:
+        radial-gradient(900px circle at 20% 20%, rgba(245, 158, 11, 0.12), transparent 55%),
+        radial-gradient(1000px circle at 90% 10%, rgba(38, 75, 25, 0.10), transparent 58%),
+        radial-gradient(900px circle at 70% 100%, rgba(0, 0, 0, 0.06), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.whofor-section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.whofor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.whofor-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 28px 26px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 14px 44px -18px rgba(0, 0, 0, 0.12);
+    transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 420ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.whofor-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(38, 75, 25, 0.6), rgba(245, 158, 11, 0.55));
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.whofor-card::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    background: rgba(38, 75, 25, 0.10);
+    border: 1px solid rgba(38, 75, 25, 0.18);
+    color: var(--primary-color);
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.whofor-card:nth-child(1)::before { content: "🛠"; }
+.whofor-card:nth-child(2)::before { content: "📍"; }
+.whofor-card:nth-child(3)::before { content: "✓"; }
+
+.whofor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 70px -32px rgba(0, 0, 0, 0.24);
+    border-color: rgba(38, 75, 25, 0.22);
+}
+
+.whofor-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.whofor-card p {
+    margin-bottom: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.whofor-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+    color: var(--text-dark);
+}
+
+.whofor-points li {
+    padding: 7px 0;
+    color: var(--text-light);
+}
+
+.whofor-points li::before {
+    content: "✓";
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-right: 10px;
+    background: rgba(38, 75, 25, 0.10);
+    color: var(--primary-color);
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.whofor-card-accent {
+    background: linear-gradient(135deg, rgba(38, 75, 25, 0.12), rgba(245, 158, 11, 0.08));
+    border-color: rgba(38, 75, 25, 0.22);
+}
+
+.whofor-card-accent p {
+    color: var(--text-dark);
+    opacity: 0.92;
+}
+
+/* FAQ */
+.faq-section {
+    padding: 80px 0;
+    background:
+        radial-gradient(900px circle at 20% 0%, rgba(38, 75, 25, 0.10), transparent 55%),
+        radial-gradient(900px circle at 80% 30%, rgba(245, 158, 11, 0.10), transparent 58%),
+        linear-gradient(180deg, var(--bg-light), rgba(249, 250, 251, 0.92));
+}
+
+.faq-list {
+    max-width: 900px;
+    margin: 40px auto 0;
+    display: grid;
+    gap: 14px;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 14px 44px -18px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: relative;
+    transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 420ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 26px 70px -32px rgba(0, 0, 0, 0.22);
+    border-color: rgba(38, 75, 25, 0.20);
+}
+
+.faq-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    background: linear-gradient(135deg, rgba(38, 75, 25, 0.35), rgba(245, 158, 11, 0.25));
+    mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+    -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+    padding: 1px;
+    box-sizing: border-box;
+}
+
+.faq-item[open]::before {
+    opacity: 0.9;
+}
+
+.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    font-size: 18px;
+    line-height: 1;
+    color: var(--primary-color);
+    transition: transform 0.25s ease;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(38, 75, 25, 0.08);
+    border: 1px solid rgba(38, 75, 25, 0.16);
+}
+
+.faq-item[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq-item summary:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.faq-body {
+    padding: 0 20px 18px;
+    color: var(--text-light);
+    line-height: 1.75;
+}
+
+.faq-cta {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 26px 24px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(38, 75, 25, 0.12), rgba(245, 158, 11, 0.08));
+    border: 1px solid rgba(38, 75, 25, 0.22);
+}
+
+.faq-cta h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.faq-cta p {
+    margin-bottom: 16px;
+    color: var(--text-light);
+}
+
+.faq-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .whofor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .whofor-card {
+        padding: 24px 20px;
+    }
+
+    .whofor-card::before {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .faq-item summary {
+        padding: 16px 16px;
+    }
+
+    .faq-body {
+        padding: 0 16px 16px;
+    }
+
+    .faq-item summary::after {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+    }
+}
+
 .stat-item {
     text-align: center;
 }
@@ -523,7 +812,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     object-fit: cover;
     display: block;
-    vertical-align: middle;
 }
 
 .portfolio-footer {
@@ -960,6 +1248,21 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255,255,255,0.8);
     text-decoration: none;
     transition: color 0.3s;
+}
+
+.footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.2;
+}
+
+.footer-social-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    fill: currentColor;
+    opacity: 0.95;
 }
 
 .footer-section a:hover {
