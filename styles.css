@@ -174,7 +174,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero.pine-bg::before {
-    opacity: 0.08;
+    background-image: url("assets/Main Website/pine treeeee.png");
+    /* The PNG has a bit of transparent padding—nudge down so trunk hits bottom */
+    background-position: right -60px bottom -44px;
+    /* Control HEIGHT so trunk touches bottom and top has breathing room */
+    background-size: auto min(740px, 82vh);
+    opacity: 0.2;
+    filter: brightness(0.78) contrast(1.08);
 }
 
 /* City scene on the left of the hero (Websites You Don't Have to Worry About) */
@@ -215,6 +221,37 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero .container {
     max-width: 1100px;
+}
+
+/* Hero depth overlays (spotlight + subtle grain) */
+.hero.pine-bg > .container::before {
+    content: "";
+    position: absolute;
+    inset: -48px;
+    background:
+        radial-gradient(1200px circle at 50% 25%, rgba(255, 255, 255, 0.14), transparent 58%),
+        radial-gradient(900px circle at 12% 85%, rgba(245, 158, 11, 0.10), transparent 62%),
+        radial-gradient(900px circle at 90% 80%, rgba(255, 255, 255, 0.06), transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero.pine-bg > .container::after {
+    content: "";
+    position: absolute;
+    inset: -48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
 }
 
 .hero-cta-glass {
@@ -289,6 +326,15 @@ h1, h2, h3, h4, h5, h6 {
     }
     .trust-strip {
         gap: 8px;
+    }
+
+    .hero.pine-bg > .container::before,
+    .hero.pine-bg > .container::after {
+        inset: -28px;
+    }
+
+    .hero.pine-bg > .container::after {
+        opacity: 0.05;
     }
 }
 
@@ -446,7 +492,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 28px;
 }
 
@@ -532,6 +578,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 14px;
     font-size: 14px;
     padding: 10px 20px;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
@@ -652,8 +704,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .packages-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
+    align-items: stretch;
 }
 
 .package-card {
@@ -661,6 +714,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 40px;
     border-radius: 16px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     transition: all 0.35s ease;
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -678,7 +734,7 @@ h1, h2, h3, h4, h5, h6 {
 .package-card.featured {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
-    transform: scale(1.05);
+    transform: none;
 }
 
 .package-card.featured h3,
@@ -735,6 +791,11 @@ h1, h2, h3, h4, h5, h6 {
 .package-features {
     list-style: none;
     margin-bottom: 30px;
+    flex: 1 1 auto;
+}
+
+.package-card .btn {
+    margin-top: auto;
 }
 
 .package-features li {
