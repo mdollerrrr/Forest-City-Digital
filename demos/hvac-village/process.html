@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HVAC Village — how our diagnostics and process work.">
+    <title>HVAC Village — Process</title>
+
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Industrial Pro (cool blue) */
+            --primary-color: #0B1B3A;
+            --primary-color-dark: #07122a;
+            --primary-color-rgb: 11, 27, 58;
+            --accent-color: #1D4ED8;
+            --accent-color-light: #06B6D4;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-primary: 'Inter', sans-serif;
+
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+            --panel-bg: rgba(255,255,255,0.86);
+            --panel-border: rgba(var(--primary-color-rgb), 0.12);
+            --panel-shadow: 0 22px 56px -44px rgba(11,27,58,0.44);
+        }
+
+        body {
+            background:
+                radial-gradient(900px circle at 20% 0%, rgba(6, 182, 212, 0.10), transparent 55%),
+                radial-gradient(900px circle at 85% 10%, rgba(29, 78, 216, 0.10), transparent 58%),
+                linear-gradient(180deg, #f4f7ff 0%, #ffffff 40%, #ffffff 100%);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(2px);
+            transition:
+                opacity 600ms ease,
+                transform 700ms var(--ease-out),
+                filter 650ms ease;
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: transform, opacity;
+        }
+        .reveal.is-inview {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Make header behave without relying on sticky-cta height JS */
+        .header { top: var(--sticky-cta-height, 56px); transition: top 240ms var(--ease-out); }
+        .sticky-cta {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            max-height: 260px;
+            opacity: 1;
+            transform: translateY(0);
+            overflow: hidden;
+            transition:
+                max-height 260ms var(--ease-out),
+                padding 260ms var(--ease-out),
+                opacity 220ms ease,
+                transform 260ms var(--ease-out),
+                border-color 260ms ease,
+                box-shadow 260ms ease;
+            will-change: max-height, transform, opacity;
+        }
+        .sticky-cta.scrolled {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            border-bottom-color: transparent;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+            .page-hero::before {
+                animation: none !important;
+            }
+            .sticky-cta,
+            .header {
+                transition: none !important;
+            }
+            .sticky-cta.scrolled {
+                transform: none;
+            }
+        }
+
+        .btn.btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 10px 30px rgba(29, 78, 216, 0.18), 0 16px 40px rgba(6, 182, 212, 0.12);
+        }
+
+        .btn.btn-secondary {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            color: var(--primary-color);
+        }
+
+        .btn.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(11, 27, 58, 0.10); }
+        .btn {
+            transition:
+                transform 220ms var(--ease-out),
+                box-shadow 220ms var(--ease-out),
+                background 220ms ease,
+                color 220ms ease,
+                border-color 220ms ease;
+            will-change: transform;
+        }
+        .btn:active { transform: translateY(0) scale(0.99); }
+
+        /* Page hero */
+        .page-hero {
+            position: relative;
+            padding: 86px 0 44px;
+            overflow: hidden;
+            background: transparent;
+        }
+        .page-hero::before {
+            content: "";
+            position: absolute;
+            inset: -40px;
+            background:
+                radial-gradient(900px circle at 18% 0%, rgba(6, 182, 212, 0.26), transparent 55%),
+                radial-gradient(1000px circle at 88% 10%, rgba(29, 78, 216, 0.24), transparent 58%),
+                repeating-linear-gradient(90deg, rgba(11,27,58,0.06), rgba(11,27,58,0.06) 1px, transparent 1px, transparent 52px),
+                repeating-linear-gradient(0deg, rgba(11,27,58,0.05), rgba(11,27,58,0.05) 1px, transparent 1px, transparent 52px);
+            opacity: 0.42;
+            pointer-events: none;
+            transform: translate3d(0, 0, 0);
+            animation: hvGridDrift 18s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes hvGridDrift {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -10px, 0); }
+        }
+
+        .page-hero .hero-card {
+            position: relative;
+            z-index: 1;
+            max-width: 920px;
+        }
+        .page-hero .hero-actions { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+        /* Stronger hero panel contrast (for white hero text) */
+        .page-hero .hero-card {
+            background: linear-gradient(135deg, rgba(7, 18, 42, 0.96), rgba(11, 27, 58, 0.92));
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            border-radius: 18px;
+            box-shadow: 0 28px 80px -60px rgba(11,27,58,0.75);
+            padding: 28px 26px;
+            overflow: hidden;
+        }
+        .page-hero .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg,
+                rgba(29, 78, 216, 0.70),
+                rgba(6, 182, 212, 0.50),
+                rgba(29, 78, 216, 0.42)
+            );
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        .page-hero .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(700px circle at 22% 0%, rgba(96, 165, 250, 0.22), transparent 55%),
+                linear-gradient(180deg, rgba(255,255,255,0.14) 0%, transparent 55%);
+            opacity: 0.90;
+            pointer-events: none;
+        }
+        .page-hero .hero-kicker { color: rgba(234, 240, 255, 0.80); }
+        .page-hero .hero-kicker .dot {
+            background: var(--accent-color-light);
+            box-shadow: 0 0 0 7px rgba(6, 182, 212, 0.16);
+        }
+        .page-hero .hero-subtitle { color: rgba(255,255,255,0.88); }
+
+        /* Problems + process */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .problem {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 18px 44px -36px rgba(11,27,58,0.30);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .problem::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .problem:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 58px -44px rgba(11,27,58,0.44);
+            border-color: rgba(6, 182, 212, 0.22);
+        }
+        .problem h3 { margin: 0 0 6px; font-size: 1.2rem; color: var(--primary-color); }
+        .problem p { margin: 0; color: rgba(15,23,42,0.70); font-weight: 600; }
+        .problem .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 7px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(6,182,212,0.26);
+            background: rgba(6,182,212,0.10);
+            color: rgba(11,27,58,0.74);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .step {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: 0 18px 44px -36px rgba(11,27,58,0.26);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .step::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.11;
+            pointer-events: none;
+        }
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 58px -48px rgba(11,27,58,0.40);
+            border-color: rgba(6, 182, 212, 0.20);
+        }
+        .step strong { display: block; color: var(--primary-color); }
+        .step span { display: block; color: rgba(15,23,42,0.70); font-weight: 600; margin-top: 6px; }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .problems-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="container">
+            <div class="cta-text">
+                Friendly local comfort pros serving <strong>London</strong> + area.
+            </div>
+            <div class="cta-buttons">
+                <a href="tel:+15195550123" class="btn btn-secondary">Call (519) 555‑0123</a>
+                <a href="index.html#quote" class="btn btn-primary">Get a Quote</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark" aria-hidden="true"><span>HV</span></div>
+                    <div class="logo-word">
+                        <a href="index.html#home">HVAC Village</a>
+                        <div class="logo-sub">Friendly local comfort pros</div>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="index.html#coverage">Coverage</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page hero -->
+    <section class="page-hero" id="top">
+        <div class="container">
+            <div class="hero-card reveal" style="--reveal-delay: 0ms;">
+                <div class="hero-kicker"><span class="dot" aria-hidden="true"></span>Diagnostics + process</div>
+                <h1 class="hero-title">Here’s what happens when you call</h1>
+                <p class="hero-subtitle">
+                    Clear diagnostics, plain-language options, and tidy work. This page keeps the “how it works” info separate so the homepage stays fast to scan on mobile.
+                </p>
+                <div class="hero-actions">
+                    <a href="#diagnostics" class="btn btn-secondary btn-large">See Diagnostics</a>
+                    <a href="#process" class="btn btn-primary btn-large">View Process</a>
+                    <a href="index.html" class="btn btn-secondary btn-large">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostics -->
+    <section id="diagnostics" style="padding: 70px 0;">
+        <div class="container">
+            <div class="section-head reveal" style="--reveal-delay: 0ms;">
+                <div>
+                    <div class="tag">DIAGNOSTICS</div>
+                    <h2 class="section-title">Common Problems We Fix</h2>
+                    <p class="section-subtitle">If you recognize one of these, we can help quickly — with clear explanations.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="problems-grid">
+                <div class="problem reveal" style="--reveal-delay: 0ms;">
+                    <h3>No heat / no cooling</h3>
+                    <p>We’ll diagnose, explain options, and quote before any work begins.</p>
+                    <div class="pill">Urgent friendly help</div>
+                </div>
+                <div class="problem reveal" style="--reveal-delay: 90ms;">
+                    <h3>Weak airflow</h3>
+                    <p>Airflow inspection and practical fixes to improve comfort.</p>
+                    <div class="pill">Comfort first</div>
+                </div>
+                <div class="problem reveal" style="--reveal-delay: 180ms;">
+                    <h3>Short cycling</h3>
+                    <p>Stops wear-and-tear and helps bring energy bills back down.</p>
+                    <div class="pill">Efficiency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" style="padding: 70px 0 90px;">
+        <div class="container">
+            <div class="section-head reveal" style="--reveal-delay: 0ms;">
+                <div>
+                    <div class="tag">PROCESS</div>
+                    <h2 class="section-title">A Simple, Stress-Free Process</h2>
+                    <p class="section-subtitle">Clear steps. Friendly communication. Clean work sites.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="steps">
+                <div class="step reveal" style="--reveal-delay: 0ms;"><strong>1) Tell us what’s happening</strong><span>Share your symptom and area.</span></div>
+                <div class="step reveal" style="--reveal-delay: 80ms;"><strong>2) We diagnose</strong><span>We explain what we found.</span></div>
+                <div class="step reveal" style="--reveal-delay: 160ms;"><strong>3) You get a quote</strong><span>No surprises. Options included.</span></div>
+                <div class="step reveal" style="--reveal-delay: 240ms;"><strong>4) We schedule quickly</strong><span>We keep things moving.</span></div>
+                <div class="step reveal" style="--reveal-delay: 320ms;"><strong>5) We fix & clean up</strong><span>Respectful, tidy workmanship.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>HVAC Village</h4>
+                    <p>Friendly local comfort pros — clean installs, clear quotes, and fast help when you need it.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="index.html#coverage">Coverage</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><a href="tel:+15195550123">(519) 555‑0123</a></p>
+                    <p><a href="mailto:hello@hvacvillage.ca">hello@hvacvillage.ca</a></p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">London • St. Thomas • Waterloo • Woodstock</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 HVAC Village. Demo mockup page.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // #region agent log
+        window.addEventListener('error', function (e) {
+            try {
+                var f = (e && e.filename) ? String(e.filename).split(/[\\/]/).slice(-1)[0] : '';
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:window.error', message: 'window.error', data: { msg: String(e && e.message || ''), file: f, line: e && e.lineno, col: e && e.colno }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'A' }) }).catch(function () { });
+            } catch (_) { }
+        }, true);
+        window.addEventListener('unhandledrejection', function (e) {
+            try {
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:window.unhandledrejection', message: 'unhandledrejection', data: { reason: String((e && e.reason && (e.reason.message || e.reason)) || '') }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'A' }) }).catch(function () { });
+            } catch (_) { }
+        });
+        fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:boot', message: 'boot', data: { protocol: location.protocol, hasDiagnostics: !!document.getElementById('diagnostics'), hasProcess: !!document.getElementById('process'), hasNavProcess: !!document.querySelector('a[href=\"process.html\"]') }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'C' }) }).catch(function () { });
+        (function () {
+            try {
+                var bad = [];
+                document.querySelectorAll('a[href^=\"#\"]').forEach(function (a) {
+                    var href = a.getAttribute('href');
+                    if (!href || href === '#') return;
+                    if (!document.querySelector(href)) bad.push(href);
+                });
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:anchors.check', message: 'anchors.check', data: { count: document.querySelectorAll('a[href^=\"#\"]').length, missing: bad.slice(0, 12) }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'D' }) }).catch(function () { });
+            } catch (_) { }
+        })();
+        // #endregion
+
+        // Mobile menu toggle (local, minimal)
+        (function () {
+            var toggle = document.querySelector('.mobile-menu-toggle');
+            var nav = document.querySelector('.nav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', function () {
+                    nav.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            }
+        })();
+
+        // Sticky CTA height -> CSS var for header offset
+        (function () {
+            var sticky = document.getElementById('stickyCta');
+            if (!sticky) return;
+            var expandedHeight = 0;
+            var collapsed = false;
+            var ticking = false;
+
+            function setStickyHeightVar(px) {
+                document.documentElement.style.setProperty('--sticky-cta-height', px + 'px');
+            }
+
+            function measureExpandedHeight() {
+                // Prefer stable measurement that doesn't break during transitions/resizes.
+                var wasCollapsed = sticky.classList.contains('scrolled');
+                var h = Math.ceil(sticky.scrollHeight || 0);
+                if (h < 40) {
+                    if (wasCollapsed) sticky.classList.remove('scrolled');
+                    h = Math.ceil((sticky.getBoundingClientRect && sticky.getBoundingClientRect().height) || sticky.offsetHeight || 56);
+                    if (wasCollapsed) sticky.classList.add('scrolled');
+                }
+                expandedHeight = Math.max(56, h);
+            }
+
+            function applyState(nextCollapsed) {
+                if (nextCollapsed === collapsed) return;
+                collapsed = nextCollapsed;
+                sticky.classList.toggle('scrolled', collapsed);
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+                // #region agent log
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:sticky.applyState', message: 'sticky.applyState', data: { collapsed: collapsed, expandedHeight: expandedHeight, y: (window.pageYOffset || 0) }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'B' }) }).catch(function () { });
+                // #endregion
+            }
+
+            function computeNextState(y) {
+                if (!collapsed && y > expandedHeight + 12) return true;
+                if (collapsed && y < 12) return false;
+                return collapsed;
+            }
+
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    ticking = false;
+                    applyState(computeNextState(window.pageYOffset || 0));
+                });
+            }
+
+            measureExpandedHeight();
+            setStickyHeightVar(expandedHeight);
+            applyState(computeNextState(window.pageYOffset || 0));
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+                measureExpandedHeight();
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+                applyState(computeNextState(window.pageYOffset || 0));
+            });
+        })();
+
+        // Friendly scroll-to-anchor with header offset
+        (function () {
+            document.querySelectorAll('a[href^=\"#\"]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    var href = a.getAttribute('href');
+                    if (!href || href === '#') return;
+                    var el = document.querySelector(href);
+                    if (!el) return;
+                    e.preventDefault();
+                    var offset = 86;
+                    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                    // #region agent log
+                    fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/process.html:anchor.click', message: 'anchor.click', data: { href: href, found: true, offset: offset }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'D' }) }).catch(function () { });
+                    // #endregion
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    var nav = document.querySelector('.nav');
+                    var toggle = document.querySelector('.mobile-menu-toggle');
+                    if (nav && nav.classList.contains('active')) nav.classList.remove('active');
+                    if (toggle && toggle.classList.contains('active')) toggle.classList.remove('active');
+                });
+            });
+        })();
+
+        // Scroll-in reveals (medium motion)
+        (function () {
+            var reduce = false;
+            try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+            var selectors = [
+                '.hero-card',
+                '#diagnostics .section-head',
+                '.problem',
+                '#process .section-head',
+                '.step'
+            ];
+
+            var nodes = [];
+            selectors.forEach(function (sel) {
+                document.querySelectorAll(sel).forEach(function (el) { nodes.push(el); });
+            });
+
+            nodes.forEach(function (el) {
+                el.classList.add('reveal');
+                if (!el.style.getPropertyValue('--reveal-delay')) el.style.setProperty('--reveal-delay', '0ms');
+            });
+
+            if (reduce || !('IntersectionObserver' in window)) {
+                nodes.forEach(function (el) { el.classList.add('is-inview'); });
+                return;
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-inview');
+                    io.unobserve(entry.target);
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+            nodes.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+</body>
+</html>
+

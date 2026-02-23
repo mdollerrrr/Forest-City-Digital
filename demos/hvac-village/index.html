@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HVAC Village — friendly local heating & cooling service in London, St. Thomas, Waterloo, and Woodstock.">
+    <title>HVAC Village — Heating & Cooling</title>
+
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Industrial Pro (cool blue) */
+            --primary-color: #0B1B3A;
+            --primary-color-dark: #07122a;
+            --primary-color-rgb: 11, 27, 58;
+            --accent-color: #1D4ED8;
+            --accent-color-light: #06B6D4;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-primary: 'Inter', sans-serif;
+
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+            --panel-bg: rgba(255,255,255,0.86);
+            --panel-border: rgba(var(--primary-color-rgb), 0.12);
+            --panel-shadow: 0 22px 56px -44px rgba(11,27,58,0.44);
+        }
+
+        body {
+            background:
+                radial-gradient(900px circle at 20% 0%, rgba(6, 182, 212, 0.10), transparent 55%),
+                radial-gradient(900px circle at 85% 10%, rgba(29, 78, 216, 0.10), transparent 58%),
+                linear-gradient(180deg, #f4f7ff 0%, #ffffff 40%, #ffffff 100%);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(2px);
+            transition:
+                opacity 600ms ease,
+                transform 700ms var(--ease-out),
+                filter 650ms ease;
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: transform, opacity;
+        }
+        .reveal.is-inview {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Make header behave without relying on sticky-cta height JS */
+        .header { top: var(--sticky-cta-height, 56px); transition: top 240ms var(--ease-out); }
+        .sticky-cta {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            max-height: 260px;
+            opacity: 1;
+            transform: translateY(0);
+            overflow: hidden;
+            transition:
+                max-height 260ms var(--ease-out),
+                padding 260ms var(--ease-out),
+                opacity 220ms ease,
+                transform 260ms var(--ease-out),
+                border-color 260ms ease,
+                box-shadow 260ms ease;
+            will-change: max-height, transform, opacity;
+        }
+        .sticky-cta.scrolled {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            border-bottom-color: transparent;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+            .hero::before,
+            .hero::after,
+            #services::before,
+            #pricing::before {
+                animation: none !important;
+            }
+            .sticky-cta,
+            .header {
+                transition: none !important;
+            }
+            .sticky-cta.scrolled {
+                transform: none;
+            }
+        }
+
+        .cta-text strong { color: var(--primary-color); }
+        .btn.btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 10px 30px rgba(29, 78, 216, 0.18), 0 16px 40px rgba(6, 182, 212, 0.12);
+        }
+
+        .btn.btn-secondary {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            color: var(--primary-color);
+        }
+
+        .btn.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(11, 27, 58, 0.10); }
+        .btn {
+            transition:
+                transform 220ms var(--ease-out),
+                box-shadow 220ms var(--ease-out),
+                background 220ms ease,
+                color 220ms ease,
+                border-color 220ms ease;
+            will-change: transform;
+        }
+        .btn:active { transform: translateY(0) scale(0.99); }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            padding: 86px 0 60px;
+            overflow: hidden;
+            background: transparent;
+            min-height: auto;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -40px;
+            background:
+                radial-gradient(900px circle at 18% 0%, rgba(6, 182, 212, 0.16), transparent 55%),
+                radial-gradient(1000px circle at 88% 10%, rgba(29, 78, 216, 0.14), transparent 58%),
+                repeating-linear-gradient(90deg, rgba(11,27,58,0.06), rgba(11,27,58,0.06) 1px, transparent 1px, transparent 52px),
+                repeating-linear-gradient(0deg, rgba(11,27,58,0.05), rgba(11,27,58,0.05) 1px, transparent 1px, transparent 52px);
+            opacity: 0.35;
+            pointer-events: none;
+            transform: translate3d(0, 0, 0);
+            animation: hvGridDrift 18s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        /* Subtle HVAC-themed decorative icons + industrial corner ticks */
+        .hero::after,
+        #services::before,
+        #pricing::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.11;
+            filter: drop-shadow(0 18px 40px rgba(11, 27, 58, 0.10));
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .hero::after {
+            right: -10px;
+            top: 20px;
+            width: min(520px, 52vw);
+            height: min(520px, 52vw);
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 520'%3E%3Cg fill='none' stroke='%230B1B3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.9'%3E%3Cpath d='M260 40v120'/%3E%3Cpath d='M260 360v120'/%3E%3Cpath d='M40 260h120'/%3E%3Cpath d='M360 260h120'/%3E%3Cpath d='M130 130l85 85'/%3E%3Cpath d='M305 305l85 85'/%3E%3Cpath d='M390 130l-85 85'/%3E%3Cpath d='M215 305l-85 85'/%3E%3Cpath d='M260 145c-63 0-115 52-115 115s52 115 115 115 115-52 115-115-52-115-115-115z'/%3E%3Cpath d='M260 185c-41 0-75 34-75 75s34 75 75 75 75-34 75-75-34-75-75-75z'/%3E%3Cpath d='M210 250c12-18 36-28 60-22'/%3E%3Cpath d='M250 300c18 6 40-1 52-18'/%3E%3Cpath d='M312 260c-5 18-22 34-42 38'/%3E%3Cpath d='M260 208v30'/%3E%3Cpath d='M260 282v30'/%3E%3Cpath d='M238 260h-30'/%3E%3Cpath d='M312 260h-30'/%3E%3C/g%3E%3C/svg%3E");
+            animation: hvFloat 11s ease-in-out infinite;
+            transform-origin: 60% 40%;
+            will-change: transform;
+        }
+
+        @keyframes hvGridDrift {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -10px, 0); }
+        }
+
+        @keyframes hvFloat {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -12px, 0); }
+        }
+
+        #services,
+        #pricing {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #services > .container,
+        #pricing > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #services::before {
+            left: -18px;
+            top: 30px;
+            width: min(420px, 46vw);
+            height: min(420px, 46vw);
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%2306B6D4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M210 40v340'/%3E%3Cpath d='M60 120h300'/%3E%3Cpath d='M90 200h240'/%3E%3Cpath d='M120 280h180'/%3E%3Cpath d='M110 110l30 30'/%3E%3Cpath d='M140 110l-30 30'/%3E%3Cpath d='M310 110l30 30'/%3E%3Cpath d='M340 110l-30 30'/%3E%3Cpath d='M210 130c-30 12-30 44 0 56c30 12 30 44 0 56c-30 12-30 44 0 56'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        #pricing::before {
+            right: -24px;
+            bottom: -10px;
+            width: min(440px, 48vw);
+            height: min(440px, 48vw);
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 440'%3E%3Cg fill='none' stroke='%231D4ED8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M220 60c40 34 60 62 60 96c0 40-26 72-60 100c-34-28-60-60-60-100c0-34 20-62 60-96z'/%3E%3Cpath d='M220 256v120'/%3E%3Cpath d='M176 332c24 18 64 18 88 0'/%3E%3Cpath d='M160 210c-40 12-70 44-70 86c0 52 48 96 130 96s130-44 130-96c0-42-30-74-70-86'/%3E%3Cpath d='M120 96l60 0'/%3E%3Cpath d='M260 96l60 0'/%3E%3Cpath d='M132 120l40 0'/%3E%3Cpath d='M268 120l40 0'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .section-head {
+            position: relative;
+        }
+
+        .section-head::before,
+        .section-head::after {
+            content: "";
+            position: absolute;
+            top: -14px;
+            left: -14px;
+            width: 22px;
+            height: 22px;
+            border-top: 2px solid rgba(11,27,58,0.10);
+            border-left: 2px solid rgba(11,27,58,0.10);
+            border-radius: 6px 0 0 0;
+            pointer-events: none;
+        }
+
+        .section-head::after {
+            left: auto;
+            right: -14px;
+            border-left: 0;
+            border-top: 2px solid rgba(6,182,212,0.16);
+            border-right: 2px solid rgba(6,182,212,0.16);
+            border-radius: 0 6px 0 0;
+        }
+
+        @media (max-width: 980px) {
+            .hero::after,
+            #services::before,
+            #pricing::before {
+                display: none;
+            }
+            .hero::before {
+                animation: none;
+            }
+            .section-head::before,
+            .section-head::after {
+                display: none;
+            }
+        }
+
+        .hero .container { position: relative; z-index: 1; }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .hero-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-xl);
+            padding: 28px 26px;
+            position: relative;
+        }
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 46%);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(11,27,58,0.72);
+            margin-bottom: 12px;
+        }
+
+        .hero-kicker .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: var(--accent-color-light);
+            box-shadow: 0 0 0 7px rgba(6, 182, 212, 0.14);
+        }
+
+        .hero-title {
+            margin: 0 0 12px;
+            color: var(--primary-color);
+            letter-spacing: -0.03em;
+            font-size: clamp(2.3rem, 4.6vw, 3.5rem);
+            line-height: 1.04;
+        }
+
+        .hero-subtitle {
+            max-width: 58ch;
+            margin: 0 0 18px;
+            color: rgba(15,23,42,0.78);
+            font-size: 1.05rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .spec-row {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: rgba(15,23,42,0.72);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .spec-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 999px;
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.22);
+        }
+
+        .spec-ico {
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(29, 78, 216, 0.08);
+            border: 1px solid rgba(29, 78, 216, 0.14);
+            color: rgba(11,27,58,0.86);
+            flex: 0 0 18px;
+        }
+        .spec-ico svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hero-side {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+        }
+        .hero-side::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 46%);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .side-title {
+            margin: 0;
+            font-size: 1.05rem;
+            color: rgba(11,27,58,0.88);
+        }
+
+        .side-note {
+            margin: -6px 0 0;
+            color: rgba(15,23,42,0.70);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .area-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.12);
+            color: rgba(11,27,58,0.82);
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .chip::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 0 0 6px rgba(29, 78, 216, 0.12);
+        }
+
+        .mini-form {
+            border-top: 1px dashed rgba(var(--primary-color-rgb), 0.18);
+            padding-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .mini-form input,
+        .mini-form textarea {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            padding: 12px 12px;
+            font: inherit;
+            font-weight: 600;
+            background: rgba(255,255,255,0.96);
+            outline: none;
+        }
+
+        .mini-form textarea { resize: vertical; min-height: 100px; }
+
+        .mini-form input:focus,
+        .mini-form textarea:focus {
+            border-color: rgba(6, 182, 212, 0.55);
+            box-shadow: 0 0 0 5px rgba(6, 182, 212, 0.16);
+        }
+
+        .mini-help {
+            font-size: 12px;
+            color: rgba(15,23,42,0.58);
+            font-weight: 600;
+        }
+
+        /* Quick logo mark */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 14px 34px rgba(29, 78, 216, 0.22), 0 18px 44px rgba(6, 182, 212, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.40);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex: 0 0 auto;
+        }
+
+        .logo-mark::after {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.50), transparent 55%),
+                radial-gradient(circle at 70% 90%, rgba(255,255,255,0.25), transparent 60%);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .logo-mark span {
+            position: relative;
+            z-index: 1;
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            color: rgba(255, 255, 255, 0.96);
+            font-size: 14px;
+        }
+
+        .logo-word {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .logo-word a {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--primary-color);
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(15,23,42,0.62);
+            margin-top: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 12px 0;
+            }
+
+            .logo {
+                gap: 10px;
+                min-width: 0;
+            }
+
+            .logo-mark {
+                width: 34px;
+                height: 34px;
+                border-radius: 11px;
+            }
+
+            .logo-mark span {
+                font-size: 13px;
+            }
+
+            .logo-word {
+                min-width: 0;
+                max-width: 62vw;
+            }
+
+            .logo-word a {
+                font-size: 1.2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .sticky-cta .container {
+                gap: 10px;
+            }
+
+            .cta-text {
+                font-size: 0.92rem;
+            }
+
+            .cta-buttons .btn {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+
+            /* Reduce clutter: keep one primary action in the sticky bar */
+            .cta-buttons .btn.btn-secondary {
+                display: none;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .logo-sub { display: none; }
+        }
+
+        /* Section headers (industrial) */
+        .section-head {
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .tag {
+            font-weight: 900;
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(11,27,58,0.62);
+        }
+        .rule {
+            height: 1px;
+            flex: 1;
+            background:
+                radial-gradient(circle, rgba(6,182,212,0.35) 0 2px, transparent 3px) 0 50% / 24px 2px repeat-x,
+                linear-gradient(90deg, rgba(var(--primary-color-rgb), 0.22), rgba(var(--primary-color-rgb), 0));
+            transform: translateY(-10px);
+        }
+
+        .section-title {
+            margin: 0;
+        }
+
+        .section-subtitle {
+            margin-top: 8px;
+            max-width: 70ch;
+        }
+
+        /* Switcher */
+        .switcher-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .segmented {
+            display: inline-flex;
+            gap: 6px;
+            padding: 6px;
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.12);
+            border-radius: 16px;
+            box-shadow: 0 12px 28px -26px rgba(11,27,58,0.35);
+        }
+
+        .segmented button {
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 800;
+            padding: 10px 14px;
+            border-radius: 12px;
+            color: rgba(11,27,58,0.78);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 220ms var(--ease-out), background 240ms var(--ease-out), color 220ms ease, box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .segmented button:hover {
+            background: rgba(6, 182, 212, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .segmented button .ico {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(29, 78, 216, 0.08);
+            border: 1px solid rgba(29, 78, 216, 0.14);
+        }
+
+        .segmented button .ico svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .segmented button.active {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.12), rgba(6, 182, 212, 0.14));
+            color: var(--primary-color);
+            box-shadow: 0 10px 24px -20px rgba(11,27,58,0.60) inset;
+            border: 1px solid rgba(6, 182, 212, 0.26);
+        }
+
+        .segmented button:active { transform: scale(0.99); }
+
+        /* Service grid cards */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 18px 44px -34px rgba(11,27,58,0.38);
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+            position: relative;
+        }
+        /* Blue gradient border accent (subtle, stronger on hover) */
+        #services .service-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg,
+                rgba(29, 78, 216, 0.55),
+                rgba(6, 182, 212, 0.48),
+                rgba(29, 78, 216, 0.38)
+            );
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.35;
+            pointer-events: none;
+            transition: opacity 240ms var(--ease-out);
+        }
+        .service-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.60) 0%, transparent 46%);
+            opacity: 0.16;
+            pointer-events: none;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 60px -34px rgba(11,27,58,0.52);
+            border-color: rgba(6, 182, 212, 0.30);
+        }
+        #services .service-card:hover::before { opacity: 0.78; }
+
+        .card-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 14px;
+            border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.08);
+            background: linear-gradient(180deg, rgba(29,78,216,0.06), rgba(6,182,212,0.02));
+        }
+        .card-topbar b { color: var(--primary-color); font-weight: 900; }
+        .badge {
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 7px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            background: rgba(255,255,255,0.78);
+            color: rgba(11,27,58,0.72);
+            white-space: nowrap;
+        }
+        .card-body {
+            padding: 14px 14px 16px;
+            color: rgba(15,23,42,0.74);
+        }
+        .card-body .mini {
+            margin: 0;
+            color: rgba(15,23,42,0.72);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .card-body ul {
+            margin: 10px 0 0;
+            padding-left: 18px;
+        }
+        .card-body li { margin: 6px 0; color: rgba(15,23,42,0.70); }
+
+        /* Problems + process */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .problem {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 18px 44px -36px rgba(11,27,58,0.30);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .problem::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .problem:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 58px -44px rgba(11,27,58,0.44);
+            border-color: rgba(6, 182, 212, 0.22);
+        }
+        .problem h3 { margin: 0 0 6px; font-size: 1.2rem; color: var(--primary-color); }
+        .problem p { margin: 0; color: rgba(15,23,42,0.70); font-weight: 600; }
+        .problem .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 7px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(6,182,212,0.26);
+            background: rgba(6,182,212,0.10);
+            color: rgba(11,27,58,0.74);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .price-panel {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: var(--panel-shadow);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .price-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.60) 0%, transparent 46%);
+            opacity: 0.14;
+            pointer-events: none;
+        }
+        .price-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 28px 70px -54px rgba(11,27,58,0.55);
+            border-color: rgba(6, 182, 212, 0.20);
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(var(--primary-color-rgb), 0.16);
+        }
+        .price-row:last-child { border-bottom: 0; padding-bottom: 0; }
+        .price-row strong { color: var(--primary-color); }
+        .price-row .desc { color: rgba(15,23,42,0.68); font-weight: 600; font-size: 0.95rem; }
+        .money { font-weight: 900; color: var(--primary-color); white-space: nowrap; }
+        .footnote {
+            margin-top: 10px;
+            color: rgba(15,23,42,0.62);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .step {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: 0 18px 44px -36px rgba(11,27,58,0.26);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .step::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.11;
+            pointer-events: none;
+        }
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 58px -48px rgba(11,27,58,0.40);
+            border-color: rgba(6, 182, 212, 0.20);
+        }
+        .step strong { display: block; color: var(--primary-color); }
+        .step span { display: block; color: rgba(15,23,42,0.70); font-weight: 600; margin-top: 6px; }
+
+        .cta-panel {
+            margin-top: 18px;
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .cta-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 46%);
+            opacity: 0.16;
+            pointer-events: none;
+        }
+        .cta-panel h3 { margin: 0; color: var(--primary-color); font-size: 1.35rem; }
+        .cta-panel p { margin: 6px 0 0; color: rgba(15,23,42,0.70); font-weight: 600; }
+
+        details.faq {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 14px 14px;
+            box-shadow: 0 18px 44px -38px rgba(11,27,58,0.24);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        details.faq::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.10;
+            pointer-events: none;
+        }
+        .faq + .faq { margin-top: 12px; }
+        details.faq summary {
+            cursor: pointer;
+            font-weight: 900;
+            color: var(--primary-color);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+        details.faq summary::-webkit-details-marker { display: none; }
+        details.faq summary::after {
+            content: "+";
+            color: rgba(11,27,58,0.72);
+            font-weight: 900;
+            display: inline-block;
+            transition: transform 240ms var(--ease-out);
+        }
+        details.faq[open] summary::after { transform: rotate(45deg); }
+        details.faq .faq-body {
+            margin-top: 10px;
+            color: rgba(15,23,42,0.70);
+            font-weight: 600;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: max-height 520ms var(--ease-out), opacity 220ms ease, transform 520ms var(--ease-out);
+            will-change: max-height, opacity, transform;
+        }
+        details.faq[open] .faq-body {
+            max-height: 220px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        details.faq:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 54px -44px rgba(11,27,58,0.34);
+            border-color: rgba(6, 182, 212, 0.20);
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .service-grid { grid-template-columns: 1fr; }
+            .problems-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="container">
+            <div class="cta-text">
+                Friendly local comfort pros serving <strong>London</strong> + area.
+            </div>
+            <div class="cta-buttons">
+                <a href="tel:+15195550123" class="btn btn-secondary">Call (519) 555‑0123</a>
+                <a href="#quote" class="btn btn-primary">Get a Quote</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark" aria-hidden="true"><span>HV</span></div>
+                    <div class="logo-word">
+                        <a href="#home">HVAC Village</a>
+                        <div class="logo-sub">Friendly local comfort pros</div>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="#coverage">Coverage</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-card">
+                    <div class="hero-kicker"><span class="dot" aria-hidden="true"></span>Local HVAC • London & area</div>
+                    <h1 class="hero-title">Heating & cooling you can count on</h1>
+                    <p class="hero-subtitle">
+                        Straightforward quotes, tidy installs, and friendly service for homeowners across
+                        <strong>London, St. Thomas, Waterloo, and Woodstock</strong>.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#pricing" class="btn btn-secondary btn-large">See Pricing</a>
+                        <a href="portfolio.html" class="btn btn-primary btn-large">See Our Work</a>
+                    </div>
+                    <div class="spec-row" aria-label="Quick proof points">
+                        <span class="spec-pill">
+                            <span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3 8-8 8s-8-3-8-8V7l8-4z"/><path d="M9 12l2 2 4-5"/></svg></span>
+                            Licensed & insured
+                        </span>
+                        <span class="spec-pill">
+                            <span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18"/><path d="M7 7v14"/><path d="M17 7v14"/><path d="M5 21h14"/><path d="M12 11h4"/><path d="M12 15h4"/></svg></span>
+                            Transparent quotes
+                        </span>
+                        <span class="spec-pill">
+                            <span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2l-2 2 2 2-2 2 2 2"/><path d="M4 13h7l2-2h7"/><path d="M4 17h16"/></svg></span>
+                            Clean workmanship
+                        </span>
+                        <span class="spec-pill">
+                            <span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9a4 4 0 0 0 0 8h6a4 4 0 0 1 0 8H6"/></svg></span>
+                            Financing options
+                        </span>
+                    </div>
+                </div>
+
+                <aside class="hero-side" aria-label="Quick quote form">
+                    <h2 class="side-title">Quick Quote Request</h2>
+                    <p class="side-note">Tell us your area and what your system is doing — we’ll reply with next steps.</p>
+                    <div>
+                        <div class="tag">COVERAGE</div>
+                        <div class="area-chips" style="margin-top: 10px;">
+                            <span class="chip">London</span>
+                            <span class="chip">St. Thomas</span>
+                            <span class="chip">Waterloo</span>
+                            <span class="chip">Woodstock</span>
+                        </div>
+                    </div>
+
+                    <form class="mini-form" onsubmit="return false;" id="quote">
+                        <input type="text" placeholder="Name">
+                        <input type="text" placeholder="Phone or email">
+                        <textarea placeholder="What’s happening? (No heat, AC warm, weird noise...)"></textarea>
+                        <button class="btn btn-primary btn-large" type="button">Send request</button>
+                        <div class="mini-help">Mockup form — connect to your real contact form later.</div>
+                    </form>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" style="padding: 70px 0;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">SERVICE</div>
+                    <h2 class="section-title">Heating &amp; Cooling Services</h2>
+                    <p class="section-subtitle">Pick a season — or tell us the symptom and we’ll guide you.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="switcher-row">
+                <div class="segmented" role="tablist" aria-label="Heating or Cooling">
+                    <button type="button" class="active" data-tab="heating" aria-selected="true">
+                        <span class="ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M8.5 7.5c1.5 1 1.5 3 0 4c-1.5 1-1.5 3 0 4"/><path d="M15.5 7.5c1.5 1 1.5 3 0 4c-1.5 1-1.5 3 0 4"/></svg>
+                        </span>
+                        Heating
+                    </button>
+                    <button type="button" data-tab="cooling" aria-selected="false">
+                        <span class="ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M4.5 7l15 10"/><path d="M19.5 7l-15 10"/><path d="M7 4.5l10 15"/><path d="M17 4.5l-10 15"/></svg>
+                        </span>
+                        Cooling
+                    </button>
+                </div>
+
+                <a href="#quote" class="btn btn-primary">Get a Quote</a>
+            </div>
+
+            <div class="service-grid" id="services-heating">
+                <article class="service-card">
+                    <div class="card-topbar"><b>Furnace Repair</b><span class="badge">Repair</span></div>
+                    <div class="card-body">
+                        <p class="mini">Diagnosis • Common repairs • System test</p>
+                        <ul>
+                            <li>No heat / weak heat</li>
+                            <li>Short cycling</li>
+                            <li>Odd smells or noises</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Furnace Installation</b><span class="badge">Install</span></div>
+                    <div class="card-body">
+                        <p class="mini">Sizing guidance • Removal • Clean install</p>
+                        <ul>
+                            <li>Efficiency options explained</li>
+                            <li>Neat finish and cleanup</li>
+                            <li>Setup + walkthrough</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Heat Pump Installation</b><span class="badge">Install</span></div>
+                    <div class="card-body">
+                        <p class="mini">Options • Efficiency guidance • Setup + testing</p>
+                        <ul>
+                            <li>Heating + cooling in one</li>
+                            <li>Great for shoulder seasons</li>
+                            <li>Ask about rebates</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Thermostat Upgrades</b><span class="badge">Install</span></div>
+                    <div class="card-body">
+                        <p class="mini">Smart thermostat setup • App pairing • Optimization</p>
+                        <ul>
+                            <li>Comfort schedules</li>
+                            <li>Remote control</li>
+                            <li>Energy tips</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Seasonal Tune‑Up</b><span class="badge">Maintenance</span></div>
+                    <div class="card-body">
+                        <p class="mini">Safety check • Cleaning • Efficiency check</p>
+                        <ul>
+                            <li>Peace of mind</li>
+                            <li>Fewer surprises</li>
+                            <li>Better efficiency</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Airflow & Comfort Fixes</b><span class="badge">Repair</span></div>
+                    <div class="card-body">
+                        <p class="mini">Airflow inspection • Basic adjustments • Recommendations</p>
+                        <ul>
+                            <li>Hot/cold spots</li>
+                            <li>Weak airflow</li>
+                            <li>Odd noises</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+
+            <div class="service-grid" id="services-cooling" style="display:none;">
+                <article class="service-card">
+                    <div class="card-topbar"><b>AC Repair</b><span class="badge">Repair</span></div>
+                    <div class="card-body">
+                        <p class="mini">Diagnosis • Common repairs • System test</p>
+                        <ul>
+                            <li>AC blowing warm</li>
+                            <li>System won’t start</li>
+                            <li>Short cycling</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>AC Installation</b><span class="badge">Install</span></div>
+                    <div class="card-body">
+                        <p class="mini">System recommendations • Setup + testing</p>
+                        <ul>
+                            <li>Right size for your home</li>
+                            <li>Clean install</li>
+                            <li>Walkthrough included</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Ductless Mini‑Splits</b><span class="badge">Install</span></div>
+                    <div class="card-body">
+                        <p class="mini">Room‑by‑room options • Clean install • Testing</p>
+                        <ul>
+                            <li>Great for additions</li>
+                            <li>Better control per room</li>
+                            <li>Quiet comfort</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Drain Line / Condensate</b><span class="badge">Repair</span></div>
+                    <div class="card-body">
+                        <p class="mini">Inspection • Clearing • Prevention tips</p>
+                        <ul>
+                            <li>Stops leaks</li>
+                            <li>Prevents shutdowns</li>
+                            <li>Quick fix</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Indoor Air Quality</b><span class="badge">Upgrade</span></div>
+                    <div class="card-body">
+                        <p class="mini">Humidity • Filtration • Fresh air options</p>
+                        <ul>
+                            <li>Humidifiers</li>
+                            <li>Air purification</li>
+                            <li>Filter advice</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="card-topbar"><b>Seasonal Tune‑Up</b><span class="badge">Maintenance</span></div>
+                    <div class="card-body">
+                        <p class="mini">Coil check • Drain line • Performance check</p>
+                        <ul>
+                            <li>Runs cooler</li>
+                            <li>Lower energy</li>
+                            <li>Fewer breakdowns</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" style="padding: 70px 0;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">PRICING</div>
+                    <h2 class="section-title">Transparent Pricing (Starting At)</h2>
+                    <p class="section-subtitle">Final price depends on home size and equipment — we quote before work begins.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="price-panel">
+                    <div class="price-row">
+                        <div>
+                            <strong>Diagnostic Visit</strong>
+                            <div class="desc">On-site diagnosis + clear quote</div>
+                        </div>
+                        <div class="money">$129</div>
+                    </div>
+                    <div class="price-row">
+                        <div>
+                            <strong>Common Repairs</strong>
+                            <div class="desc">Thermostats, capacitors, drain issues</div>
+                        </div>
+                        <div class="money">$249+</div>
+                    </div>
+                    <div class="price-row">
+                        <div>
+                            <strong>After-hours Emergency</strong>
+                            <div class="desc">Nights/weekends (if offered)</div>
+                        </div>
+                        <div class="money">$199+</div>
+                    </div>
+                    <div class="footnote">Friendly note: we’ll always explain what we found and your options.</div>
+                </div>
+
+                <div class="price-panel">
+                    <div class="price-row">
+                        <div>
+                            <strong>AC Installation</strong>
+                            <div class="desc">Setup + testing included</div>
+                        </div>
+                        <div class="money">$3,999+</div>
+                    </div>
+                    <div class="price-row">
+                        <div>
+                            <strong>Furnace Installation</strong>
+                            <div class="desc">Removal/haul away included</div>
+                        </div>
+                        <div class="money">$4,499+</div>
+                    </div>
+                    <div class="price-row">
+                        <div>
+                            <strong>Heat Pump Installation</strong>
+                            <div class="desc">Ask about rebates</div>
+                        </div>
+                        <div class="money">$6,999+</div>
+                    </div>
+                    <div class="footnote">We recommend what fits your home — not what’s most expensive.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process (moved to a dedicated page) -->
+    <section id="process-teaser" style="padding: 70px 0;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">PROCESS</div>
+                    <h2 class="section-title">How it works</h2>
+                    <p class="section-subtitle">Diagnostics + our step-by-step process live on a separate page so the homepage stays fast to scan.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="cta-panel">
+                <div>
+                    <h3>See diagnostics + the full process</h3>
+                    <p>What we check, how we quote, and what to expect on install day.</p>
+                </div>
+                <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="process.html" class="btn btn-primary">View Process</a>
+                    <a href="#quote" class="btn btn-secondary">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage + CTA -->
+    <section id="coverage" style="padding: 70px 0;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">COVERAGE</div>
+                    <h2 class="section-title">Serving Southwestern Ontario</h2>
+                    <p class="section-subtitle">London • St. Thomas • Waterloo • Woodstock (and nearby towns)</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="cta-panel">
+                <div>
+                    <h3>Not sure if we cover your area?</h3>
+                    <p>Send your postal code — we’ll confirm availability.</p>
+                </div>
+                <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="#quote" class="btn btn-secondary">Message Us</a>
+                    <a href="tel:+15195550123" class="btn btn-primary">Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="padding: 70px 0 90px;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">FAQ</div>
+                    <h2 class="section-title">Quick Answers</h2>
+                    <p class="section-subtitle">Friendly, clear info so you know what to expect.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <details class="faq">
+                <summary>How fast can you book?</summary>
+                <div class="faq-body">We aim for fast scheduling and prioritize urgent issues when possible. We’ll give you the earliest available option.</div>
+            </details>
+            <details class="faq">
+                <summary>Do you quote before work starts?</summary>
+                <div class="faq-body">Always. You’ll get a clear quote before any work begins — and we’ll explain your options in plain language.</div>
+            </details>
+            <details class="faq">
+                <summary>Do you offer financing?</summary>
+                <div class="faq-body">If financing is available for your project, we’ll walk you through the options and help you choose what makes sense.</div>
+            </details>
+            <details class="faq">
+                <summary>What systems do you work on?</summary>
+                <div class="faq-body">Furnaces, AC, heat pumps, ductless systems, thermostats, and seasonal tune-ups.</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>HVAC Village</h4>
+                    <p>Friendly local comfort pros — clean installs, clear quotes, and fast help when you need it.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="#coverage">Coverage</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><a href="tel:+15195550123">(519) 555‑0123</a></p>
+                    <p><a href="mailto:hello@hvacvillage.ca">hello@hvacvillage.ca</a></p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">London • St. Thomas • Waterloo • Woodstock</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 HVAC Village. Demo mockup page.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // #region agent log
+        window.addEventListener('error', function (e) {
+            try {
+                var f = (e && e.filename) ? String(e.filename).split(/[\\/]/).slice(-1)[0] : '';
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/index.html:window.error', message: 'window.error', data: { msg: String(e && e.message || ''), file: f, line: e && e.lineno, col: e && e.colno }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'A' }) }).catch(function () { });
+            } catch (_) { }
+        }, true);
+        window.addEventListener('unhandledrejection', function (e) {
+            try {
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/index.html:window.unhandledrejection', message: 'unhandledrejection', data: { reason: String((e && e.reason && (e.reason.message || e.reason)) || '') }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'A' }) }).catch(function () { });
+            } catch (_) { }
+        });
+        fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/index.html:boot', message: 'boot', data: { protocol: location.protocol, hasSticky: !!document.getElementById('stickyCta'), hasHeader: !!document.querySelector('.header'), hasServices: !!document.getElementById('services'), hasPricing: !!document.getElementById('pricing'), hasProcessLink: !!document.querySelector('a[href=\"process.html\"]') }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'C' }) }).catch(function () { });
+        (function () {
+            try {
+                var bad = [];
+                document.querySelectorAll('a[href^=\"#\"]').forEach(function (a) {
+                    var href = a.getAttribute('href');
+                    if (!href || href === '#') return;
+                    if (!document.querySelector(href)) bad.push(href);
+                });
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/index.html:anchors.check', message: 'anchors.check', data: { count: document.querySelectorAll('a[href^=\"#\"]').length, missing: bad.slice(0, 12) }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'D' }) }).catch(function () { });
+            } catch (_) { }
+        })();
+        // #endregion
+
+        // Mobile menu toggle (local, minimal)
+        (function () {
+            var toggle = document.querySelector('.mobile-menu-toggle');
+            var nav = document.querySelector('.nav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', function () {
+                    nav.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            }
+        })();
+
+        // Sticky CTA height -> CSS var for header offset
+        (function () {
+            var sticky = document.getElementById('stickyCta');
+            if (!sticky) return;
+            var expandedHeight = 0;
+            var collapsed = false;
+            var ticking = false;
+
+            function setStickyHeightVar(px) {
+                document.documentElement.style.setProperty('--sticky-cta-height', px + 'px');
+            }
+
+            function measureExpandedHeight() {
+                // Prefer stable measurement that doesn't break during transitions/resizes.
+                // scrollHeight is not affected by max-height animation, so it should not drop to 1px.
+                var wasCollapsed = sticky.classList.contains('scrolled');
+                var h = Math.ceil(sticky.scrollHeight || 0);
+                if (h < 40) {
+                    if (wasCollapsed) sticky.classList.remove('scrolled');
+                    h = Math.ceil((sticky.getBoundingClientRect && sticky.getBoundingClientRect().height) || sticky.offsetHeight || 56);
+                    if (wasCollapsed) sticky.classList.add('scrolled');
+                }
+                expandedHeight = Math.max(56, h);
+            }
+
+            function applyState(nextCollapsed) {
+                if (nextCollapsed === collapsed) return;
+                collapsed = nextCollapsed;
+                sticky.classList.toggle('scrolled', collapsed);
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+                // #region agent log
+                fetch('http://127.0.0.1:7243/ingest/a1a6cb06-c8c5-4208-b2a6-e8867073ec3f', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'demos/hvac-village/index.html:sticky.applyState', message: 'sticky.applyState', data: { collapsed: collapsed, expandedHeight: expandedHeight, y: (window.pageYOffset || 0) }, timestamp: Date.now(), runId: 'bugscan-1', hypothesisId: 'B' }) }).catch(function () { });
+                // #endregion
+            }
+
+            function computeNextState(y) {
+                // Hysteresis prevents oscillation from layout shifts near the threshold.
+                // Collapse after scrolling past CTA height; expand only when near top.
+                if (!collapsed && y > expandedHeight + 12) return true;
+                if (collapsed && y < 12) return false;
+                return collapsed;
+            }
+
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    ticking = false;
+                    applyState(computeNextState(window.pageYOffset || 0));
+                });
+            }
+
+            measureExpandedHeight();
+            setStickyHeightVar(expandedHeight);
+            applyState(computeNextState(window.pageYOffset || 0));
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+                measureExpandedHeight();
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+                applyState(computeNextState(window.pageYOffset || 0));
+            });
+        })();
+
+        // Heating/Cooling switcher
+        (function () {
+            var buttons = document.querySelectorAll('.segmented button[data-tab]');
+            var heat = document.getElementById('services-heating');
+            var cool = document.getElementById('services-cooling');
+            if (!buttons.length || !heat || !cool) return;
+
+            function setTab(tab) {
+                buttons.forEach(function (b) {
+                    var active = b.getAttribute('data-tab') === tab;
+                    b.classList.toggle('active', active);
+                    b.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+                heat.style.display = tab === 'heating' ? '' : 'none';
+                cool.style.display = tab === 'cooling' ? '' : 'none';
+            }
+
+            buttons.forEach(function (b) {
+                b.addEventListener('click', function () {
+                    setTab(b.getAttribute('data-tab'));
+                });
+            });
+        })();
+
+        // Friendly scroll-to-anchor with header offset
+        (function () {
+            document.querySelectorAll('a[href^=\"#\"]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    var href = a.getAttribute('href');
+                    if (!href || href === '#') return;
+                    var el = document.querySelector(href);
+                    if (!el) return;
+                    e.preventDefault();
+                    var offset = 86;
+                    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    var nav = document.querySelector('.nav');
+                    var toggle = document.querySelector('.mobile-menu-toggle');
+                    if (nav && nav.classList.contains('active')) nav.classList.remove('active');
+                    if (toggle && toggle.classList.contains('active')) toggle.classList.remove('active');
+                });
+            });
+        })();
+
+        // Scroll-in reveals (medium motion)
+        (function () {
+            var reduce = false;
+            try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+            var selectors = [
+                '.hero-card',
+                '.hero-side',
+                '#services .section-head',
+                '.switcher-row',
+                '.service-card',
+                '.problem',
+                '#pricing .section-head',
+                '.price-panel',
+                '.step',
+                '#coverage .section-head',
+                '.cta-panel',
+                '#faq .section-head',
+                'details.faq'
+            ];
+
+            var nodes = [];
+            selectors.forEach(function (sel) {
+                document.querySelectorAll(sel).forEach(function (el) { nodes.push(el); });
+            });
+
+            // Add reveal class + default delay.
+            nodes.forEach(function (el) {
+                el.classList.add('reveal');
+                if (!el.style.getPropertyValue('--reveal-delay')) el.style.setProperty('--reveal-delay', '0ms');
+            });
+
+            function stagger(containerSel, childSel, step) {
+                step = step || 80;
+                document.querySelectorAll(containerSel).forEach(function (wrap) {
+                    var items = wrap.querySelectorAll(childSel);
+                    items.forEach(function (el, i) {
+                        el.classList.add('reveal');
+                        el.style.setProperty('--reveal-delay', (Math.min(i, 8) * step) + 'ms');
+                        if (nodes.indexOf(el) === -1) nodes.push(el);
+                    });
+                });
+            }
+
+            stagger('.service-grid', '.service-card', 90);
+            stagger('.problems-grid', '.problem', 90);
+            stagger('.pricing-grid', '.price-panel', 110);
+            stagger('.steps', '.step', 80);
+
+            if (reduce) {
+                nodes.forEach(function (el) { el.classList.add('is-inview'); });
+                return;
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                nodes.forEach(function (el) { el.classList.add('is-inview'); });
+                return;
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-inview');
+                    io.unobserve(entry.target);
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+            nodes.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthBolt Electric — Work & Proof (Demo)</title>
+  <meta name="description" content="NorthBolt Electric — recent work gallery + proof of quality, plus demo reviews. (Demo site)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1022;
+      --ink:#EAF0FF;
+      --muted:rgba(234,240,255,.74);
+      --line:rgba(234,240,255,.12);
+      --shadow: 0 26px 70px -48px rgba(0,0,0,.75);
+      --shadow2: 0 18px 50px -38px rgba(0,0,0,.6);
+      --radius:18px;
+      --radius2:22px;
+      --bolt:#FBBF24;
+      --blue:#60A5FA;
+      --easeOut:cubic-bezier(.2,.8,.2,1);
+      --easeSmooth:cubic-bezier(.22,1,.36,1);
+      --topbar-space: 52px;
+      --topbar-h: 52px;
+      --header-h: 72px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1000px circle at 16% -10%, rgba(96,165,250,.18), transparent 58%),
+        radial-gradient(900px circle at 86% 0%, rgba(251,191,36,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 60%, #050611 100%);
+      overflow-x:hidden;
+      padding-top: calc(var(--topbar-space, 0px) + var(--header-h, 0px));
+    }
+
+    h1,h2,h3,h4,.brand-name,.name{
+      font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+    @media (min-width: 880px){ .container{padding:0 28px} }
+
+    section{padding: 54px 0; scroll-margin-top: calc(var(--topbar-space, 0px) + var(--header-h, 0px) + 16px);}
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      filter: blur(2px);
+      transition: opacity 650ms ease, transform 750ms var(--easeOut), filter 650ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: transform, opacity;
+    }
+    .reveal.is-inview{opacity:1; transform:none; filter:none;}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1 !important; transform:none !important; filter:none !important; transition:none !important;}
+      .topbar,
+      .header{ transition:none !important; }
+      .topbar.is-collapsed{ transform:none; }
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      box-shadow: 0 18px 48px -40px rgba(0,0,0,.9);
+      transition: transform 220ms var(--easeOut), background 220ms ease, border-color 220ms ease, box-shadow 220ms var(--easeOut);
+      will-change: transform;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.09); border-color: rgba(234,240,255,.22)}
+    .btn:active{transform: translateY(0) scale(.99)}
+    .btn-primary{
+      border: 1px solid rgba(251,191,36,.30);
+      background: linear-gradient(135deg, rgba(251,191,36,.96), rgba(96,165,250,.72));
+      color: rgba(7,10,18,.92);
+      box-shadow: 0 22px 60px -44px rgba(251,191,36,.55), 0 26px 70px -52px rgba(96,165,250,.35);
+    }
+    .btn-primary:hover{box-shadow: 0 28px 78px -56px rgba(251,191,36,.65), 0 30px 90px -62px rgba(96,165,250,.42)}
+    .btn-ghost{ background: rgba(255,255,255,.04); }
+    .btn-small{padding: 10px 12px; border-radius: 12px; font-size:.95rem}
+    .btn-wide{padding: 14px 16px}
+
+    /* Top utility bar */
+    .topbar{
+      position: fixed;
+      top:0; left:0; right:0;
+      z-index: 50;
+      background: rgba(7,10,18,.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      max-height: 140px;
+      overflow: hidden;
+      transform: translateY(0);
+      opacity: 1;
+      transition:
+        max-height 300ms var(--easeOut),
+        opacity 220ms ease,
+        transform 300ms var(--easeOut),
+        border-color 260ms ease;
+      will-change: max-height, opacity, transform;
+    }
+    .topbar.is-collapsed{
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      border-bottom-color: transparent;
+      pointer-events:none;
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px 0;
+      font-weight:700;
+      color: rgba(234,240,255,.78);
+    }
+    .topbar strong{color:var(--ink)}
+    .topbar .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(234,240,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 14px 34px -28px rgba(0,0,0,.8);
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--bolt));
+      box-shadow: 0 0 0 6px rgba(251,191,36,.16);
+      flex:0 0 auto;
+    }
+    .topbar-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+
+    /* Header */
+    .header{
+      position: fixed;
+      top: var(--topbar-h, 0px);
+      left:0; right:0;
+      z-index: 40;
+      background: rgba(7,10,18,.60);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      transition: top 240ms var(--easeOut);
+      will-change: top;
+    }
+    .header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0;}
+    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .mark{
+      width:40px; height:40px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(251,191,36,.96), rgba(96,165,250,.82));
+      box-shadow: 0 22px 60px -46px rgba(251,191,36,.55), 0 26px 70px -52px rgba(96,165,250,.35);
+      display:grid; place-items:center;
+      border: 1px solid rgba(255,255,255,.22);
+      position: relative;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .mark::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(circle at 70% 90%, rgba(255,255,255,.22), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .bolt{
+      width:18px; height:18px; position:relative; z-index:1;
+      background: currentColor;
+      color: rgba(7,10,18,.92);
+      clip-path: polygon(45% 0%, 70% 0%, 54% 42%, 78% 42%, 34% 100%, 46% 56%, 22% 56%);
+      transform: rotate(-10deg);
+    }
+    .brand-text{display:flex; flex-direction:column; min-width:0}
+    .brand-name{font-weight: 900; letter-spacing: -0.03em; font-size: 1.1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand-sub{font-size:.82rem; color: rgba(234,240,255,.65); font-weight:700; margin-top:1px}
+
+    .nav{display:none}
+    .nav a{color: rgba(234,240,255,.78); font-weight:800; font-size:.98rem; position:relative}
+    .nav a:hover{color: var(--ink)}
+    .nav a::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:-6px;
+      height:2px;
+      background: linear-gradient(90deg, rgba(251,191,36,.95), rgba(96,165,250,.7));
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform 240ms var(--easeOut);
+      border-radius: 999px;
+      opacity:.9;
+    }
+    .nav a:hover::after{transform: scaleX(1)}
+
+    .mobile-toggle{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(255,255,255,.06);
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:4px;
+    }
+    .mobile-toggle span{
+      width:18px; height:2px; background: rgba(234,240,255,.84);
+      display:block;
+      border-radius: 999px;
+      transition: transform 240ms var(--easeOut), opacity 240ms ease;
+    }
+    .mobile-toggle.active span:nth-child(1){transform: translateY(6px) rotate(45deg)}
+    .mobile-toggle.active span:nth-child(2){opacity:0}
+    .mobile-toggle.active span:nth-child(3){transform: translateY(-6px) rotate(-45deg)}
+
+    .mobile-nav{
+      display:none;
+      border-top:1px solid rgba(234,240,255,.10);
+      padding: 12px 0 16px;
+    }
+    .mobile-nav.active{display:block}
+    .mobile-nav a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: rgba(234,240,255,.80);
+      font-weight: 900;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(234,240,255,.10);
+      margin-top: 10px;
+    }
+    .mobile-nav a:hover{background: rgba(255,255,255,.07); color: var(--ink)}
+
+    @media (min-width: 880px){
+      .nav{display:flex; gap:18px; align-items:center}
+      .mobile-toggle{display:none}
+      .mobile-nav{display:none !important}
+    }
+
+    /* Page hero */
+    .page-hero{
+      position: relative;
+      padding: 52px 0 18px;
+      overflow:hidden;
+    }
+    .page-hero::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(900px circle at 18% 0%, rgba(96,165,250,.18), transparent 55%),
+        radial-gradient(1000px circle at 88% 10%, rgba(251,191,36,.20), transparent 58%),
+        repeating-linear-gradient(90deg, rgba(234,240,255,.08), rgba(234,240,255,.08) 1px, transparent 1px, transparent 52px),
+        repeating-linear-gradient(0deg, rgba(234,240,255,.06), rgba(234,240,255,.06) 1px, transparent 1px, transparent 52px);
+      opacity: .28;
+      pointer-events:none;
+      transform: translate3d(0,0,0);
+      animation: gridDrift 18s ease-in-out infinite;
+    }
+    @keyframes gridDrift{ 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-10px,0)} }
+    .page-hero .panel{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero .panel::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 52%);
+      opacity: .75;
+      pointer-events:none;
+    }
+    .panel-inner{position:relative; z-index:1; padding: 22px}
+    h1{margin: 10px 0 0; font-size: clamp(2.0rem, 4.4vw, 2.8rem); letter-spacing:-0.04em; line-height:1.05}
+    .lead{margin: 12px 0 0; color: rgba(234,240,255,.74); font-weight:650; font-size: 1.02rem; max-width: 70ch}
+    .hero-actions{display:flex; gap: 10px; margin-top: 16px; flex-wrap:wrap}
+
+    /* Section heads */
+    .section-head{display:flex; align-items:flex-end; gap: 14px; flex-wrap:wrap; margin-bottom: 18px;}
+    .section-head-spaced{ margin-top: 44px; }
+    .tag{font-weight: 900; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(234,240,255,.66);}
+    .rule{
+      flex:1;
+      height:1px;
+      background:
+        radial-gradient(circle, rgba(251,191,36,.45) 0 2px, transparent 3px) 0 50% / 26px 2px repeat-x,
+        linear-gradient(90deg, rgba(234,240,255,.18), rgba(234,240,255,0));
+      transform: translateY(-10px);
+      min-width: 160px;
+    }
+    h2{margin: 6px 0 0; font-size: clamp(1.65rem, 3.4vw, 2.15rem); letter-spacing: -0.03em;}
+    .sub{margin: 10px 0 0; color: var(--muted); font-weight: 650; max-width: 78ch;}
+
+    /* Cards */
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position: relative;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, transparent 55%);
+      opacity: .8;
+      pointer-events:none;
+    }
+    .card:hover{transform: translateY(-4px); border-color: rgba(251,191,36,.22); box-shadow: 0 28px 78px -60px rgba(0,0,0,.85);}
+    .card-inner{position:relative; z-index:1; padding: 16px}
+    .card h3{margin: 10px 0 6px; font-size: 1.2rem; letter-spacing:-0.02em}
+    .card p{margin:0; color: var(--muted); font-weight: 650}
+
+    .two-col{display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px;}
+    @media (min-width: 980px){ .two-col{grid-template-columns: 1.05fr .95fr; gap: 16px} }
+
+    .list{margin: 10px 0 0; padding: 0 0 0 18px; color: rgba(234,240,255,.76); font-weight: 700;}
+    .list li{margin: 7px 0}
+
+    /* Gallery */
+    .gallery-grid{display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px;}
+    @media (min-width: 880px){ .gallery-grid{grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px} }
+    .gallery-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position: relative;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+    }
+    .gallery-card::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, transparent 55%);
+      opacity: .72;
+      pointer-events:none;
+    }
+    .gallery-card:hover{transform: translateY(-4px); border-color: rgba(251,191,36,.22); box-shadow: 0 28px 78px -60px rgba(0,0,0,.85);}
+    .gallery-media{position: relative; aspect-ratio: 16 / 10; overflow:hidden; background: linear-gradient(135deg, rgba(251,191,36,.10), rgba(96,165,250,.10)); border-bottom: 1px solid rgba(234,240,255,.10);}
+    .gallery-media::after{content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(7,10,18,0) 35%, rgba(7,10,18,.30) 100%); opacity: .85; pointer-events:none;}
+    .gallery-media img{width:100%; height:100%; object-fit: cover; transform: scale(1.02); transition: transform 650ms var(--easeOut); will-change: transform;}
+    .gallery-card:hover .gallery-media img{ transform: scale(1.06); }
+    .gallery-meta{position: relative; z-index: 1; padding: 14px 16px 14px; display:flex; align-items:flex-start; justify-content: space-between; gap: 12px;}
+    .gallery-title{margin: 0; font-size: 1.12rem; letter-spacing: -0.02em; line-height: 1.18; font-weight: 900;}
+    .gallery-sub{margin-top: 6px; color: rgba(234,240,255,.74); font-weight: 650; font-size: .95rem;}
+    .pill2{display:inline-flex; align-items:center; gap: 8px; padding: 8px 10px; border-radius: 999px; border: 1px solid rgba(234,240,255,.12); background: rgba(255,255,255,.06); color: rgba(234,240,255,.78); font-weight: 900; font-size: .86rem; white-space: nowrap;}
+    .gallery-feature{grid-column: 1 / -1;}
+    @media (min-width: 880px){ .gallery-feature{ grid-column: span 2; } }
+    .split-media{display:grid; grid-template-columns: 1fr 1fr; aspect-ratio: 16 / 9; overflow:hidden; border-bottom: 1px solid rgba(234,240,255,.10); background: rgba(255,255,255,.04);}
+    .split{position: relative; overflow:hidden;}
+    .split img{width:100%; height:100%; object-fit: cover; transform: scale(1.02); transition: transform 650ms var(--easeOut); will-change: transform;}
+    .gallery-card:hover .split img{ transform: scale(1.06); }
+    .split::after{content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(7,10,18,0) 35%, rgba(7,10,18,.30) 100%); opacity: .85; pointer-events:none;}
+    .label-pill{position:absolute; top: 12px; left: 12px; z-index: 1; display:inline-flex; align-items:center; gap: 8px; padding: 8px 10px; border-radius: 999px; border: 1px solid rgba(234,240,255,.16); background: rgba(7,10,18,.55); color: rgba(234,240,255,.86); font-weight: 950; font-size: .86rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);}
+
+    /* Reviews */
+    .reviews-grid{display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px;}
+    @media (min-width: 980px){ .reviews-grid{grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px} }
+    .rating{display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 14px 16px; border-bottom: 1px solid rgba(234,240,255,.10); background: rgba(255,255,255,.04);}
+    .rating-right{display:flex; align-items:center; gap:10px;}
+    .rating-score{font-weight:950; color: rgba(234,240,255,.85);}
+    .stars{display:inline-flex; gap:2px; color: var(--bolt); filter: drop-shadow(0 10px 22px rgba(251,191,36,.22));}
+    .stars svg{width:16px; height:16px; fill: currentColor}
+    .rating b{font-weight: 950}
+    .loc{font-size: .85rem; color: rgba(234,240,255,.66); font-weight: 800; letter-spacing: .04em; text-transform: uppercase;}
+    .demo-dim{opacity:.85;}
+
+    /* Footer */
+    .footer{padding: 44px 0 32px; border-top: 1px solid rgba(234,240,255,.10); background: rgba(7,10,18,.50);}
+    .footer-grid{display:grid; grid-template-columns: 1fr; gap: 18px;}
+    @media (min-width: 980px){ .footer-grid{grid-template-columns: 1.2fr .8fr .8fr} }
+    .footer h4{margin:0 0 10px; letter-spacing:-0.02em}
+    .footer p{margin:0; color: rgba(234,240,255,.70); font-weight:650}
+    .footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    .footer a{color: rgba(234,240,255,.75); font-weight:800}
+    .footer a:hover{color: var(--ink)}
+    .fine{margin-top: 18px; color: rgba(234,240,255,.56); font-weight:650; font-size: .92rem}
+
+    /* Sticky mobile CTA */
+    .mobile-cta{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(7,10,18,.64);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 26px 70px -54px rgba(0,0,0,.9);
+      transform: translateY(140%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 360ms var(--easeOut), opacity 240ms ease;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+    .mobile-cta.visible{transform: none; opacity: 1; pointer-events: auto;}
+    @media (min-width: 880px){ .mobile-cta{ display:none; } }
+    @media (max-width: 880px){ body{ padding-bottom: 96px; } }
+    @media (prefers-reduced-motion: reduce){ .mobile-cta{ transition:none !important; } }
+  </style>
+</head>
+<body>
+  <!-- Sticky top bar -->
+  <div class="topbar" aria-label="Demo contact bar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="pill"><span class="dot" aria-hidden="true"></span>Same-week availability in <strong>London + area</strong></div>
+        <div class="topbar-actions">
+          <a class="btn btn-small btn-ghost" href="tel:+15195550123">Call (519) 555‑0123</a>
+          <a class="btn btn-small btn-primary" href="../home/index.html#quote">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="../home/index.html" aria-label="NorthBolt Electric">
+          <div class="mark" aria-hidden="true"><span class="bolt"></span></div>
+          <div class="brand-text">
+            <div class="brand-name">NorthBolt Electric</div>
+            <div class="brand-sub">Licensed electricians • Clean installs • Clear quotes</div>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="../home/index.html#services">Services</a>
+          <a href="../home/index.html#pricing">Pricing</a>
+          <a href="#gallery">Work</a>
+          <a href="#proof">Proof</a>
+          <a class="btn btn-primary btn-small" href="../home/index.html#quote">Get a Quote</a>
+        </nav>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="../home/index.html#services">Services</a>
+        <a href="../home/index.html#pricing">Pricing</a>
+        <a href="#gallery">Work</a>
+        <a href="#proof">Proof</a>
+        <a href="../home/index.html#quote">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page hero -->
+  <section class="page-hero" id="top">
+    <div class="container">
+      <div class="panel reveal" style="--reveal-delay: 0ms;">
+        <div class="panel-inner">
+          <div class="tag">Work</div>
+          <h1>Recent work + proof of quality</h1>
+          <p class="lead">For a cleaner homepage, the gallery and proof sections live here. Everything below is demo content using stock photos and sample reviews.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-wide" href="#gallery">View Gallery</a>
+            <a class="btn btn-wide" href="#proof">See Proof</a>
+            <a class="btn btn-wide btn-ghost" href="../home/index.html">Back to Homepage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Recent work</div>
+          <h2>Projects that feel “finished”</h2>
+          <p class="sub">Demo gallery with stock photos. Replace with real job photos + short notes as you complete projects.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="gallery-grid" aria-label="Project gallery">
+        <article class="gallery-card gallery-feature reveal" style="--reveal-delay: 0ms;">
+          <div class="split-media" aria-hidden="true">
+            <div class="split">
+              <span class="label-pill">Before</span>
+              <img src="https://images.unsplash.com/photo-1493267688905-a18e8e437e91?ixlib=rb-4.1.0&auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="split">
+              <span class="label-pill">After</span>
+              <img src="https://images.unsplash.com/photo-1741177364447-f79669c51f12?ixlib=rb-4.1.0&auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="gallery-meta">
+            <div>
+              <p class="gallery-title">Service upgrade + panel refresh</p>
+              <p class="gallery-sub">Old setup → cleaner labeling, safer distribution, and room to grow.</p>
+            </div>
+            <span class="pill2">London</span>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" style="--reveal-delay: 90ms;">
+          <div class="gallery-media">
+            <img src="https://images.unsplash.com/photo-1726471845977-9ebf30dc6822?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80" alt="Electric car charging in a garage (stock photo)" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-meta">
+            <div>
+              <p class="gallery-title">EV charger install</p>
+              <p class="gallery-sub">Tidy conduit run, clean walkthrough, and reliable charging.</p>
+            </div>
+            <span class="pill2">Woodstock</span>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" style="--reveal-delay: 180ms;">
+          <div class="gallery-media">
+            <img src="https://images.unsplash.com/photo-1745242655021-d0b950c8b0da?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80" alt="Recessed lighting in a modern ceiling (stock photo)" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-meta">
+            <div>
+              <p class="gallery-title">Pot lights + dimmers</p>
+              <p class="gallery-sub">Even lighting, clean cuts, and a smoother night mode.</p>
+            </div>
+            <span class="pill2">London</span>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" style="--reveal-delay: 0ms;">
+          <div class="gallery-media">
+            <img src="https://images.unsplash.com/photo-1741388222137-c0d3007ec173?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80" alt="Electrician working on wiring indoors (stock photo)" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-meta">
+            <div>
+              <p class="gallery-title">New circuit + dedicated line</p>
+              <p class="gallery-sub">Stops nuisance trips and makes upgrades straightforward.</p>
+            </div>
+            <span class="pill2">St. Thomas</span>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" style="--reveal-delay: 90ms;">
+          <div class="gallery-media">
+            <img src="https://images.unsplash.com/photo-1759830337357-29c472b6746c?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80" alt="Electrical equipment on a wall (stock photo)" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-meta">
+            <div>
+              <p class="gallery-title">Surge protection add-on</p>
+              <p class="gallery-sub">Adds a strong layer of protection for modern electronics.</p>
+            </div>
+            <span class="pill2">Waterloo</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="fine reveal" style="--reveal-delay: 140ms;">
+        And more: hot tubs + spas, basement renos, smoke/CO detectors, range circuits, appliance hookups, exterior power, and small commercial fixes.
+        <span class="demo-dim">(Demo copy)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section id="proof">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Proof</div>
+          <h2>What customers notice</h2>
+          <p class="sub">A clean job site, clear communication, and electrical work you don’t have to think about again.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card reveal" style="--reveal-delay: 0ms;">
+          <div class="card-inner">
+            <div class="tag">Typical outcomes</div>
+            <h3>Clean installs + fewer surprises</h3>
+            <p>We show up, protect floors, label clearly, and walk you through what changed.</p>
+            <ul class="list">
+              <li>Neat conduit and cable runs</li>
+              <li>Panels labeled properly</li>
+              <li>Photos when useful</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal" style="--reveal-delay: 110ms;">
+          <div class="card-inner">
+            <div class="tag">Coverage</div>
+            <h3>Serving London + nearby</h3>
+            <p>Demo placeholders. Swap for your real service area list.</p>
+            <ul class="list">
+              <li>London</li>
+              <li>St. Thomas</li>
+              <li>Woodstock</li>
+              <li>Waterloo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head section-head-spaced reveal">
+        <div>
+          <div class="tag">Reviews</div>
+          <h2>Google-style reviews (demo)</h2>
+          <p class="sub">Swap these for real reviews once the business has them. Stars are intentionally “warm yellow” for trust.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="card reveal" style="--reveal-delay: 0ms;">
+          <div class="rating">
+            <div>
+              <b>Sarah M.</b>
+              <div class="loc">London</div>
+            </div>
+            <div class="rating-right">
+              <span class="stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+              </span>
+              <span class="rating-score">5.0</span>
+            </div>
+          </div>
+          <div class="card-inner">
+            <p>Explained everything clearly and kept the work area tidy. New lights look amazing.</p>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 90ms;">
+          <div class="rating">
+            <div>
+              <b>Jason K.</b>
+              <div class="loc">Woodstock</div>
+            </div>
+            <div class="rating-right">
+              <span class="stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+              </span>
+              <span class="rating-score">5.0</span>
+            </div>
+          </div>
+          <div class="card-inner">
+            <p>Quick quote, no pressure, clean install. EV charger works perfectly.</p>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 180ms;">
+          <div class="rating">
+            <div>
+              <b>Amina R.</b>
+              <div class="loc">St. Thomas</div>
+            </div>
+            <div class="rating-right">
+              <span class="stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+              </span>
+              <span class="rating-score">5.0</span>
+            </div>
+          </div>
+          <div class="card-inner">
+            <p>Diagnosed the issue fast and gave options. Everything feels safer now.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="fine">Demo content — replace reviews with real Google reviews.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>NorthBolt Electric</h4>
+          <p>Licensed electricians (demo). Clean installs, clear quotes, and fast scheduling for homeowners and small businesses.</p>
+          <div class="fine">Demo site built by Forest City Digital.</div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../home/index.html#services">Services</a></li>
+            <li><a href="#gallery">Work</a></li>
+            <li><a href="#proof">Proof</a></li>
+            <li><a href="../home/index.html#quote">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact (Demo)</h4>
+          <ul>
+            <li><a href="tel:+15195550123">(519) 555‑0123</a></li>
+            <li><a href="mailto:hello@northboltelectric.ca">hello@northboltelectric.ca</a></li>
+            <li><a href="../home/index.html#quote">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta" id="mobileCta" aria-label="Quick actions">
+    <a class="btn btn-wide btn-ghost" href="tel:+15195550123">Call</a>
+    <a class="btn btn-wide btn-primary" href="../home/index.html#quote">Get a Quote</a>
+  </div>
+
+  <script>
+    // Mobile nav
+    (function () {
+      var btn = document.getElementById('mobileToggle');
+      var nav = document.getElementById('mobileNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var next = !nav.classList.contains('active');
+        nav.classList.toggle('active', next);
+        btn.classList.toggle('active', next);
+        btn.setAttribute('aria-expanded', next ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('active');
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Scroll reveals (medium motion)
+    (function () {
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var nodes = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      if (reduce || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (el) { el.classList.add('is-inview'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-inview');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Sticky mobile CTA show/hide
+    (function () {
+      var bar = document.getElementById('mobileCta');
+      if (!bar) return;
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var showY = 220;
+      var last = 0;
+      var ticking = false;
+      function setVisible(v) { bar.classList.toggle('visible', v); }
+      function compute(y) { if (y < showY) return false; return true; }
+      function onScroll() {
+        last = window.pageYOffset || 0;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          setVisible(compute(last));
+        });
+      }
+      function onResize() {
+        showY = window.innerWidth < 520 ? 180 : 220;
+        setVisible(compute(window.pageYOffset || 0));
+      }
+      onResize();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+    })();
+
+    // Topbar collapse (soft upward animation)
+    (function () {
+      var topbar = document.querySelector('.topbar');
+      if (!topbar) return;
+      var docEl = document.documentElement;
+      var headerInner = document.querySelector('.header-inner');
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var expandedH = 0;
+      var headerH = 0;
+      var isCollapsed = false;
+      var lastY = 0;
+      var ticking = false;
+      var threshold = 44;
+      function measure() {
+        expandedH = Math.max(0, Math.ceil(topbar.scrollHeight || 0));
+        headerH = headerInner ? Math.max(0, Math.ceil(headerInner.getBoundingClientRect().height)) : 0;
+        docEl.style.setProperty('--topbar-space', expandedH ? (expandedH + 'px') : '0px');
+        docEl.style.setProperty('--header-h', headerH ? (headerH + 'px') : '0px');
+        docEl.style.setProperty('--topbar-h', isCollapsed ? '0px' : (expandedH + 'px'));
+      }
+      function setState(collapsed) {
+        isCollapsed = collapsed;
+        topbar.classList.toggle('is-collapsed', collapsed);
+        docEl.style.setProperty('--topbar-h', collapsed ? '0px' : (expandedH + 'px'));
+      }
+      function compute(y) {
+        if (reduce) return false;
+        if (!isCollapsed && y > threshold + 14) return true;
+        if (isCollapsed && y < threshold) return false;
+        return isCollapsed;
+      }
+      function onScroll() {
+        lastY = window.pageYOffset || 0;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          setState(compute(lastY));
+        });
+      }
+      function onResize() {
+        measure();
+        setState(compute(window.pageYOffset || 0));
+      }
+      measure();
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+    })();
+  </script>
+</body>
+</html>
+

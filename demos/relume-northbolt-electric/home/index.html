@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthBolt Electric — Licensed Electricians (Demo)</title>
+  <meta name="description" content="NorthBolt Electric — clean, modern electrical services for homes and small businesses. Panel upgrades, EV chargers, lighting, troubleshooting, and more. (Demo site)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1022;
+      --ink:#EAF0FF;
+      --muted:rgba(234,240,255,.74);
+      --muted2:rgba(234,240,255,.60);
+      --line:rgba(234,240,255,.12);
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.08);
+      --shadow: 0 26px 70px -48px rgba(0,0,0,.75);
+      --shadow2: 0 18px 50px -38px rgba(0,0,0,.6);
+      --radius:18px;
+      --radius2:22px;
+      --bolt:#FBBF24;
+      --bolt2:#F59E0B;
+      --blue:#60A5FA;
+      --easeOut:cubic-bezier(.2,.8,.2,1);
+      --easeSmooth:cubic-bezier(.22,1,.36,1);
+      --topbar-space: 52px; /* reserved space above content (measured by JS) */
+      --topbar-h: 52px;     /* live offset for fixed header (measured by JS) */
+      --header-h: 72px;     /* reserved space for header (measured by JS) */
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1000px circle at 16% -10%, rgba(96,165,250,.18), transparent 58%),
+        radial-gradient(900px circle at 86% 0%, rgba(251,191,36,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 60%, #050611 100%);
+      overflow-x:hidden;
+      padding-top: calc(var(--topbar-space, 0px) + var(--header-h, 0px));
+    }
+
+    h1,h2,h3,h4,.brand-name,.name{
+      font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+    @media (min-width: 880px){ .container{padding:0 28px} }
+
+    /* Mobile optimization */
+    @media (max-width: 768px){
+      section{ padding: 46px 0; }
+    }
+    @media (max-width: 520px){
+      section{ padding: 40px 0; }
+      .topbar-inner{ gap: 10px; padding: 10px 0; }
+      .topbar .pill{ white-space: normal; line-height: 1.25; }
+      .topbar-actions{ gap: 8px; }
+      .btn{ padding: 11px 12px; }
+      .btn-wide{ padding: 13px 14px; }
+      .hero{ padding: 44px 0 34px; }
+      .panel-inner{ padding: 18px; }
+      .trust .t{ width: 100%; justify-content: flex-start; }
+      .section-head{ gap: 10px; margin-bottom: 16px; }
+      .rule{ transform: translateY(-6px); min-width: 120px; }
+      .gallery-meta{ flex-direction: column; align-items: flex-start; }
+      .pill2{ margin-top: 6px; }
+      .pricing-grid{ gap: 12px; }
+      .reviews-grid{ gap: 12px; }
+    }
+
+    /* Ensure content not covered by mobile CTA */
+    @media (max-width: 880px){
+      body{ padding-bottom: 96px; }
+    }
+
+    section{
+      scroll-margin-top: calc(var(--topbar-space, 0px) + var(--header-h, 0px) + 16px);
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      filter: blur(2px);
+      transition: opacity 650ms ease, transform 750ms var(--easeOut), filter 650ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: transform, opacity;
+    }
+    .reveal.is-inview{opacity:1; transform:none; filter:none;}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1 !important; transform:none !important; filter:none !important; transition:none !important;}
+      .topbar,
+      .header{
+        transition: none !important;
+      }
+      .topbar.is-collapsed{ transform: none; }
+    }
+
+    /* Top utility bar (demo placeholders) */
+    .topbar{
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index: 50;
+      background: rgba(7,10,18,.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      max-height: 140px;
+      overflow: hidden;
+      transform: translateY(0);
+      opacity: 1;
+      transition:
+        max-height 300ms var(--easeOut),
+        opacity 220ms ease,
+        transform 300ms var(--easeOut),
+        border-color 260ms ease;
+      will-change: max-height, opacity, transform;
+    }
+    .topbar.is-collapsed{
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      border-bottom-color: transparent;
+      pointer-events: none;
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px 0;
+      font-weight:700;
+      color: rgba(234,240,255,.78);
+    }
+    .topbar strong{color:var(--ink)}
+    .topbar .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(234,240,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 14px 34px -28px rgba(0,0,0,.8);
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--bolt));
+      box-shadow: 0 0 0 6px rgba(251,191,36,.16);
+      flex:0 0 auto;
+    }
+    .topbar-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+
+    /* Header */
+    .header{
+      position: fixed;
+      top: var(--topbar-h, 0px);
+      left:0;
+      right:0;
+      z-index: 40;
+      background: rgba(7,10,18,.60);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      transition: top 240ms var(--easeOut);
+      will-change: top;
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding: 14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .mark{
+      width:40px; height:40px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(251,191,36,.96), rgba(96,165,250,.82));
+      box-shadow: 0 22px 60px -46px rgba(251,191,36,.55), 0 26px 70px -52px rgba(96,165,250,.35);
+      display:grid; place-items:center;
+      border: 1px solid rgba(255,255,255,.22);
+      position: relative;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .mark::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(circle at 70% 90%, rgba(255,255,255,.22), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .bolt{
+      width:18px; height:18px; position:relative; z-index:1;
+      background: currentColor;
+      color: rgba(7,10,18,.92);
+      clip-path: polygon(45% 0%, 70% 0%, 54% 42%, 78% 42%, 34% 100%, 46% 56%, 22% 56%);
+      transform: rotate(-10deg);
+    }
+    .brand-text{display:flex; flex-direction:column; min-width:0}
+    .brand-name{
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-size: 1.1rem;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand-sub{font-size:.82rem; color: rgba(234,240,255,.65); font-weight:700; margin-top:1px}
+
+    .nav{display:none}
+    .nav a{color: rgba(234,240,255,.78); font-weight:800; font-size:.98rem; position:relative}
+    .nav a:hover{color: var(--ink)}
+    .nav a::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:-6px;
+      height:2px;
+      background: linear-gradient(90deg, rgba(251,191,36,.95), rgba(96,165,250,.7));
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform 240ms var(--easeOut);
+      border-radius: 999px;
+      opacity:.9;
+    }
+    .nav a:hover::after{transform: scaleX(1)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      box-shadow: 0 18px 48px -40px rgba(0,0,0,.9);
+      transition: transform 220ms var(--easeOut), background 220ms ease, border-color 220ms ease, box-shadow 220ms var(--easeOut);
+      will-change: transform;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.09); border-color: rgba(234,240,255,.22)}
+    .btn:active{transform: translateY(0) scale(.99)}
+    .btn-primary{
+      border: 1px solid rgba(251,191,36,.30);
+      background: linear-gradient(135deg, rgba(251,191,36,.96), rgba(96,165,250,.72));
+      color: rgba(7,10,18,.92);
+      box-shadow: 0 22px 60px -44px rgba(251,191,36,.55), 0 26px 70px -52px rgba(96,165,250,.35);
+    }
+    .btn-primary:hover{box-shadow: 0 28px 78px -56px rgba(251,191,36,.65), 0 30px 90px -62px rgba(96,165,250,.42)}
+
+    .btn-ghost{
+      background: rgba(255,255,255,.04);
+    }
+    .btn-small{padding: 10px 12px; border-radius: 12px; font-size:.95rem}
+    .btn-wide{padding: 14px 16px}
+
+    .mobile-toggle{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(255,255,255,.06);
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:4px;
+    }
+    .mobile-toggle span{
+      width:18px; height:2px; background: rgba(234,240,255,.84);
+      display:block;
+      border-radius: 999px;
+      transition: transform 240ms var(--easeOut), opacity 240ms ease;
+    }
+    .mobile-toggle.active span:nth-child(1){transform: translateY(6px) rotate(45deg)}
+    .mobile-toggle.active span:nth-child(2){opacity:0}
+    .mobile-toggle.active span:nth-child(3){transform: translateY(-6px) rotate(-45deg)}
+
+    .mobile-nav{
+      display:none;
+      border-top:1px solid rgba(234,240,255,.10);
+      padding: 12px 0 16px;
+    }
+    .mobile-nav.active{display:block}
+    .mobile-nav a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: rgba(234,240,255,.80);
+      font-weight: 900;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(234,240,255,.10);
+      margin-top: 10px;
+    }
+    .mobile-nav a:hover{background: rgba(255,255,255,.07); color: var(--ink)}
+
+    @media (min-width: 880px){
+      .nav{display:flex; gap:18px; align-items:center}
+      .mobile-toggle{display:none}
+      .mobile-nav{display:none !important}
+    }
+
+    /* Hero */
+    .hero{
+      position: relative;
+      padding: 52px 0 40px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(900px circle at 18% 0%, rgba(96,165,250,.18), transparent 55%),
+        radial-gradient(1000px circle at 88% 10%, rgba(251,191,36,.20), transparent 58%),
+        repeating-linear-gradient(90deg, rgba(234,240,255,.08), rgba(234,240,255,.08) 1px, transparent 1px, transparent 52px),
+        repeating-linear-gradient(0deg, rgba(234,240,255,.06), rgba(234,240,255,.06) 1px, transparent 1px, transparent 52px);
+      opacity: .32;
+      pointer-events:none;
+      transform: translate3d(0,0,0);
+      animation: gridDrift 18s ease-in-out infinite;
+    }
+    @keyframes gridDrift{ 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-10px,0)} }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width: 980px){
+      .hero-grid{grid-template-columns: 1.15fr .85fr; gap: 24px}
+    }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 52%);
+      opacity: .75;
+      pointer-events:none;
+    }
+    .panel-inner{position:relative; z-index:1; padding: 22px}
+    @media (min-width: 980px){ .panel-inner{padding: 26px} }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(234,240,255,.78);
+    }
+    .kicker .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,240,255,.12);
+      background: rgba(255,255,255,.06);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      letter-spacing: -0.04em;
+      line-height: 1.03;
+      font-size: clamp(2.1rem, 4.8vw, 3.2rem);
+    }
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 62ch;
+      font-weight: 650;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top: 18px}
+    .note{
+      margin-top: 14px;
+      color: var(--muted2);
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .trust{
+      margin-top: 18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+    .trust .t{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,240,255,.12);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.78);
+      font-weight: 800;
+      font-size: .92rem;
+    }
+    .check{
+      width: 18px; height: 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(251,191,36,.28);
+      background: rgba(251,191,36,.14);
+      display:inline-grid; place-items:center;
+      color: rgba(251,191,36,.95);
+      flex:0 0 auto;
+    }
+    .check svg{width: 12px; height: 12px; fill:none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;}
+
+    /* Quote card */
+    .quote-title{margin:0; font-size: 1.05rem; letter-spacing:-0.02em}
+    .quote-sub{margin: 6px 0 0; color: var(--muted2); font-weight: 650}
+    .quick-grid{margin-top: 14px; display:grid; gap:10px}
+    .field{
+      width:100%;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+      outline:none;
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--easeOut);
+    }
+    .field::placeholder{color: rgba(234,240,255,.55); font-weight: 650}
+    .field:focus{
+      border-color: rgba(96,165,250,.40);
+      box-shadow: 0 0 0 6px rgba(96,165,250,.12);
+    }
+    textarea.field{min-height: 110px; resize: vertical}
+    .help{color: rgba(234,240,255,.56); font-weight: 650; font-size: .9rem; margin-top: 10px}
+
+    /* Sections */
+    section{padding: 54px 0}
+    .section-head{
+      display:flex; align-items:flex-end; gap: 14px; flex-wrap:wrap;
+      margin-bottom: 18px;
+    }
+    .tag{
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.66);
+    }
+    .rule{
+      flex:1;
+      height:1px;
+      background:
+        radial-gradient(circle, rgba(251,191,36,.45) 0 2px, transparent 3px) 0 50% / 26px 2px repeat-x,
+        linear-gradient(90deg, rgba(234,240,255,.18), rgba(234,240,255,0));
+      transform: translateY(-10px);
+      min-width: 160px;
+    }
+    h2{
+      margin: 6px 0 0;
+      font-size: clamp(1.65rem, 3.4vw, 2.15rem);
+      letter-spacing: -0.03em;
+    }
+    .sub{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-weight: 650;
+      max-width: 78ch;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 880px){ .grid3{grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px} }
+
+    .worklink-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .worklink-inner h3{ margin: 10px 0 6px; }
+    .worklink-inner p{ margin: 0; color: rgba(234,240,255,.70); font-weight:650; }
+
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position: relative;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, transparent 55%);
+      opacity: .8;
+      pointer-events:none;
+    }
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(251,191,36,.22);
+      box-shadow: 0 28px 78px -60px rgba(0,0,0,.85);
+    }
+    .card-inner{position:relative; z-index:1; padding: 16px}
+    .card h3{margin: 10px 0 6px; font-size: 1.2rem; letter-spacing:-0.02em}
+    .card p{margin:0; color: var(--muted); font-weight: 650}
+    .ico{
+      width: 46px; height: 46px;
+      border-radius: 16px;
+      border: 1px solid rgba(251,191,36,.22);
+      background: linear-gradient(135deg, rgba(251,191,36,.18), rgba(96,165,250,.12));
+      display:grid; place-items:center;
+      color: rgba(251,191,36,.95);
+      box-shadow: 0 22px 60px -54px rgba(251,191,36,.55);
+    }
+    .ico svg{width: 22px; height: 22px; fill:none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 980px){ .two-col{grid-template-columns: 1.05fr .95fr; gap: 16px} }
+
+    /* Gallery */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 880px){ .gallery-grid{grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px} }
+
+    .gallery-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position: relative;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+    }
+    .gallery-card::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, transparent 55%);
+      opacity: .72;
+      pointer-events:none;
+    }
+    .gallery-card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(251,191,36,.22);
+      box-shadow: 0 28px 78px -60px rgba(0,0,0,.85);
+    }
+    .gallery-media{
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow:hidden;
+      background: linear-gradient(135deg, rgba(251,191,36,.10), rgba(96,165,250,.10));
+      border-bottom: 1px solid rgba(234,240,255,.10);
+    }
+    .gallery-media::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(7,10,18,0) 35%, rgba(7,10,18,.30) 100%);
+      opacity: .85;
+      pointer-events:none;
+    }
+    .gallery-media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 650ms var(--easeOut);
+      will-change: transform;
+    }
+    .gallery-card:hover .gallery-media img{ transform: scale(1.06); }
+
+    .gallery-meta{
+      position: relative;
+      z-index: 1;
+      padding: 14px 16px 14px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .gallery-title{
+      margin: 0;
+      font-size: 1.12rem;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+    .gallery-sub{
+      margin-top: 6px;
+      color: rgba(234,240,255,.74);
+      font-weight: 650;
+      font-size: .95rem;
+    }
+    .pill2{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,240,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(234,240,255,.78);
+      font-weight: 900;
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+
+    .gallery-feature{
+      grid-column: 1 / -1;
+    }
+    @media (min-width: 880px){
+      .gallery-feature{ grid-column: span 2; }
+    }
+    .split-media{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      aspect-ratio: 16 / 9;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .split{
+      position: relative;
+      overflow:hidden;
+    }
+    .split img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 650ms var(--easeOut);
+      will-change: transform;
+    }
+    .gallery-card:hover .split img{ transform: scale(1.06); }
+    .split::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(7,10,18,0) 35%, rgba(7,10,18,.30) 100%);
+      opacity: .85;
+      pointer-events:none;
+    }
+    .label-pill{
+      position:absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,240,255,.16);
+      background: rgba(7,10,18,.55);
+      color: rgba(234,240,255,.86);
+      font-weight: 950;
+      font-size: .86rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding: 0 0 0 18px;
+      color: rgba(234,240,255,.76);
+      font-weight: 700;
+    }
+    .list li{margin: 7px 0}
+
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    @media (min-width: 980px){ .steps{grid-template-columns: repeat(4, minmax(0, 1fr));} }
+
+    .step{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      padding: 14px;
+      position: relative;
+      overflow:hidden;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+      box-shadow: 0 18px 44px -38px rgba(0,0,0,.7);
+    }
+    .step:hover{transform: translateY(-3px); border-color: rgba(96,165,250,.22); box-shadow: 0 26px 70px -56px rgba(0,0,0,.85)}
+    .num{
+      display:grid;
+      place-items:center;
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: rgba(234,240,255,.92);
+      box-shadow: none;
+    }
+    .num img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 34px rgba(0,0,0,.45));
+      transform: translateY(0.25px);
+    }
+    .step strong{display:block; margin-top: 10px; font-size: 1.02rem; letter-spacing:-0.02em}
+    .step span{display:block; margin-top: 6px; color: var(--muted); font-weight: 650}
+
+    /* Reviews */
+    .reviews-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 980px){ .reviews-grid{grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px} }
+
+    /* Pricing */
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 980px){ .pricing-grid{grid-template-columns: 1fr 1fr; gap: 16px;} }
+    .price-panel{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position: relative;
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+    }
+    .price-panel::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, transparent 55%);
+      opacity: .72;
+      pointer-events:none;
+    }
+    .price-panel:hover{
+      transform: translateY(-4px);
+      border-color: rgba(96,165,250,.22);
+      box-shadow: 0 28px 78px -60px rgba(0,0,0,.85);
+    }
+    .price-row{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px dashed rgba(234,240,255,.16);
+    }
+    .price-row:last-child{border-bottom:0}
+    .price-row strong{display:block; font-weight: 950; letter-spacing:-0.02em}
+    .desc{margin-top: 6px; color: var(--muted); font-weight: 650; font-size: .95rem}
+    .money{
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      color: rgba(234,240,255,.92);
+      padding-top: 2px;
+    }
+    .pricing-note{
+      margin-top: 10px;
+      color: rgba(234,240,255,.62);
+      font-weight: 650;
+      font-size: .95rem;
+    }
+
+    .rating{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(234,240,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .stars{display:inline-flex; gap:2px; color: var(--bolt); filter: drop-shadow(0 10px 22px rgba(251,191,36,.22));}
+    .stars svg{width:16px; height:16px; fill: currentColor}
+    .rating b{font-weight: 950}
+    .loc{
+      font-size: .85rem;
+      color: rgba(234,240,255,.66);
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    details.faq{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(234,240,255,.12);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: 0 18px 44px -38px rgba(0,0,0,.72);
+      transition: transform 240ms var(--easeOut), box-shadow 240ms var(--easeOut), border-color 240ms ease;
+      overflow:hidden;
+    }
+    details.faq:hover{transform: translateY(-2px); border-color: rgba(251,191,36,.20); box-shadow: 0 24px 62px -52px rgba(0,0,0,.82)}
+    details.faq + details.faq{margin-top: 12px}
+    details.faq summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+      color: rgba(234,240,255,.92);
+      transition: color 180ms ease;
+    }
+    details.faq summary::-webkit-details-marker{display:none}
+    details.faq summary::after{
+      content:"+";
+      font-weight: 950;
+      color: rgba(234,240,255,.75);
+      transition: transform 240ms var(--easeOut), color 180ms ease;
+    }
+    details.faq[open] summary::after{transform: rotate(45deg)}
+    details.faq[open]{
+      transform: translateY(-1px);
+      border-color: rgba(96,165,250,.22);
+      box-shadow: 0 30px 78px -66px rgba(0,0,0,.92);
+    }
+    .faq-body{
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 650;
+      max-height: 0;
+      overflow:hidden;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height 520ms var(--easeSmooth), opacity 240ms ease, transform 520ms var(--easeSmooth);
+      will-change: max-height, opacity, transform;
+    }
+    details.faq[open] .faq-body{max-height: 260px; opacity:1; transform:none}
+
+    /* Footer */
+    .footer{
+      padding: 44px 0 32px;
+      border-top: 1px solid rgba(234,240,255,.10);
+      background: rgba(7,10,18,.50);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 980px){ .footer-grid{grid-template-columns: 1.2fr .8fr .8fr} }
+    .footer h4{margin:0 0 10px; letter-spacing:-0.02em}
+    .footer p{margin:0; color: rgba(234,240,255,.70); font-weight:650}
+    .footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    .footer a{color: rgba(234,240,255,.75); font-weight:800}
+    .footer a:hover{color: var(--ink)}
+    .fine{margin-top: 18px; color: rgba(234,240,255,.56); font-weight:650; font-size: .92rem}
+
+    /* Sticky mobile CTA */
+    .mobile-cta{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(234,240,255,.14);
+      background: rgba(7,10,18,.64);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 26px 70px -54px rgba(0,0,0,.9);
+      transform: translateY(140%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 360ms var(--easeSmooth), opacity 260ms ease;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    }
+    .mobile-cta.visible{
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-cta a{
+      width: 100%;
+      text-align:center;
+      justify-content:center;
+    }
+    @media (min-width: 880px){
+      .mobile-cta{ display:none; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .mobile-cta{ transition:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky top bar -->
+  <div class="topbar" aria-label="Demo contact bar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="pill"><span class="dot" aria-hidden="true"></span>Same-week availability in <strong>London + area</strong></div>
+        <div class="topbar-actions">
+          <a class="btn btn-small btn-ghost" href="tel:+15195550123">Call (519) 555‑0123</a>
+          <a class="btn btn-small btn-primary" href="#quote">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand" aria-label="NorthBolt Electric">
+          <div class="mark" aria-hidden="true"><span class="bolt"></span></div>
+          <div class="brand-text">
+            <div class="brand-name">NorthBolt Electric</div>
+            <div class="brand-sub">Licensed electricians • Clean installs • Clear quotes</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="../work/index.html">Work</a>
+          <a href="#process">Process</a>
+          <a href="#faq">FAQ</a>
+          <a class="btn btn-primary btn-small" href="#quote">Get a Quote</a>
+        </nav>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="../work/index.html">Work</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#quote">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="panel reveal" style="--reveal-delay: 0ms;">
+          <div class="panel-inner">
+            <div class="kicker">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Residential + small business</span>
+              <span class="chip">London • St. Thomas • Woodstock</span>
+            </div>
+
+            <h1>Electrical work that feels easy—because it’s done right.</h1>
+            <p class="lead">
+              Fast scheduling, tidy workmanship, and clear quotes for homeowners and small businesses.
+              From panel upgrades to EV chargers and lighting—NorthBolt keeps it simple.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-wide" href="#quote">Get a Quote</a>
+              <a class="btn btn-wide" href="#services">See Services</a>
+              <a class="btn btn-wide btn-ghost" href="tel:+15195550123">Call Now</a>
+            </div>
+
+            <div class="note">Demo placeholders • Replace phone/email + service areas for a real business.</div>
+
+            <div class="trust" aria-label="Trust strip">
+              <span class="t">
+                <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                ESA-style safety mindset
+              </span>
+              <span class="t">
+                <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                Neat installs + cleanup
+              </span>
+              <span class="t">
+                <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                Transparent pricing
+              </span>
+              <span class="t">
+                <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                Same-week availability
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel reveal" style="--reveal-delay: 120ms;" aria-label="Quick quote form">
+          <div class="panel-inner">
+            <h2 class="quote-title">Quick Quote Request</h2>
+            <p class="quote-sub">Tell us what you need—get a clear next step.</p>
+
+            <form class="quick-grid" id="quote" onsubmit="return false;">
+              <input class="field" type="text" placeholder="Name (demo)" />
+              <input class="field" type="text" placeholder="Phone or email (demo)" />
+              <input class="field" type="text" placeholder="City (London, St. Thomas…)" />
+              <textarea class="field" placeholder="What do you need? (EV charger, panel upgrade, lights...)"></textarea>
+              <button class="btn btn-primary btn-wide" type="button" id="demoSend">Send request</button>
+              <div class="help">Demo form — connect to your real contact form later.</div>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Services</div>
+          <h2>Common electrical services</h2>
+          <p class="sub">Clear, homeowner-friendly work with fast scheduling and tidy finishes.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="grid3">
+        <article class="card reveal" style="--reveal-delay: 0ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10v6H7z"/><path d="M6 10h12v12H6z"/><path d="M9 14h6"/><path d="M9 18h6"/></svg></div>
+            <h3>Panel upgrades</h3>
+            <p>Safer capacity, cleaner wiring, and clearer labeling—done neatly.</p>
+            <ul class="list">
+              <li>100A → 200A upgrades</li>
+              <li>Breaker replacements</li>
+              <li>Code-minded installs</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 90ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v10"/><path d="M9 5h6"/><path d="M8 22h8"/><path d="M10 22v-6a2 2 0 0 1 4 0v6"/></svg></div>
+            <h3>Lighting installs</h3>
+            <p>Pot lights, fixtures, dimmers, and exterior lighting that looks sharp.</p>
+            <ul class="list">
+              <li>Kitchen + living areas</li>
+              <li>Outdoor security lights</li>
+              <li>Smart dimmers</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 180ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7h10v10H7z"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg></div>
+            <h3>EV charger installs</h3>
+            <p>Level 2 charger setup, tidy conduit runs, and reliable performance.</p>
+            <ul class="list">
+              <li>Garage + exterior installs</li>
+              <li>Load considerations</li>
+              <li>Clean walkthrough</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 0ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M6 7h12"/><path d="M8 17h8"/><path d="M12 3v18"/></svg></div>
+            <h3>Outlets & switches</h3>
+            <p>New outlets, GFCI protection, smart switches, and troubleshooting.</p>
+            <ul class="list">
+              <li>GFCI / AFCI where needed</li>
+              <li>USB outlets</li>
+              <li>Switch rewires</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 90ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-6 4 2 7-5-4-5 4 2-7-6-4h7z"/></svg></div>
+            <h3>Surge protection</h3>
+            <p>Protect sensitive electronics with whole-home surge solutions.</p>
+            <ul class="list">
+              <li>Panel-mounted surge</li>
+              <li>Home office protection</li>
+              <li>Peace of mind</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 180ms;">
+          <div class="card-inner">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v6"/><path d="M9 7h6"/><path d="M7 22h10"/><path d="M8 12a4 4 0 1 1 8 0c0 2-1 3-2 4s-1 2-1 3h-2c0-1 0-2-1-3s-2-2-2-4z"/></svg></div>
+            <h3>Troubleshooting</h3>
+            <p>Flickering lights, breakers tripping, dead circuits—diagnose and fix.</p>
+            <ul class="list">
+              <li>Clear explanations</li>
+              <li>Options + quote first</li>
+              <li>Safe repairs</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work (moved to a dedicated page) -->
+  <section id="worklink">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Work</div>
+          <h2>See recent work + proof</h2>
+          <p class="sub">The gallery + proof section now live on a separate page for a cleaner homepage experience.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="card reveal" style="--reveal-delay: 90ms;">
+        <div class="card-inner worklink-inner">
+          <div>
+            <div class="tag">Demo</div>
+            <h3>Recent Work & Proof</h3>
+            <p>Stock gallery cards, proof outcomes, and demo reviews — all in one place.</p>
+          </div>
+          <a class="btn btn-primary btn-wide" href="../work/index.html">View Work Page</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Pricing</div>
+          <h2>Transparent starting prices (demo)</h2>
+          <p class="sub">These are example ranges for a demo electrician site. A real business should quote based on scope and home conditions.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-panel reveal" style="--reveal-delay: 0ms;">
+          <div class="price-row">
+            <div>
+              <strong>Diagnostic visit</strong>
+              <div class="desc">On-site diagnosis + clear options</div>
+            </div>
+            <div class="money">$129</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Outlet / switch replacement</strong>
+              <div class="desc">Common swap + safety checks</div>
+            </div>
+            <div class="money">$99+</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Pot lights</strong>
+              <div class="desc">Per light (typical install)</div>
+            </div>
+            <div class="money">$149/ea+</div>
+          </div>
+        </div>
+
+        <div class="price-panel reveal" style="--reveal-delay: 110ms;">
+          <div class="price-row">
+            <div>
+              <strong>EV charger install</strong>
+              <div class="desc">Level 2 setup (typical)</div>
+            </div>
+            <div class="money">$799+</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Whole-home surge protection</strong>
+              <div class="desc">Panel-mounted protection</div>
+            </div>
+            <div class="money">$349+</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Panel upgrade</strong>
+              <div class="desc">Common residential upgrade range</div>
+            </div>
+            <div class="money">$1,999+</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-note">Friendly note: final price depends on your home and the scope — we quote before work begins.</div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">Process</div>
+          <h2>Simple, stress-free scheduling</h2>
+          <p class="sub">Clear steps. Friendly communication. Clean job sites.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal" style="--reveal-delay: 0ms;">
+          <span class="num" aria-hidden="true"><img src="../../../assets/NorthBolt Electric/number-1.png" alt="" loading="lazy" decoding="async"></span>
+          <strong>Tell us what you need</strong>
+          <span>Message, call, or use the quick quote form.</span>
+        </div>
+        <div class="step reveal" style="--reveal-delay: 90ms;">
+          <span class="num" aria-hidden="true"><img src="../../../assets/NorthBolt Electric/number-2.png" alt="" loading="lazy" decoding="async"></span>
+          <strong>We diagnose + quote</strong>
+          <span>Clear options before any work begins.</span>
+        </div>
+        <div class="step reveal" style="--reveal-delay: 180ms;">
+          <span class="num" aria-hidden="true"><img src="../../../assets/NorthBolt Electric/number-3.png" alt="" loading="lazy" decoding="async"></span>
+          <strong>We do the work</strong>
+          <span>Neat installs, protected floors, labeled circuits.</span>
+        </div>
+        <div class="step reveal" style="--reveal-delay: 270ms;">
+          <span class="num" aria-hidden="true"><img src="../../../assets/NorthBolt Electric/number-4.png" alt="" loading="lazy" decoding="async"></span>
+          <strong>Walkthrough + cleanup</strong>
+          <span>You know what changed and what to expect next.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="tag">FAQ</div>
+          <h2>Quick answers</h2>
+          <p class="sub">Honest info so homeowners feel confident booking.</p>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </div>
+
+      <details class="faq reveal" style="--reveal-delay: 0ms;">
+        <summary>Do you quote before work starts?</summary>
+        <div class="faq-body">Always. You’ll get a clear quote (and options) before we begin any work.</div>
+      </details>
+      <details class="faq reveal" style="--reveal-delay: 90ms;">
+        <summary>How fast can you book?</summary>
+        <div class="faq-body">We aim for same-week scheduling when possible, and we prioritize urgent safety issues.</div>
+      </details>
+      <details class="faq reveal" style="--reveal-delay: 180ms;">
+        <summary>Do you do commercial work?</summary>
+        <div class="faq-body">This demo is written for residential + small business. You can expand it to full commercial services anytime.</div>
+      </details>
+      <details class="faq reveal" style="--reveal-delay: 270ms;">
+        <summary>Do you install EV chargers?</summary>
+        <div class="faq-body">Yes—Level 2 installs with neat conduit runs and a clear walkthrough when we’re done.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>NorthBolt Electric</h4>
+          <p>Licensed electricians (demo). Clean installs, clear quotes, and fast scheduling for homeowners and small businesses.</p>
+          <div class="fine">Demo site built by Forest City Digital.</div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="../work/index.html">Work</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact (Demo)</h4>
+          <ul>
+            <li><a href="tel:+15195550123">(519) 555‑0123</a></li>
+            <li><a href="mailto:hello@northboltelectric.ca">hello@northboltelectric.ca</a></li>
+            <li><a href="#quote">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta" id="mobileCta" aria-label="Quick actions">
+    <a class="btn btn-wide btn-ghost" href="tel:+15195550123">Call</a>
+    <a class="btn btn-wide btn-primary" href="#quote">Get a Quote</a>
+  </div>
+
+  <script>
+    // Mobile nav
+    (function () {
+      var btn = document.getElementById('mobileToggle');
+      var nav = document.getElementById('mobileNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var next = !nav.classList.contains('active');
+        nav.classList.toggle('active', next);
+        btn.classList.toggle('active', next);
+        btn.setAttribute('aria-expanded', next ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('active');
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Demo send button
+    (function () {
+      var b = document.getElementById('demoSend');
+      if (!b) return;
+      b.addEventListener('click', function () {
+        b.textContent = 'Sent (demo)';
+        b.disabled = true;
+        setTimeout(function () {
+          b.textContent = 'Send request';
+          b.disabled = false;
+        }, 1600);
+      });
+    })();
+
+    // FAQ accordion (only one open at a time)
+    (function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('details.faq'));
+      if (!items.length) return;
+
+      items.forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          if (!d.open) return;
+          items.forEach(function (other) {
+            if (other !== d) other.open = false;
+          });
+        });
+      });
+    })();
+
+    // Scroll reveals (medium motion)
+    (function () {
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var nodes = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      if (reduce || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (el) { el.classList.add('is-inview'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-inview');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Sticky mobile CTA show/hide
+    (function () {
+      var bar = document.getElementById('mobileCta');
+      if (!bar) return;
+
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+      var showY = 220;
+      var last = 0;
+      var ticking = false;
+
+      function setVisible(v) {
+        bar.classList.toggle('visible', v);
+      }
+
+      function compute(y) {
+        // hide near top; show once the hero has passed
+        if (y < showY) return false;
+        return true;
+      }
+
+      function onScroll() {
+        last = window.pageYOffset || 0;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          setVisible(compute(last));
+        });
+      }
+
+      function onResize() {
+        // small devices: lower threshold slightly
+        showY = window.innerWidth < 520 ? 180 : 220;
+        setVisible(compute(window.pageYOffset || 0));
+      }
+
+      if (reduce) {
+        // still show/hide, just no motion (CSS handles)
+        onResize();
+      } else {
+        onResize();
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+    })();
+
+    // Topbar collapse (soft upward animation)
+    (function () {
+      var topbar = document.querySelector('.topbar');
+      if (!topbar) return;
+
+      var docEl = document.documentElement;
+      var headerInner = document.querySelector('.header-inner');
+      var reduce = false;
+      try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+      var expandedH = 0;
+      var headerH = 0;
+      var isCollapsed = false;
+      var lastY = 0;
+      var ticking = false;
+      var threshold = 44;
+
+      function measure() {
+        // Use scrollHeight so we can measure even when collapsed.
+        expandedH = Math.max(0, Math.ceil(topbar.scrollHeight || 0));
+        headerH = headerInner ? Math.max(0, Math.ceil(headerInner.getBoundingClientRect().height)) : 0;
+
+        // Reserve space once (prevents layout shifts/jitter).
+        docEl.style.setProperty('--topbar-space', expandedH ? (expandedH + 'px') : '0px');
+        docEl.style.setProperty('--header-h', headerH ? (headerH + 'px') : '0px');
+
+        // Live header offset.
+        docEl.style.setProperty('--topbar-h', isCollapsed ? '0px' : (expandedH + 'px'));
+      }
+
+      function setState(collapsed) {
+        isCollapsed = collapsed;
+        topbar.classList.toggle('is-collapsed', collapsed);
+        docEl.style.setProperty('--topbar-h', collapsed ? '0px' : (expandedH + 'px'));
+      }
+
+      function compute(y) {
+        if (reduce) return false;
+        if (!isCollapsed && y > threshold + 14) return true;
+        if (isCollapsed && y < threshold) return false;
+        return isCollapsed;
+      }
+
+      function onScroll() {
+        lastY = window.pageYOffset || 0;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          setState(compute(lastY));
+        });
+      }
+
+      function onResize() {
+        measure();
+        setState(compute(window.pageYOffset || 0));
+      }
+
+      measure();
+      onScroll();
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+    })();
+  </script>
+</body>
+</html>

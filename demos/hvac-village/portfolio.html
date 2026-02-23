@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HVAC Village — our work, mission, and what you can expect.">
+    <title>HVAC Village — Portfolio</title>
+
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0B1B3A;
+            --primary-color-dark: #07122a;
+            --primary-color-rgb: 11, 27, 58;
+            --accent-color: #1D4ED8;
+            --accent-color-light: #06B6D4;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-primary: 'Inter', sans-serif;
+
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+            --panel-bg: rgba(255,255,255,0.86);
+            --panel-border: rgba(var(--primary-color-rgb), 0.12);
+            --panel-shadow: 0 22px 56px -44px rgba(11,27,58,0.44);
+        }
+
+        body {
+            background:
+                radial-gradient(900px circle at 20% 0%, rgba(6, 182, 212, 0.10), transparent 55%),
+                radial-gradient(900px circle at 85% 10%, rgba(29, 78, 216, 0.10), transparent 58%),
+                linear-gradient(180deg, #f4f7ff 0%, #ffffff 40%, #ffffff 100%);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(2px);
+            transition:
+                opacity 600ms ease,
+                transform 700ms var(--ease-out),
+                filter 650ms ease;
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: transform, opacity;
+        }
+        .reveal.is-inview {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .header { top: var(--sticky-cta-height, 56px); transition: top 240ms var(--ease-out); }
+        .sticky-cta {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            max-height: 260px;
+            opacity: 1;
+            transform: translateY(0);
+            overflow: hidden;
+            transition:
+                max-height 260ms var(--ease-out),
+                padding 260ms var(--ease-out),
+                opacity 220ms ease,
+                transform 260ms var(--ease-out),
+                border-color 260ms ease,
+                box-shadow 260ms ease;
+            will-change: max-height, transform, opacity;
+        }
+        .sticky-cta.scrolled {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            border-bottom-color: transparent;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+            .page-hero::before {
+                animation: none !important;
+            }
+            .sticky-cta,
+            .header {
+                transition: none !important;
+            }
+            .sticky-cta.scrolled {
+                transform: none;
+            }
+        }
+
+        .btn.btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 10px 30px rgba(29, 78, 216, 0.18), 0 16px 40px rgba(6, 182, 212, 0.12);
+        }
+
+        .btn.btn-secondary {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            color: var(--primary-color);
+        }
+        .btn {
+            transition:
+                transform 220ms var(--ease-out),
+                box-shadow 220ms var(--ease-out),
+                background 220ms ease,
+                color 220ms ease,
+                border-color 220ms ease;
+            will-change: transform;
+        }
+        .btn:active { transform: translateY(0) scale(0.99); }
+
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-mark {
+            width: 38px; height: 38px; border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
+            box-shadow: 0 14px 34px rgba(29, 78, 216, 0.22), 0 18px 44px rgba(6, 182, 212, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.40);
+            display: inline-flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; flex: 0 0 auto;
+        }
+        .logo-mark::after {
+            content: ""; position: absolute; inset: -40%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.50), transparent 55%),
+                radial-gradient(circle at 70% 90%, rgba(255,255,255,0.25), transparent 60%);
+            opacity: 0.7; pointer-events: none;
+        }
+        .logo-mark span { position: relative; z-index: 1; font-weight: 900; letter-spacing: -0.06em; color: rgba(255,255,255,0.96); font-size: 14px; }
+        .logo-word { display: flex; flex-direction: column; line-height: 1.05; }
+        .logo-word a { font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.02em; color: var(--primary-color); }
+        .logo-sub { font-size: 12px; font-weight: 700; color: rgba(15,23,42,0.62); margin-top: 2px; }
+        @media (max-width: 520px) { .logo-sub { display: none; } }
+
+        @media (max-width: 768px) {
+            .header-content { padding: 12px 0; }
+            .logo { gap: 10px; min-width: 0; }
+            .logo-mark { width: 34px; height: 34px; border-radius: 11px; }
+            .logo-mark span { font-size: 13px; }
+            .logo-word { min-width: 0; max-width: 62vw; }
+            .logo-word a { font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .cta-buttons .btn.btn-secondary { display: none; }
+        }
+
+        .page-hero {
+            position: relative;
+            padding: 86px 0 26px;
+            overflow: hidden;
+        }
+        .page-hero::before{
+            content:"";
+            position:absolute;
+            inset:-40px;
+            background:
+                radial-gradient(900px circle at 18% 0%, rgba(6, 182, 212, 0.16), transparent 55%),
+                radial-gradient(1000px circle at 88% 10%, rgba(29, 78, 216, 0.14), transparent 58%),
+                repeating-linear-gradient(90deg, rgba(11,27,58,0.06), rgba(11,27,58,0.06) 1px, transparent 1px, transparent 52px),
+                repeating-linear-gradient(0deg, rgba(11,27,58,0.05), rgba(11,27,58,0.05) 1px, transparent 1px, transparent 52px);
+            opacity: 0.32;
+            pointer-events:none;
+            transform: translate3d(0, 0, 0);
+            animation: hvGridDrift 18s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes hvGridDrift {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -10px, 0); }
+        }
+        .page-hero .container{ position:relative; z-index:1; }
+
+        .hero-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-xl);
+            padding: 26px 24px;
+            position: relative;
+        }
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 46%);
+            opacity: 0.20;
+            pointer-events: none;
+        }
+        .tag { font-weight: 900; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(11,27,58,0.62); }
+        .hero-title { margin: 10px 0 10px; color: var(--primary-color); letter-spacing: -0.03em; font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1.04; }
+        .hero-subtitle { margin: 0; color: rgba(15,23,42,0.75); font-weight: 600; max-width: 72ch; }
+        .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top: 16px; }
+
+        .section-head{ display:flex; align-items:flex-end; gap:14px; margin-bottom: 18px; }
+        .rule{ height:1px; flex:1; background: radial-gradient(circle, rgba(6,182,212,0.35) 0 2px, transparent 3px) 0 50% / 24px 2px repeat-x, linear-gradient(90deg, rgba(var(--primary-color-rgb), 0.22), rgba(var(--primary-color-rgb), 0)); transform: translateY(-10px); }
+        .section-title{ margin:0; }
+        .section-subtitle{ margin-top:8px; max-width: 80ch; }
+
+        .grid {
+            display:grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 18px 44px -34px rgba(11,27,58,0.38);
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+            position: relative;
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.60) 0%, transparent 46%);
+            opacity: 0.14;
+            pointer-events: none;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 26px 68px -44px rgba(11,27,58,0.55);
+            border-color: rgba(6, 182, 212, 0.26);
+        }
+
+        .card-media {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, rgba(29,78,216,0.08), rgba(6,182,212,0.06));
+            overflow: hidden;
+        }
+        .card-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(11,27,58,0.00) 35%, rgba(11,27,58,0.20) 100%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: transform 600ms var(--ease-out);
+            will-change: transform;
+        }
+        .card:hover .card-media img {
+            transform: scale(1.06);
+        }
+        .card-topbar {
+            display:flex; align-items:center; justify-content:space-between; gap:10px;
+            padding: 14px 14px;
+            border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.08);
+            background: linear-gradient(180deg, rgba(29,78,216,0.06), rgba(6,182,212,0.02));
+        }
+        .card-topbar b { color: var(--primary-color); font-weight: 900; }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.07);
+            background: rgba(255,255,255,0.55);
+        }
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.10);
+            background: rgba(255,255,255,0.80);
+            color: rgba(11,27,58,0.76);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+        .meta-pill svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.95;
+        }
+
+        .review-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            font-weight: 800;
+            color: rgba(11,27,58,0.78);
+        }
+        .stars {
+            display: inline-flex;
+            gap: 2px;
+            color: #fbbf24;
+            filter: drop-shadow(0 10px 22px rgba(251, 191, 36, 0.18));
+        }
+        .stars svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        .badge {
+            font-weight: 900; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+            padding: 7px 9px; border-radius: 999px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.14);
+            background: rgba(255,255,255,0.78);
+            color: rgba(11,27,58,0.72);
+            white-space: nowrap;
+        }
+        .card-body { padding: 14px 14px 16px; color: rgba(15,23,42,0.74); }
+        .mini { margin: 0; color: rgba(15,23,42,0.72); font-weight: 700; font-size: 0.95rem; }
+        .card-body ul { margin: 10px 0 0; padding-left: 18px; }
+        .card-body li { margin: 6px 0; color: rgba(15,23,42,0.70); }
+
+        .stats {
+            display:grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .stat {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: 0 18px 44px -38px rgba(11,27,58,0.24);
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .stat::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 46%);
+            opacity: 0.11;
+            pointer-events: none;
+        }
+        .stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 58px -48px rgba(11,27,58,0.34);
+            border-color: rgba(6, 182, 212, 0.18);
+        }
+        .stat .num { font-weight: 900; color: var(--primary-color); font-size: 1.5rem; letter-spacing: -0.02em; }
+        .stat .lbl { margin-top: 6px; color: rgba(15,23,42,0.70); font-weight: 700; }
+
+        .proof {
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: var(--shadow-xl);
+            margin-top: 18px;
+            position: relative;
+            transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), border-color 240ms ease;
+        }
+        .proof::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 46%);
+            opacity: 0.14;
+            pointer-events: none;
+        }
+        .proof:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 28px 70px -54px rgba(11,27,58,0.45);
+            border-color: rgba(6, 182, 212, 0.18);
+        }
+        .proof h3 { margin:0; color: var(--primary-color); font-size: 1.35rem; }
+        .proof p { margin: 8px 0 0; color: rgba(15,23,42,0.72); font-weight: 600; }
+        .proof .actions { margin-top: 14px; display:flex; gap:12px; flex-wrap:wrap; }
+
+        @media (max-width: 980px) {
+            .grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 520px) {
+            .stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sticky-cta" id="stickyCta">
+        <div class="container">
+            <div class="cta-text">
+                Friendly local comfort pros serving <strong>London</strong> + area.
+            </div>
+            <div class="cta-buttons">
+                <a href="tel:+15195550123" class="btn btn-secondary">Call (519) 555‑0123</a>
+                <a href="index.html#quote" class="btn btn-primary">Get a Quote</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark" aria-hidden="true"><span>HV</span></div>
+                    <div class="logo-word">
+                        <a href="index.html#home">HVAC Village</a>
+                        <div class="logo-sub">Friendly local comfort pros</div>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="index.html#coverage">Coverage</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="hero-card">
+                <div class="tag">MISSION</div>
+                <h1 class="hero-title">Our mission</h1>
+                <p class="hero-subtitle">
+                    HVAC Village exists to help homeowners feel confident when they book heating and cooling work.
+                    We focus on clear communication, respectful job sites, and doing things right — the kind of service you’d recommend to a neighbour.
+                </p>
+                <div class="hero-actions">
+                    <a href="index.html#pricing" class="btn btn-secondary btn-large">See Pricing</a>
+                    <a href="index.html#services" class="btn btn-primary btn-large">View Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 40px 0 70px;">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="tag">OUR WORK</div>
+                    <h2 class="section-title">Example Projects</h2>
+                    <p class="section-subtitle">These are demo examples to show how we present services, pricing, and trust — swap these for real jobs as they come in. Photos are stock imagery for demo purposes.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="grid">
+                <article class="card">
+                    <div class="card-media">
+                        <img
+                            src="https://images.unsplash.com/photo-1757800159710-080b937f517d?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80"
+                            alt="Outdoor HVAC unit installation (stock photo)"
+                            loading="lazy"
+                            decoding="async"
+                            fetchpriority="low"
+                        >
+                    </div>
+                    <div class="card-topbar"><b>Furnace Replacement</b><span class="badge">Install</span></div>
+                    <div class="project-meta" aria-label="Project details">
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><path d="M12 10.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5z"/></svg>London</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M14 7l-1 1-2-2 1-1a2 2 0 0 1 3 2z"/><path d="M13 8l-7 7v3h3l7-7"/><path d="M16 5l3 3"/></svg>Residential</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 7v6l4 2"/><path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0z"/></svg>1 day install</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 17h16"/><path d="M8 7v10"/><path d="M16 7v10"/></svg>Before/after</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="mini">Outcome: warmer rooms, quieter operation, and a clearer thermostat schedule.</p>
+                        <ul>
+                            <li>Equipment options explained</li>
+                            <li>Clean install + walkthrough</li>
+                            <li>Follow-up checklist</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="card-media">
+                        <img
+                            src="https://images.unsplash.com/photo-1559986540-90b7aeee6ded?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80"
+                            alt="Outdoor air conditioning condensers (stock photo)"
+                            loading="lazy"
+                            decoding="async"
+                            fetchpriority="low"
+                        >
+                    </div>
+                    <div class="card-topbar"><b>AC Repair &amp; Tune-Up</b><span class="badge">Repair</span></div>
+                    <div class="project-meta" aria-label="Project details">
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><path d="M12 10.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5z"/></svg>Woodstock</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3v18"/><path d="M7 7l10 10"/><path d="M17 7L7 17"/></svg>AC service</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 7v6l4 2"/><path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0z"/></svg>Same-day</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 17h16"/><path d="M8 7v10"/><path d="M16 7v10"/></svg>Before/after</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="mini">Outcome: faster cooling and reduced short-cycling.</p>
+                        <ul>
+                            <li>Diagnosis + options</li>
+                            <li>System test after repair</li>
+                            <li>Prevention tips</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="card-media">
+                        <img
+                            src="https://images.unsplash.com/photo-1719716138413-a7e4908aa8d5?ixlib=rb-4.1.0&auto=format&fit=crop&w=1400&q=80"
+                            alt="Air conditioner close-up (stock photo)"
+                            loading="lazy"
+                            decoding="async"
+                            fetchpriority="low"
+                        >
+                    </div>
+                    <div class="card-topbar"><b>Ductless Mini‑Split</b><span class="badge">Install</span></div>
+                    <div class="project-meta" aria-label="Project details">
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><path d="M12 10.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5z"/></svg>Waterloo</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/><path d="M8 7h8"/><path d="M8 17h8"/></svg>Ductless</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M12 7v6l4 2"/><path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0z"/></svg>1–2 days</span>
+                        <span class="meta-pill"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 17h16"/><path d="M8 7v10"/><path d="M16 7v10"/></svg>Before/after</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="mini">Outcome: room-by-room comfort control (quiet + efficient).</p>
+                        <ul>
+                            <li>Placement planning</li>
+                            <li>Setup + testing</li>
+                            <li>Usage guidance</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 0 0 70px;">
+        <div class="container">
+            <div class="section-head" style="margin-top: 44px;">
+                <div>
+                    <div class="tag">STATS</div>
+                    <h2 class="section-title">Quick Stats</h2>
+                    <p class="section-subtitle">Demo stats — replace with real numbers for a real business.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="num">100+</div>
+                    <div class="lbl">Homes served</div>
+                </div>
+                <div class="stat">
+                    <div class="num">24/7</div>
+                    <div class="lbl">Emergency availability</div>
+                </div>
+                <div class="stat">
+                    <div class="num">1–2 days</div>
+                    <div class="lbl">Typical booking window</div>
+                </div>
+                <div class="stat">
+                    <div class="num">4.9★</div>
+                    <div class="lbl">Average rating</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px; color: rgba(15,23,42,0.58); font-weight: 600; font-size: 0.9rem;">
+                Demo content — replace stats with real numbers.
+            </div>
+
+            <div class="section-head" style="margin-top: 44px;">
+                <div>
+                    <div class="tag">GOOGLE</div>
+                    <h2 class="section-title">Google Reviews</h2>
+                    <p class="section-subtitle">Demo reviews — replace with real Google reviews for a real business.</p>
+                </div>
+                <div class="rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="grid" style="margin-top: 18px;">
+                <article class="card">
+                    <div class="card-topbar"><b>Sarah M.</b><span class="badge">London</span></div>
+                    <div class="card-body">
+                        <p class="review-rating" aria-label="5 out of 5 stars">
+                            <span class="stars" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                            </span>
+                            <span class="mini">5.0</span>
+                        </p>
+                        <ul>
+                            <li>Super friendly and explained everything clearly.</li>
+                            <li>Showed up on time and kept the work area tidy.</li>
+                            <li>Heat was back the same day.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="card-topbar"><b>Jason K.</b><span class="badge">Woodstock</span></div>
+                    <div class="card-body">
+                        <p class="review-rating" aria-label="5 out of 5 stars">
+                            <span class="stars" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                            </span>
+                            <span class="mini">5.0</span>
+                        </p>
+                        <ul>
+                            <li>Quick quote and no pressure.</li>
+                            <li>Install was clean and the walkthrough was helpful.</li>
+                            <li>Comfort difference was immediate.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="card-topbar"><b>Amina R.</b><span class="badge">St. Thomas</span></div>
+                    <div class="card-body">
+                        <p class="review-rating" aria-label="5 out of 5 stars">
+                            <span class="stars" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.1l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+                            </span>
+                            <span class="mini">5.0</span>
+                        </p>
+                        <ul>
+                            <li>Diagnosed the issue fast and gave options.</li>
+                            <li>Transparent pricing and great communication.</li>
+                            <li>Would recommend to friends.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+
+            <div style="margin-top: 10px; color: rgba(15,23,42,0.58); font-weight: 600; font-size: 0.9rem;">
+                Demo content — replace with real Google reviews.
+            </div>
+
+            <div class="proof" style="margin-top: 18px;">
+                <h3>Want a quote?</h3>
+                <p>Tell us your area and what your system is doing — we’ll reply with next steps.</p>
+                <div class="actions">
+                    <a href="index.html#quote" class="btn btn-primary">Get a Quote</a>
+                    <a href="index.html" class="btn btn-secondary">Back to homepage</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>HVAC Village</h4>
+                    <p>Friendly local comfort pros — clean installs, clear quotes, and fast help when you need it.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="index.html#coverage">Coverage</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><a href="tel:+15195550123">(519) 555‑0123</a></p>
+                    <p><a href="mailto:hello@hvacvillage.ca">hello@hvacvillage.ca</a></p>
+                    <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">London • St. Thomas • Waterloo • Woodstock</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 HVAC Village. Demo mockup page.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        (function () {
+            var toggle = document.querySelector('.mobile-menu-toggle');
+            var nav = document.querySelector('.nav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', function () {
+                    nav.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            }
+        })();
+
+        // Sticky CTA height -> CSS var for header offset (no flicker)
+        (function () {
+            var sticky = document.getElementById('stickyCta');
+            if (!sticky) return;
+            var expandedHeight = 0;
+            var collapsed = false;
+            var ticking = false;
+
+            function setStickyHeightVar(px) {
+                document.documentElement.style.setProperty('--sticky-cta-height', px + 'px');
+            }
+
+            function measureExpandedHeight() {
+                var wasCollapsed = sticky.classList.contains('scrolled');
+                if (wasCollapsed) sticky.classList.remove('scrolled');
+                expandedHeight = sticky.offsetHeight || 56;
+                if (wasCollapsed) sticky.classList.add('scrolled');
+            }
+
+            function applyState(nextCollapsed) {
+                if (nextCollapsed === collapsed) return;
+                collapsed = nextCollapsed;
+                sticky.classList.toggle('scrolled', collapsed);
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+            }
+
+            function computeNextState(y) {
+                if (!collapsed && y > expandedHeight + 12) return true;
+                if (collapsed && y < 12) return false;
+                return collapsed;
+            }
+
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    ticking = false;
+                    applyState(computeNextState(window.pageYOffset || 0));
+                });
+            }
+
+            measureExpandedHeight();
+            setStickyHeightVar(expandedHeight);
+            applyState(computeNextState(window.pageYOffset || 0));
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+                measureExpandedHeight();
+                setStickyHeightVar(collapsed ? 0 : expandedHeight);
+                applyState(computeNextState(window.pageYOffset || 0));
+            });
+        })();
+
+        // Scroll-in reveals (medium motion)
+        (function () {
+            var reduce = false;
+            try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+            var nodes = [];
+            function pushAll(sel) {
+                document.querySelectorAll(sel).forEach(function (el) { nodes.push(el); });
+            }
+
+            pushAll('.hero-card');
+            pushAll('.section-head');
+            pushAll('.card');
+            pushAll('.stat');
+            pushAll('.proof');
+
+            function stagger(containerSel, childSel, step) {
+                step = step || 85;
+                document.querySelectorAll(containerSel).forEach(function (wrap) {
+                    var items = wrap.querySelectorAll(childSel);
+                    items.forEach(function (el, i) {
+                        el.classList.add('reveal');
+                        el.style.setProperty('--reveal-delay', (Math.min(i, 8) * step) + 'ms');
+                        if (nodes.indexOf(el) === -1) nodes.push(el);
+                    });
+                });
+            }
+
+            nodes.forEach(function (el) {
+                el.classList.add('reveal');
+                if (!el.style.getPropertyValue('--reveal-delay')) el.style.setProperty('--reveal-delay', '0ms');
+            });
+
+            stagger('.grid', '.card', 90);
+            stagger('.stats', '.stat', 90);
+
+            if (reduce || !('IntersectionObserver' in window)) {
+                nodes.forEach(function (el) { el.classList.add('is-inview'); });
+                return;
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-inview');
+                    io.unobserve(entry.target);
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+            nodes.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+</body>
+</html>
+
