@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forest City Plumbing (Demo)</title>
+    <meta name="description" content="Forest City Plumbing demo. Static shell + shadcn/Vite app." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .landing {
+        min-height: calc(100dvh - (var(--topbar-h) + var(--header-h)));
+        display: grid;
+        place-items: center;
+        padding: 32px 0;
+      }
+      .landing .panel-inner { max-width: 820px; }
+      .landing code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+        font-size: 0.95em;
+        padding: 0.15em 0.35em;
+        border-radius: 10px;
+        border: 1px solid rgba(234, 242, 255, 0.12);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .landing .steps { margin-top: 14px; display: grid; gap: 8px; color: var(--muted); font-weight: 650; }
+      .landing .actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .landing .note { margin-top: 12px; color: rgba(234,242,255,.65); font-weight: 650; }
+    </style>
+  </head>
+  <body>
+    <section class="landing">
+      <div class="container">
+        <div class="panel">
+          <div class="panel-inner">
+            <div class="kicker">
+              <span class="chip"><span class="dot"></span> Forest City Plumbing (Demo)</span>
+            </div>
+            <h1 style="margin-top: 14px;">Choose what you want to preview</h1>
+            <p class="lead" style="margin-top: 10px;">
+              You’re currently viewing the <strong>static demo folder</strong>. The shadcn theme lives inside the
+              <strong>Vite app</strong> at <code>demos/forest-city-plumbing/app</code>.
+            </p>
+
+            <div class="steps">
+              <div>To open the shadcn/Vite version locally:</div>
+              <div><code>cd demos/forest-city-plumbing/app</code></div>
+              <div><code>npm run dev</code></div>
+              <div>Then open: <code>http://localhost:5173/</code></div>
+            </div>
+
+            <div class="actions">
+              <a class="btn btn-primary" href="http://localhost:5173/" target="_blank" rel="noreferrer">
+                Open shadcn app (localhost:5173)
+              </a>
+              <a class="btn btn-ghost" href="./app/" title="Folder only (Vite needs npm run dev)">
+                View app folder
+              </a>
+            </div>
+
+            <p class="note">
+              If you see an error when opening <code>localhost:5173</code>, it just means the Vite dev server isn’t
+              running yet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+

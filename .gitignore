@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Static backup (optional; remove this line if you want to commit backups)
+_static-backup/
+
+# Env and logs
+.env
+.env.local
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea
+.vscode/

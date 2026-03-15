@@ -1,0 +1,22 @@
+{
+  "name": "forest-city-digital",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "replace-static": "node scripts/replace-static.js",
+    "copy-assets": "node -e \"const fs=require('fs');const path=require('path');const from=path.join(process.cwd(),'..');const to=path.join(process.cwd(),'public');['assets','demos'].forEach(d=>{const src=path.join(from,d);const dest=path.join(to,d);if(fs.existsSync(src)){try{fs.cpSync(src,dest,{recursive:true});console.log('Copied '+d);}catch(e){console.warn('Copy '+d+':',e.message);}}else{console.warn('Skip '+d+' (not found)');}});\""
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.0"
+  }
+}

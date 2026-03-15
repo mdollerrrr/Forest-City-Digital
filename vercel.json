@@ -31,7 +31,8 @@
       "has": [{ "type": "header", "key": "host", "value": "slurpsdirtysoda.vercel.app" }],
       "dest": "/demos/slurps/shared/$1"
     },
-    { "handle": "filesystem" }
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
 

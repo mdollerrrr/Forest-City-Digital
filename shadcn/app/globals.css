@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Forest City Digital theme */
+:root {
+  --primary-color: #264b19;
+  --secondary-color: #1b3412;
+  --accent-color: #f59e0b;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --bg-light: #f9fafb;
+  --white: #ffffff;
+  --border-color: #e5e7eb;
+  --font-heading: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --background: #ffffff;
+  --foreground: var(--text-dark);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-primary);
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+/* Package carousel: hide scrollbar on mobile */
+.packages-grid {
+  -webkit-overflow-scrolling: touch;
+}
+.packages-grid::-webkit-scrollbar {
+  display: none;
+}
