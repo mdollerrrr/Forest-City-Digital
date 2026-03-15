@@ -282,6 +282,20 @@
             color: #2d3748;
         }
 
+        .schedule-card-coming-soon {
+            opacity: 0.85;
+            border-top-color: rgba(0, 0, 0, 0.12);
+        }
+        .schedule-card-coming-soon:hover {
+            opacity: 0.95;
+        }
+        .schedule-card-coming-soon .schedule-coming-soon-text {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .hero-cta-glass {
                 padding: 20px;
@@ -361,23 +375,19 @@
     <!-- Schedule Section -->
     <section class="schedule-section" id="schedule">
         <div class="container">
-            <h2 class="section-title">Upcoming Popups</h2>
+            <h2 class="section-title">Upcoming Pop-ups</h2>
             <p class="schedule-note">Schedule updates weekly.</p>
             <div class="schedule-grid">
                 <div class="schedule-card">
-                    <div class="schedule-day">March 1st</div>
-                    <div class="schedule-time">6–8pm</div>
-                    <div class="schedule-location">IRC Grand Iftar &amp; Auction<br><span class="schedule-venue">FIMS &amp; Nursing (Room TBD)</span></div>
+                    <div class="schedule-day">March 25th</div>
+                    <div class="schedule-time">5pm–8pm</div>
+                    <div class="schedule-location">Western Entrepreneurship Building</div>
                 </div>
-                <div class="schedule-card">
-                    <div class="schedule-day">March 6–7</div>
-                    <div class="schedule-time">7pm–1am</div>
-                    <div class="schedule-location">Relay for Life<br><span class="schedule-venue">Rec Center</span></div>
+                <div class="schedule-card schedule-card-coming-soon">
+                    <p class="schedule-coming-soon-text">Coming Soon</p>
                 </div>
-                <div class="schedule-card">
-                    <div class="schedule-day">March 9</div>
-                    <div class="schedule-time">4–7pm</div>
-                    <div class="schedule-location">UWO Aesthetics Fitness Social<br><span class="schedule-venue">UCC Mustang Lounge</span></div>
+                <div class="schedule-card schedule-card-coming-soon">
+                    <p class="schedule-coming-soon-text">Coming Soon</p>
                 </div>
             </div>
         </div>
