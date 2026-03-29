@@ -5,17 +5,46 @@
     box-sizing: border-box;
 }
 
+/* Forest City Digital — warm green theme (light) */
 :root {
-    --primary-color: #264b19;
-    --secondary-color: #1b3412;
-    --accent-color: #f59e0b;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --bg-light: #f9fafb;
+    --primary-color: #2e7d32;
+    --secondary-color: #1b5e20;
+    --accent-color: #388e3c;
+    --text-dark: #3e2723;
+    --text-light: #6d4c41;
+    --bg-light: #f0e9e0;
     --white: #ffffff;
-    --border-color: #e5e7eb;
-    --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --border-color: #e0d6c9;
+    --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Extended theme (for future use) */
+    --background: #f8f5f0;
+    --foreground: #3e2723;
+    --card: #f8f5f0;
+    --muted: #f0e9e0;
+    --muted-foreground: #6d4c41;
+    --secondary-bg: #e8f5e9;
+    --radius: 0.5rem;
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+}
+
+/* Dark mode — optional, enable with class .dark on html or body */
+.dark {
+    --primary-color: #4caf50;
+    --secondary-color: #388e3c;
+    --accent-color: #66bb6a;
+    --text-dark: #f0ebe5;
+    --text-light: #d7cfc4;
+    --bg-light: #252f26;
+    --white: #f0ebe5;
+    --border-color: #3e4a3d;
+    --background: #1c2a1f;
+    --foreground: #f0ebe5;
+    --card: #2d3a2e;
+    --muted: #252f26;
+    --muted-foreground: #d7cfc4;
+    --secondary-bg: #3e4a3d;
 }
 
 /* ----- Premium template additions ----- */
@@ -33,41 +62,11 @@
 }
 
 /* Hero: stronger gradient and glow */
-.hero-with-glows {
-    position: relative;
-}
-.hero-with-glows .container::before {
-    opacity: 1;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 55%),
-        radial-gradient(1200px circle at 50% 25%, rgba(255, 255, 255, 0.14), transparent 58%),
-        radial-gradient(900px circle at 12% 85%, rgba(245, 158, 11, 0.10), transparent 62%),
-        radial-gradient(900px circle at 90% 80%, rgba(255, 255, 255, 0.06), transparent 62%);
-}
 .hero-title.text-gradient-hero {
     background: linear-gradient(135deg, var(--white) 0%, rgba(255,255,255,0.95) 45%, rgba(200,230,180,0.9) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-/* Floating blobs in hero */
-.hero-blob {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 70%, transparent 100%);
-    animation: hero-float 18s ease-in-out infinite;
-}
-.hero-blob-1 { width: 280px; height: 280px; top: 10%; left: 5%; animation-delay: 0s; }
-.hero-blob-2 { width: 200px; height: 200px; top: 55%; right: 5%; animation-delay: 0.8s; }
-.hero-blob-3 { width: 160px; height: 160px; bottom: 10%; left: 20%; animation-delay: 1.6s; }
-.hero-with-glows .container { position: relative; z-index: 1; }
-@keyframes hero-float {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-    33% { transform: translate(10px, -12px) scale(1.02); opacity: 0.85; }
-    66% { transform: translate(-6px, 8px) scale(0.98); opacity: 0.6; }
 }
 
 /* Section title motif (line above) */
@@ -99,6 +98,7 @@ body {
     line-height: 1.65;
     letter-spacing: 0.01em;
     color: var(--text-dark);
+    background: var(--background);
     overflow-x: hidden;
 }
 
@@ -240,7 +240,7 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("assets/Main Website/pine-tree.png");
+    background-image: url("/assets/Main Website/pine-tree.png");
     background-repeat: no-repeat;
     background-position: right -80px bottom -60px;
     background-size: min(520px, 55vw);
@@ -250,28 +250,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero.pine-bg::before {
-    background-image: url("assets/Main Website/pine treeeee.png");
-    /* The PNG has a bit of transparent padding—nudge down so trunk hits bottom */
-    background-position: right -60px bottom -44px;
-    /* Control HEIGHT so trunk touches bottom and top has breathing room */
-    background-size: auto min(740px, 82vh);
-    opacity: 0.2;
-    filter: brightness(0.78) contrast(1.08);
+    background-image: url("/assets/Main Website/pine treeeee.png");
+    background-position: right -80px bottom -60px;
+    /* Bigger pine: scale to fill most of viewport height */
+    background-size: auto min(1100px, 95vh);
+    opacity: 0.22;
+    filter: brightness(0.82) contrast(1.05);
 }
 
-/* City scene on the left of the hero (Websites You Don't Have to Worry About) */
-.hero.pine-bg::after {
-    content: "";
+/* City scene — transparent PNG on a light base so no dark background; right stays green */
+.hero-city-layer {
     position: absolute;
     inset: 0;
-    background-image: url("assets/Main Website/city-scene.png");
-    background-repeat: no-repeat;
-    background-position: left -60px bottom -40px;
-    background-size: min(620px, 62vw);
-    opacity: 0.18;
-    pointer-events: none;
     z-index: 0;
-    mix-blend-mode: lighten;
+    pointer-events: none;
+    background-image:
+        url("/assets/Main Website/city-scene.png"),
+        linear-gradient(to right, rgba(248, 253, 245, 0.92) 0%, rgba(232, 245, 233, 0.5) 40%, transparent 55%);
+    background-repeat: no-repeat, no-repeat;
+    background-position: left -80px bottom -50px, 0 0;
+    background-size: min(720px, 68vw), auto;
+    opacity: 1;
+}
+/* Remove city from ::after (pine stays on ::before) */
+.hero.pine-bg::after {
+    content: none;
 }
 
 .contact.pine-bg::before {
@@ -299,26 +302,76 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 1100px;
 }
 
-/* Hero depth overlays (spotlight + subtle grain) */
+/* Premium hero background: floating glow blobs (slow CSS animation) + grain */
+.hero-bg-glows {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.hero-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(56px);
+    will-change: transform;
+    opacity: 0.75;
+    animation: hero-bg-float 28s ease-in-out infinite;
+}
+.hero-bg-blob-1 {
+    width: min(80vw, 520px);
+    height: min(80vw, 520px);
+    top: 8%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+    animation-duration: 28s;
+    animation-delay: 0s;
+}
+.hero-bg-blob-2 {
+    width: min(70vw, 420px);
+    height: min(70vw, 420px);
+    top: 55%;
+    right: 0;
+    left: auto;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 50%, transparent 70%);
+    animation-duration: 36s;
+    animation-delay: 2s;
+}
+.hero-bg-blob-3 {
+    width: min(60vw, 380px);
+    height: min(60vw, 380px);
+    bottom: 10%;
+    left: 15%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+    animation-duration: 32s;
+    animation-delay: 1s;
+}
+@keyframes hero-bg-float {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(20px, -14px); }
+    50% { transform: translate(-10px, 10px); }
+    75% { transform: translate(-16px, -8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg-blob { animation: none; }
+}
+.hero-bg-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-size: 120px 120px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* One subtle gradient so text stays readable; pine and city graphics stay clear */
 .hero.pine-bg > .container::before {
     content: "";
     position: absolute;
-    inset: -48px;
-    background:
-        radial-gradient(1200px circle at 50% 25%, rgba(255, 255, 255, 0.14), transparent 58%),
-        radial-gradient(900px circle at 12% 85%, rgba(245, 158, 11, 0.10), transparent 62%),
-        radial-gradient(900px circle at 90% 80%, rgba(255, 255, 255, 0.06), transparent 62%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.hero.pine-bg > .container::after {
-    content: "";
-    position: absolute;
-    inset: -48px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    opacity: 0.06;
+    inset: -20px;
+    background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(255, 255, 255, 0.08), transparent 65%);
     pointer-events: none;
     z-index: 0;
 }
@@ -371,8 +424,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-note {
     margin-top: 30px;
-    opacity: 0.8;
     font-size: 16px;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .trust-strip {
@@ -382,8 +435,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 12px 24px;
     font-size: 14px;
-    opacity: 0.9;
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .trust-strip span {
@@ -404,13 +456,8 @@ h1, h2, h3, h4, h5, h6 {
         gap: 8px;
     }
 
-    .hero.pine-bg > .container::before,
-    .hero.pine-bg > .container::after {
-        inset: -28px;
-    }
-
-    .hero.pine-bg > .container::after {
-        opacity: 0.05;
+    .hero.pine-bg > .container::before {
+        inset: -16px;
     }
 }
 
@@ -503,8 +550,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .whofor-card:nth-child(1)::before { content: "🛠"; }
-.whofor-card:nth-child(2)::before { content: "📍"; }
-.whofor-card:nth-child(3)::before { content: "✓"; }
+.whofor-card:nth-child(2)::before {
+    content: "";
+    background-image: url("/assets/Main Website/place.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.whofor-card:nth-child(3)::before {
+    content: "";
+    width: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+    background-image: url("/assets/Main Website/shield.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 .whofor-card:hover {
     transform: translateY(-4px);

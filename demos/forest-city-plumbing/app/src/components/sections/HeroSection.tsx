@@ -6,7 +6,7 @@ import { business } from "@/config/business"
 import { heroEntrance } from "@/animations/heroEntrance"
 import { Section } from "@/components/layout/Section"
 import { SplitSection } from "@/components/layout/SplitSection"
-import { FloatingBackground } from "@/components/animations/FloatingBackground"
+import { HeroBackground } from "@/components/hero/HeroBackground"
 import { AnimatedButton } from "@/components/animations/AnimatedButton"
 import { AnimatedCard } from "@/components/animations/AnimatedCard"
 import { cn } from "@/lib/utils"
@@ -103,16 +103,9 @@ export function HeroSection() {
       padding="none"
       className="relative min-h-[92vh] overflow-hidden"
     >
-      <FloatingBackground animated />
-      <div
-        className="absolute inset-0 -z-10 hero-glow"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_100%_80%_at_70%_20%,var(--primary)_0%,transparent_50%),radial-gradient(ellipse_80%_50%_at_20%_80%,var(--primary)_0%,transparent_40%)] opacity-[0.06]"
-        aria-hidden
-      />
+      {/* Depth: base → HeroBackground (glows + grain) → content */}
       <div className="absolute inset-0 -z-10 bg-background" aria-hidden />
+      <HeroBackground blobCount={3} parallax className="-z-10" />
       <SplitSection
         left={left}
         right={right}

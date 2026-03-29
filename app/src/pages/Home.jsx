@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { HeroBackground } from '../components/hero/HeroBackground';
 
 export default function Home() {
   const [packagesTab, setPackagesTab] = useState('build');
@@ -37,10 +38,9 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="hero pine-bg hero-with-glows" id="home">
-        <div className="hero-blob hero-blob-1" />
-        <div className="hero-blob hero-blob-2" />
-        <div className="hero-blob hero-blob-3" />
+      <section className="hero pine-bg" id="home">
+        <HeroBackground />
+        <div className="hero-city-layer" aria-hidden="true" />
         <div className="container">
           <div className="hero-content">
             <h1 className="hero-title text-gradient-hero">We build websites you don&apos;t have to worry about</h1>

@@ -4,13 +4,28 @@ The **main site** is now this React app. It replaces the previous static HTML (i
 
 ## Run locally
 
+**Option A — Dev server (best for development)**  
+From the repo root:
+
 ```bash
 cd app
 npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+Then open **http://localhost:5173**. You get hot reload and the React app with `/`, `/contact`, `/portfolio`, `/thank-you`.
+
+**Option B — Production build (same as Vercel)**  
+Build and serve the static output from the repo root:
+
+```bash
+cd app
+npm run replace-static
+cd ..
+npx serve .
+```
+
+Then open **http://localhost:3000** (or the URL `serve` prints). This uses the same `index.html` + `static/` that Vercel deploys.
 
 ## Replace static site (build to repo root)
 
@@ -26,9 +41,15 @@ This backs up the current root `index.html`, `contact.html`, `portfolio.html`, `
 
 The built site uses `/assets/` and `/demos/` at the **repo root**. Keep those folders there; the React app does not copy them. For local dev, copy or symlink into `app/public/` if needed (see `npm run copy-assets`).
 
-## Deployment
+## Deployment (Vercel)
 
-Deploy the **repo root** (it contains the built `index.html`, `static/`, `assets/`, `demos/`). Ensure your host serves `index.html` for client-side routes (e.g. `/contact`, `/portfolio`, `/thank-you`). Vercel is configured with a catch-all rewrite to `index.html` for the main site.
+The repo is set up so **Vercel builds and deploys the right thing**:
+
+- **Install:** runs `cd app && npm ci` (installs app dependencies).
+- **Build:** runs `cd app && npm run build` (writes `index.html` and `static/` to the repo root).
+- **Output:** the repo root (`.`) is deployed, so the live site has `index.html`, `static/`, `assets/`, and `demos/`.
+
+The catch-all route in `vercel.json` sends all paths (e.g. `/contact`, `/portfolio`) to `index.html`, so the React app handles routing. No need to run `replace-static` before pushing — just push and Vercel will build and deploy.
 
 ## Routes
 
