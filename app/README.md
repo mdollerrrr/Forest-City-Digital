@@ -45,8 +45,9 @@ The built site uses `/assets/` and `/demos/` at the **repo root**. Keep those fo
 
 The repo is set up so **Vercel builds and deploys the right thing**:
 
-- **Install:** runs `cd app && npm ci` (installs app dependencies).
-- **Build:** runs `cd app && npm run build` (writes `index.html` and `static/` to the repo root).
+- **Root Directory:** Either leave it as the **repository root** (recommended) or set it to **`app`**. The install/build commands in root `vercel.json` detect which layout you use and run `npm ci` / `npm run build` in the right place (no broken `cd app` when Root Directory is already `app`).
+- **Install:** `npm ci --prefix app` from repo root, or `npm ci` when Root Directory is `app`.
+- **Build:** `npm run build --prefix app` from repo root, or `npm run build` when Root Directory is `app` (writes `index.html` and `static/` to the repo root via Vite `outDir: '..'`).
 - **Output:** the repo root (`.`) is deployed, so the live site has `index.html`, `static/`, `assets/`, and `demos/`.
 
 The catch-all route in `vercel.json` sends all paths (e.g. `/contact`, `/portfolio`) to `index.html`, so the React app handles routing. No need to run `replace-static` before pushing — just push and Vercel will build and deploy.
