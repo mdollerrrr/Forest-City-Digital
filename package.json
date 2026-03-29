@@ -1,0 +1,9 @@
+{
+  "name": "forest-city-digital-repo",
+  "private": true,
+  "description": "Vercel runs install/build here when Root Directory is the repo root. See app/package.json for the React app.",
+  "scripts": {
+    "vercel-install": "cd app && npm ci",
+    "vercel-build": "cd app && npm run build"
+  }
+}

@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "vercel-install": "npm ci",
+    "vercel-build": "npm run build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
